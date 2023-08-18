@@ -278,7 +278,6 @@ export class AdminFinalReportComponent implements OnInit {
     var tenures = $(".outputTenures");
     var gaps = $(".gaps");
     var gap = 0;
-    debugger;
     $.each(tenures, function (idx, elem) {
 
     });

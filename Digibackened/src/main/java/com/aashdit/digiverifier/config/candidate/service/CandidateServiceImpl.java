@@ -3618,11 +3618,11 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
             globalDatabaseCase_stat = globalDatabaseCaseDetails.getColorName();
         }
         String candidateFinalReport_stat = "";
-        if (executiveSummary_stat == "Red" || candidateAddress_stat == "Red" || candidateEducation_stat == "Red" || candidateIdItems_stat == "Red" || candidateEmployment_stat == "Red" || globalDatabaseCase_stat == "Red" || criminal_stat == "Red") {
+        if (executiveSummary_stat .equalsIgnoreCase( "Red") || candidateAddress_stat .equalsIgnoreCase( "Red") || candidateEducation_stat.equalsIgnoreCase( "Red") || candidateIdItems_stat.equalsIgnoreCase( "Red") || candidateEmployment_stat .equalsIgnoreCase( "Red")|| globalDatabaseCase_stat.equalsIgnoreCase( "Red") || criminal_stat .equalsIgnoreCase( "Red")) {
             candidateFinalReport_stat = "Red";
-        } else if (executiveSummary_stat == "Amber" || candidateAddress_stat == "Amber" || candidateEducation_stat == "Amber" || candidateIdItems_stat == "Amber" || candidateEmployment_stat == "Amber" || globalDatabaseCase_stat == "Amber" || criminal_stat == "Amber") {
+        } else if (executiveSummary_stat .equalsIgnoreCase( "Amber") || candidateAddress_stat.equalsIgnoreCase( "Amber") || candidateEducation_stat .equalsIgnoreCase( "Amber")|| candidateIdItems_stat .equalsIgnoreCase( "Amber") || candidateEmployment_stat.equalsIgnoreCase( "Amber") || globalDatabaseCase_stat .equalsIgnoreCase( "Amber")|| criminal_stat .equalsIgnoreCase( "Amber")) {
             candidateFinalReport_stat = "Amber";
-        } else if (executiveSummary_stat == "Green" || candidateAddress_stat == "Green" || candidateEducation_stat == "Green" || candidateIdItems_stat == "Green" || candidateEmployment_stat == "Green" || globalDatabaseCase_stat == "Green" || criminal_stat == "Green") {
+        } else if (executiveSummary_stat .equalsIgnoreCase( "Green") || candidateAddress_stat .equalsIgnoreCase( "Green") || candidateEducation_stat .equalsIgnoreCase( "Green") || candidateIdItems_stat.equalsIgnoreCase( "Green") || candidateEmployment_stat .equalsIgnoreCase( "Green") || globalDatabaseCase_stat.equalsIgnoreCase( "Green")|| criminal_stat .equalsIgnoreCase( "Green")) {
             candidateFinalReport_stat = "Green";
         }
 
