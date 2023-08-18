@@ -55,7 +55,7 @@ export class ConventionalPendingUploadComponent implements OnInit {
               console.log('Lavanyafinal',final[i].contentSubCategory)
             }
           }
-         
+
         }
 
 
@@ -112,8 +112,6 @@ export class ConventionalPendingUploadComponent implements OnInit {
         //console.log(this.CharReportDeliveryData);
         let data = [];
         for (let i = 0; i < this.CharReportDeliveryData.length; i++) {
-          let obj={};
-          obj=this.CharReportDeliveryData[i].statusName;
           data.push({name: this.CharReportDeliveryData[i].statusName, value: this.CharReportDeliveryData[i].count, statcode: this.CharReportDeliveryData[i].statusCode });
         }
         chart.data = data;
@@ -205,7 +203,7 @@ ngOnDestroy() {
     }
   }
 
-  
+
   linkPendingApproval(candidateCode:any){
     console.log(candidateCode,"-----------------------------------------------");
     const billUrl = 'admin/C-Pending-Approval/'+candidateCode;
@@ -223,7 +221,7 @@ ngOnDestroy() {
       this.CharReportDelivery[i].pre_approval_content_id = (index != -1) ? this.CharReportDelivery[i].contentDTOList[index].contentId : -1;
       console.log('Lavanyafinal',index)
       this.startpredownload=true
-     
+
     }
     if(this.startpredownload==true){
       if(candidate.pre_approval_content_id != -1) {
@@ -243,7 +241,7 @@ ngOnDestroy() {
       this.CharReportDelivery[i].pre_approval_content_id = (index != -1) ? this.CharReportDelivery[i].contentDTOList[index].contentId : -1;
       console.log('Lavanyafinal',index)
       this.startdownload=true
-     
+
     }
     if(this.startdownload==true){
       if(candidate.pre_approval_content_id != -1) {
@@ -259,7 +257,7 @@ ngOnDestroy() {
 }
 
 
-  
-  
+
+
 
 

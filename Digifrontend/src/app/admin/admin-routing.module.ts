@@ -4,12 +4,9 @@ import {AdminGuard} from '../services/admin.guard';
 import {ErrorComponent} from '../shared/error/error.component';
 import {AddCustomerComponent} from './add-customer/add-customer.component';
 import {AdminCReportApprovalComponent} from './admin-c-report-approval/admin-c-report-approval.component';
-// import {AdminFinalReportComponent} from './admin-final-report/admin-final-report.component';
 import {AdminSetupComponent} from './admin-setup/admin-setup.component';
 import {AdminComponent} from './admin.component';
 import {CandidateMgmtComponent} from './candidate-mgmt/candidate-mgmt.component';
-import {CustomerBillComponent} from './customer-bill/customer-bill.component';
-import {CustomerConfigComponent} from './customer-config/customer-config.component';
 import {CustomerEditComponent} from './customer-edit/customer-edit.component';
 import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerUtilAgentComponent} from './customer-util-agent/customer-util-agent.component';
@@ -19,21 +16,26 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {EkycreportComponent} from './ekycreport/ekycreport.component';
 import {MyprofileComponent} from './myprofile/myprofile.component';
 import {OrgadminDashboardComponent} from './orgadmin-dashboard/orgadmin-dashboard.component';
-import {OrgadminRolemgmtComponent} from './orgadmin-rolemgmt/orgadmin-rolemgmt.component';
 import {OrgadminUsermgmtComponent} from './orgadmin-usermgmt/orgadmin-usermgmt.component';
 import {TestComponent} from './test/test.component';
-// import {VendorMgmtComponent} from './vendor-mgmt/vendor-mgmt.component';
 import {AddVendorComponent} from './add-vendor/add-vendor.component';
 import {VendorDashboardComponent} from './vendor-dashboard/vendor-dashboard.component';
-import {VendorInitiateComponent} from './vendor-initiate/vendor-initiate.component';
 import {UploadVendocheckComponent} from './upload-vendocheck/upload-vendocheck.component';
-import {ConventionalVendorcheckDashboardComponent} from './conventional-vendorcheck-dashboard/conventional-vendorcheck-dashboard.component';
+import {
+  ConventionalVendorcheckDashboardComponent
+} from './conventional-vendorcheck-dashboard/conventional-vendorcheck-dashboard.component';
 import {PendingConventionalComponent} from './pending-conventional/pending-conventional.component';
 import {BGVVerificationTypeComponent} from './bgv-verification-type/bgv-verification-type.component';
-import {CandidatesubmittedConventionalComponent} from "./candidatesubmitted-conventional/candidatesubmitted-conventional.component";
+import {
+  CandidatesubmittedConventionalComponent
+} from "./candidatesubmitted-conventional/candidatesubmitted-conventional.component";
 import {VendorCApprovalComponent} from './vendor-c-approval/vendor-c-approval.component';
-import { ConventionalVendorFinalReportComponent } from './conventional-vendor-final-report/conventional-vendor-final-report.component';
-import { ConventionalCReportApprovalComponent } from './conventional-c-report-approval/conventional-creport-approval/conventional-creport-approval.component';
+import {
+  ConventionalVendorFinalReportComponent
+} from './conventional-vendor-final-report/conventional-vendor-final-report.component';
+import {
+  ConventionalCReportApprovalComponent
+} from './conventional-c-report-approval/conventional-creport-approval/conventional-creport-approval.component';
 
 const routes: Routes = [
   {
@@ -94,24 +96,12 @@ const routes: Routes = [
       },
       {path: 'custlist', component: CustomerListComponent, canActivate: [AdminGuard], data: {roles: ['ROLE_CBADMIN']}},
       {
-        path: 'custbill/:organizationId',
-        component: CustomerBillComponent,
-        canActivate: [AdminGuard],
-        data: {roles: ['ROLE_CBADMIN']}
-      },
-      {
         path: 'custedit/:organizationId',
         component: CustomerEditComponent,
         canActivate: [AdminGuard],
         data: {roles: ['ROLE_CBADMIN']}
       },
       {path: 'adminsetup', component: AdminSetupComponent, canActivate: [AdminGuard], data: {roles: ['ROLE_CBADMIN']}},
-      {
-        path: 'custconfig/:organizationId',
-        component: CustomerConfigComponent,
-        canActivate: [AdminGuard],
-        data: {roles: ['ROLE_CBADMIN']}
-      },
       {path: 'test', component: TestComponent},
       {
         path: 'orgadminDashboard',
@@ -122,12 +112,6 @@ const routes: Routes = [
       {
         path: 'usermgmt',
         component: OrgadminUsermgmtComponent,
-        canActivate: [AdminGuard],
-        data: {roles: ['ROLE_ADMIN', 'ROLE_PARTNERADMIN', 'ROLE_AGENTSUPERVISOR']}
-      },
-      {
-        path: 'rolemgmt',
-        component: OrgadminRolemgmtComponent,
         canActivate: [AdminGuard],
         data: {roles: ['ROLE_ADMIN', 'ROLE_PARTNERADMIN', 'ROLE_AGENTSUPERVISOR']}
       },
@@ -161,12 +145,7 @@ const routes: Routes = [
         canActivate: [AdminGuard],
         data: {roles: ['ROLE_ADMIN', 'ROLE_VENDOR']}
       },
-      {
-        path: 'vendorinitiaste/:candidateId',
-        component: VendorInitiateComponent,
-        canActivate: [AdminGuard],
-        data: {roles: ['ROLE_VENDOR', 'ROLE_ADMIN']}
-      },
+
       {
         path: 'uploadvendorcheck',
         component: UploadVendocheckComponent,
