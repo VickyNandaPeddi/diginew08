@@ -149,7 +149,7 @@ export class UploadVendocheckComponent implements OnInit {
     let day = event.day <= 9 ? '0' + event.day : event.day;
     let finalDate = day + "/" + month + "/" + year;
     this.fromDate = finalDate;
-    // alert("this.fromdate" + this.fromDate)
+
     this.getMinDate = {day: +day, month: +month, year: +year};
   }
 
@@ -163,7 +163,7 @@ export class UploadVendocheckComponent implements OnInit {
     let finalDate = day + "/" + month + "/" + year;
     this.toDate = finalDate;
 
-    // alert("this.todate" + this.toDate)
+
   }
 
   get remarksControl() {
@@ -309,8 +309,7 @@ export class UploadVendocheckComponent implements OnInit {
   }
 
   getVendorStatusID(vendorCheckStatusID: any) {
-    // alert(vendorCheckStatusID)
-  }
+   }
 
   updateLiCheckStatus(status: any, vendorCheckId: any, remarks: any, modeOfVerificationStatus: any) {
     console.log("updating licheckdata")
@@ -415,7 +414,6 @@ export class UploadVendocheckComponent implements OnInit {
   }
 
   downloadReferenceExcelData(candidateName: any, sourceName: any, candidateId: any, sourceId: any) {
-    debugger
     this.candidateService.generateReferenceDataForVendor(candidateId, sourceId).subscribe((data: any) => {
       const link = document.createElement('a');
       link.href = 'data:application/vnd.ms-excel;base64,' + data.message;
@@ -431,7 +429,7 @@ export class UploadVendocheckComponent implements OnInit {
   downloadPdf(agentUploadedDocument: any) {
     console.log(agentUploadedDocument, "******************************");
     if (agentUploadedDocument == null || agentUploadedDocument == "") {
-      alert("No Document Found")
+      console.log("No Document Found")
     }
 
     this.customers.generatePrecisedUrl(agentUploadedDocument).subscribe(data => {

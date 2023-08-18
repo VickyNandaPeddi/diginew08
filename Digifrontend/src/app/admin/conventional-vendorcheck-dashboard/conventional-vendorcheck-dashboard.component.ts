@@ -102,10 +102,6 @@ export class ConventionalVendorcheckDashboardComponent implements OnInit {
       this.customers.getVendorList(localStorage.getItem('orgID')).subscribe((data: any) => {
         // this.getVendorID = data.data;
         this.completeData.getVendorData = data.data;
-
-        // @ts-ignore
-        //alert(this.completeData.getVendorData.map(dsa=>dsa.userFirstName));
-
         // console.log(this.getVendorID, "-------------vendoy----------------");
       });
       // @ts-ignore
@@ -305,24 +301,6 @@ export class ConventionalVendorcheckDashboardComponent implements OnInit {
     console.log("checked==============================", this.tmp)
   }
 
-  selectAll(e: any) {
-    if (e.target.checked) {
-      $(e.target).parent().siblings().find(".billServiceId").prop('checked', true);
-      var iteminput = $('.item input');
-      var arrNumber: any = [];
-      $.each(iteminput, function (idx, elem) {
-        var inputValues: any = $(elem).val();
-        console.log(inputValues);
-        arrNumber.push($(this).val());
-      });
-
-      this.tmp = arrNumber;
-      console.log(this.tmp);
-    } else {
-      $(e.target).parent().siblings().find(".billServiceId").prop('checked', false);
-    }
-
-  }
 
   getvendorid(id: any) {
     this.isButtonDisabled = id === null;
@@ -470,7 +448,6 @@ export class ConventionalVendorcheckDashboardComponent implements OnInit {
   }
 
   getsourceid(item: any) {
-    debugger
     this.sourceName = item.sourceName;
     this.sourceid = item.sourceId;
     this.liIndex = item.id;
@@ -594,10 +571,7 @@ export class ConventionalVendorcheckDashboardComponent implements OnInit {
     formData.append('vendorchecks', JSON.stringify(this.formpassport.value));
     formData.append('documentUrl', JSON.stringify(this.documentUrl));
     console.log(this.formpassport.getRawValue())
-    // @ts-ignore
-    if (this.vendorCheckId != null) {
-      alert("not null")
-    }
+
     // this.customers.saveConventionalVendorCheckWithVendorData(this.licheckVendor).subscribe((data: any) => {
     //   console.log(data.data);
     // });

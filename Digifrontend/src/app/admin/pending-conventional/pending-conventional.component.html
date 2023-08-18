@@ -1,0 +1,99 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+               <p>Pending Conventional</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container dashboard_container">
+    <form [formGroup]="dashboardFilter">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="z-index: 1;margin: -10px 0 10px 0;box-shadow: 0px 7px 14px #00000017;">
+                    <div class="card-body" style="padding: 15px 20px 10px;">
+                        <div class="row">
+                            <div class="col-md-3 offset-2">
+                                <div class="form-group mb-0">
+                                    <div class="input-group">
+                                        <input #rangeFrom="ngbDatepicker" formControlName="fromDate" (dateSelect)="onfromDate($event)"  [maxDate]="getToday"
+                                        class="form-control form-control-sm" ngbDatepicker readonly placeholder="From Date" id="inputFromDate"/>
+                                        <div class="input-group-append">
+                                            <button  class="btn btn-sm btn-outline-secondary" (click)="rangeFrom.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-0">
+                                    <div class="input-group">
+                                        <input #rangeTo="ngbDatepicker" [startDate]="getMinDate" [minDate]="getMinDate" [maxDate]="getToday" 
+                                        formControlName="toDate" (dateSelect)="ontoDate($event)" 
+                                        class="form-control form-control-sm" ngbDatepicker readonly  placeholder="To Date" id="inputToDate"/>
+                                        <div class="input-group-append">
+                                            <button  class="btn btn-sm btn-outline-secondary" (click)="rangeTo.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-0">
+                                    <button type="button" (click)="onSubmitFilter(dashboardFilter)" 
+                                    class="btn btn-sm btn-success btn-block">Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+             <div class="card-header">
+                <h4>
+                   <font size="3" color="orange" class="card-title">New Upload-Conventional</font>
+                </h4>
+                <div class="table-responsive">
+                <table class="table table-bordered" id="tbl-uploaddetails">
+                <thead>
+                 <th>S.No</th>
+                 <th>Agent Name</th>
+                 <th>Candidate Name</th>
+                 <th>Email ID</th>
+                 <th>Contact Number</th>                 
+                 <th>Applicant ID</th>
+                 <th>Data uploaded</th>
+                 <th>Status</th>
+                 <th *ngIf="stat_conventional">Action</th>
+                </thead>
+                
+                <tbody>
+                    <tr *ngFor="let item of candidateData; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{ item.createdByUserFirstName }} {{ item.createdByUserLastName }}</td>
+                        <td>{{item.candidateName}}</td>
+                        <td>{{item.emailId}}</td>
+                        <td>{{item.contactNumber}}</td>
+                        <td>{{item.applicantId}}</td>
+                        <td>{{item.createdOn}}</td>
+                        <td>{{item.candidateStatusName}}</td>
+                        <td>
+                            <button *ngIf="stat_conventional" type="button" (click)="initiatevendor()" class="btn btn-sm btn-primary" title="Add Check"><i class='fas fa-user-check '></i></button>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
+                </div>
+             </div>
+        </div>
+    </div>  
+</div>

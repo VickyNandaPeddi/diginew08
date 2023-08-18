@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head><title>Digiverifier</title>
+<!-- global style css -->
+<link rel="stylesheet" href="https://img1.digitallocker.gov.in/public/smart/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://img1.digitallocker.gov.in/public/smart/css/global-style-v5_071219.css">
+</head>
+
+<body>
+<div class="pageHeader">
+    <div class="container-fluid">
+        <!--<div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle" *ngIf="reportStat">Final Report</h2>
+                <h2 class="pageTitle" *ngIf="!reportStat">Interim Report</h2>
+            </div>
+        </div>-->
+    </div>
+</div>
+<div class="container-fluid candidate_report reportStat-{{reportStat}}">
+    <!-- Page Heading -->
+    <div class="row">
+        <!-- <div class="col-md-12" style="justify-content: flex-end;margin: -16px 0 4px 0;text-align: right;">
+            <button type="button" class="btn btn-primary btn-sm btn-print" (click)="htmltoPDF()">Download</button>
+        </div> -->
+    </div>
+    <div class="row" id="print_sec">
+        <div class="col-xl-12 ">
+             <div class="card shadow">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                        	<h3 class="reportheader"><b>Digital Background Verification Report</b></h3><br>
+                            <table class="table table-bordered ">
+                                
+                                    <tr>
+                                        <th class="companydetails">
+										<span class="companyname">{{organizationName}}</span><br>
+										<span class="companyadd">{{organizationLocation}}</span>
+										</th>
+                                        <!-- <th class="logo"><img [src]="logo()"></th> -->
+                                        <!--<th class="logo" ><img style="width: 247px;height: 80px; display: block; margin-left: auto; margin-right: auto; width: 50%;" [src]=" logo()"></th>-->
+                                    </tr>
+                                
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div>
+			
+			</div>
+           <div class="card shadow bg_profile">
+           	<table class="table table-bordered profilebackground">
+			<tbody>
+            <tr>
+                <td style="width:20%; text-align: left; background-color: #0087c0 ; color:#fff;"><h5><b>Background Profile</b></h5></td>
+                <td style="width:60%; text-align: left;"><b>Color Code:</b> <span class="text-Red bg-result">DISCREPANCY</span> | <span class="text-Green bg-result">CLEARED</span> | <span class="text-Amber bg-result">UNABLE TO VERIFY/ INACCESSIBLE</span></td>									                       
+            </tr>
+	        </tbody>
+			</table>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+						
+                            <table class="table table-bordered">
+                               
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left;" class="detail-1">Name of the Candidate</td>
+                                        <td style="text-align: left;" class="detail-2 rowbackground">{{ candidateName }}</td>
+										<td style="text-align: left;" class="detail-3">Date of Birth</td>
+                                        <td  style="text-align: left;"class="detail-4 rowbackground">{{dateOfBirth}}</td>
+                                    </tr>
+                                    <tr>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" class="detail-1">Contact No</td>
+                                        <td style="text-align: left;" class="detail-2 rowbackground">{{contactNumber}}</td>
+										<td style="text-align: left;" class="detail-3">Email ID</td>
+                                        <td style="text-align: left;" class="detail-4 rowbackground">{{emailId}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" class="detail-1">Reference ID</td>
+                                        <!-- <td class="detail-1">Applicant ID</td> -->
+                                        <td style="text-align: left;" class="detail-2 rowbackground">{{applicantId}}</td>
+										<td style="text-align: left;" class="detail-3">Project/BU</td>
+                                        <td  style="text-align: left;"class="detail-4 rowbackground">{{organizationName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" class="detail-1">Fresher/ Experienced</td>
+                                        <td style="text-align: left;" class="detail-2 rowbackground">{{isFresher == true ?'Fresher':'Experienced'}}</td>
+										<td style="text-align: left;" class="detail-3">Case Initiation Date</td>
+                                        <td style="text-align: left;" class="detail-4 rowbackground">{{dateOfEmailInvite | date: 'dd-MM-yyyy' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left;" class="detail-1">Report Delivered Date</td>
+                                        <td style="text-align: left;" class="detail-2 rowbackground">{{submittedOn | date: 'dd-MM-yyyy' }}</td>
+										<td style="text-align: left;" class="detail-3">Verification Status</td>
+                                        <td style="text-align: left;" class="detail-4">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <div class="card shadow">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between"><h5><b>Vendor Proofs</b></h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class=" table table-bordered mt-2">
+                                <thead style="display: table-row-group;">
+                                    <tr>
+                                        <th class="summhead-1">S.No</th>
+                                        <th class="summhead-1">Document Name</th>
+                                        <th class="summhead-1">Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="rowbackground">
+                                    <tr *ngFor="let item of employ; let i=index;">
+                                        <td class="col-md-2">{{ i + 1 }}</td>
+                                        <td class="col-md-7">{{ item.documentname }}</td>
+                                        <td class="col-md-3"><span class=" bg-result" [style.color]="item.colorHexCode">{{ item.agentColor }}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            </div>
+                 <div class="card shadow isVendor_{{isVendor}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div class="col-md-5">
+                            <h6 class="m-0 font-weight-bold text-primary">                                
+                            </h6>
+                        </div>
+                        <div>
+                            <h5><b>PROOFS</b></h5>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card shadow isDOC0_{{isDOC0}} card_globalDatabaseCase_stat">
+                    <!-- Card Header--> 
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname0}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12">
+                                     <iframe id="doc0" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card shadow isDOC1_{{isDOC1}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname1}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc1" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card shadow isDOC2_{{isDOC2}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname2}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            
+                                <div class="row">
+                                    <div class="col-md-12" >
+                                         <iframe id="doc2" style="width: 100%;height: 600px;"></iframe>
+                                    </div>
+            
+                                </div>
+        
+                           
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card shadow isDOC3_{{isDOC3}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname3}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc3" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card shadow isDOC4_{{isDOC4}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname4}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc4" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card shadow isDOC5_{{isDOC5}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname5}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc5" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card shadow isDOC6_{{isDOC6}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname6}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc6" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="card shadow isDOC7_{{isDOC7}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname7}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc7" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div> 
+                 <div class="card shadow isDOC8_{{isDOC8}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname8}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc8" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div> 
+                 <div class="card shadow isDOC9_{{isDOC9}} card_globalDatabaseCase_stat">
+                    <!-- Card Header -->
+                     <div class="card-header py-3 d-flex ">
+                        <div>
+                            <h5><b>{{docname9}}</b></h5>
+                        </div>
+                        <div class="card-body"  >
+                            <div class="row">
+                                <div class="col-md-12" >
+                                     <iframe id="doc9" style="width: 100%;height: 600px;"></iframe>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                 </div>                                                      
+            </div>
+        </div>
+    </div>
+    
+    <ng-template #modalCertificate let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">View Certificate</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <iframe id="viewcandidateCertificate" style="width: 100%;height: 600px;"></iframe>
+                </div>
+            </div>
+        </div>
+      </ng-template>

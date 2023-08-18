@@ -48,7 +48,7 @@ export class AdminFinalReportComponent implements OnInit {
   isCRIMINAL:boolean=false;
   isGLOBAL:boolean=false;
   epfoSkipped:boolean=false;
-  constructor( private candidateService: CandidateService, private router: ActivatedRoute, private modalService: NgbModal) {
+  constructor( private candidateService: CandidateService, private router: ActivatedRoute, private modalService: NgbModal) { 
     this.candidateCode = this.router.snapshot.paramMap.get('candidateCode');
     this.candidateService.getCandidateFormData_admin(this.candidateCode).subscribe((data: any)=>{
       this.cApplicationFormDetails=data.data;
@@ -84,9 +84,9 @@ export class AdminFinalReportComponent implements OnInit {
         this.globalDatabaseCase_stat = this.globalDatabaseCaseDetails.colorName;
       }
       this.digiDoc=this.cApplicationFormDetails.document;
-
+     
       for (let index = 0; index < this.digiDoc.length; index++) {
-
+        
         if(this.digiDoc[index].contentSubCategory=="PAN"){
           console.log(this.digiDoc[index].contentSubCategory);
           $("#digiDoc").attr("src", 'data:application/pdf;base64,'+this.digiDoc[index].document);
@@ -103,19 +103,19 @@ export class AdminFinalReportComponent implements OnInit {
           console.log(this.digiDoc[index].contentSubCategory);
           $("#degreeDoc").attr("src", 'data:application/pdf;base64,'+this.digiDoc[index].document);
         }
-
+        
       }
-
+      
       // if(this.digiDoc){
       //   $("#digiDoc").attr("src", 'data:application/pdf;base64,'+this.cApplicationFormDetails.document);
-
+        
       // }
 
       const reportStat =this.cApplicationFormDetails.candidateStatus.statusMaster.statusCode;
       if(reportStat == "FINALREPORT"){
-        this.reportStat = true;
+        this.reportStat = true; 
       }else {
-        this.reportStat = false;
+        this.reportStat = false; 
       }
       if(this.executiveSummary){
         var colorArray=[];
@@ -129,13 +129,13 @@ export class AdminFinalReportComponent implements OnInit {
         }else{
           this.executiveSummary_stat = 'Green';
         }
-
+        
       }
       if(this.candidateEXPData){
         var colorArray=[];
         for (let index = 0; index < this.candidateEXPData.length; index++) {
           colorArray.push(this.candidateEXPData[index].colorColorName);
-
+         
         }
         if(colorArray.includes('Red')){
           this.candidateEXPData_stat = 'Red';
@@ -144,14 +144,14 @@ export class AdminFinalReportComponent implements OnInit {
         }else{
           this.candidateEXPData_stat = 'Green';
         }
-
+        
       }
 
       if(this.candidateAddressData){
         var colorArray=[];
         for (let index = 0; index < this.candidateAddressData.length; index++) {
           colorArray.push(this.candidateAddressData[index].colorColorName);
-
+          
         }
         if(colorArray.includes('Red')){
           this.candidateAddressData_stat = 'Red';
@@ -168,8 +168,8 @@ export class AdminFinalReportComponent implements OnInit {
           if(this.candidateEduData[index].colorColorName!=""){
             colorArray.push(this.candidateEduData[index].colorColorName);
           }
-
-
+          
+          
         }
         if(colorArray.includes('Red')){
           this.candidateEduData_stat = 'Red';
@@ -178,14 +178,14 @@ export class AdminFinalReportComponent implements OnInit {
         }else{
           this.candidateEduData_stat = 'Green';
         }
-
+        
       }
 
       if(this.candidateIdItems){
         var colorArray=[];
         for (let index = 0; index < this.candidateIdItems.length; index++) {
           colorArray.push(this.candidateIdItems[index].color.colorName);
-
+          
         }
         if(colorArray.includes('Red')){
           this.candidateIdItems_stat = 'Red';
@@ -194,14 +194,14 @@ export class AdminFinalReportComponent implements OnInit {
         }else{
           this.candidateIdItems_stat = 'Green';
         }
-
+        
       }
 
       if(this.employmentDetails){
         var colorArray=[];
         for (let index = 0; index < this.employmentDetails.length; index++) {
           colorArray.push(this.employmentDetails[index].result);
-
+          
         }
         if(colorArray.includes('Red')){
           this.employmentDetails_stat = 'Red';
@@ -225,7 +225,7 @@ export class AdminFinalReportComponent implements OnInit {
       }else{
         this.epfoSkipped =false
       }
-
+      
     });
 
     this.candidateService.getServiceConfigCodes(this.candidateCode).subscribe((result:any)=>{
@@ -239,12 +239,12 @@ export class AdminFinalReportComponent implements OnInit {
       }
     });
 
-
+    
 
   }
 
   ngOnInit(): void {
-
+    
   }
   printDiv(){
     window.print();
@@ -277,11 +277,18 @@ calculateTotalGapsAndTenure(){
   var tenures = $(".outputTenures");
   var gaps = $(".gaps");
   var gap=0;
-
+  debugger;
   $.each(tenures,function(idx,elem){
 
   });
-
+  $.each(gaps,function(idx,elem){
+    if($(elem).val()!="Not-Available"){
+      let value:any = $(elem).val();
+      console.log("value"+value);
+      gap = gap + parseInt(value.toString());
+      console.log("gaps"+gap);
+    }
+  });
 
   console.log("tgaps"+gap);
 }

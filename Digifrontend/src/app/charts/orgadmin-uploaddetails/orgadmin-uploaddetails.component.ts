@@ -182,7 +182,6 @@ export class OrgadminUploaddetailsComponent implements OnInit, OnDestroy, AfterV
         let data = [];
         for (let i = 0; i < this.getuploadinfo.length; i++) {
           let obj = {};
-          obj = this.getuploadinfo[i].statusName;
           data.push({
             name: this.getuploadinfo[i].statusName,
             value: this.getuploadinfo[i].count,
@@ -332,8 +331,6 @@ export class OrgadminUploaddetailsComponent implements OnInit, OnDestroy, AfterV
       var cboxRolesinput = $('.childCheck');
       var arrNumber: any = [];
       $.each(cboxRolesinput, function (idx, elem) {
-        var inputValues: any = $(elem).val();
-        //console.log(inputValues);
         arrNumber.push($(this).val());
       });
 

@@ -10,14 +10,15 @@ import * as  _ from 'lodash';
 am4core.useTheme(am4themes_animated);
 
 @Component({
-  selector: 'app-report-delivery-details',
-  templateUrl: './report-delivery-details.component.html',
-  styleUrls: ['./report-delivery-details.component.scss']
+  selector: 'app-conventional-pending-upload',
+  templateUrl: './conventional-pending-upload.component.html',
+  styleUrls: ['./conventional-pending-upload.component.scss']
 })
-export class ReportDeliveryDetailsComponent implements OnInit {
+export class ConventionalPendingUploadComponent implements OnInit {
   private chart: am4charts.XYChart | undefined;
   getReportDeliveryStatCodes: any;
   CharReportDelivery: any=[];
+  candidateData: any;
   CharReportDeliveryData: any=[];
   containerStat:boolean = false;
   stat_linkAdminApproval:boolean = false;
@@ -54,7 +55,7 @@ export class ReportDeliveryDetailsComponent implements OnInit {
               console.log('Lavanyafinal',final[i].contentSubCategory)
             }
           }
-
+         
         }
 
 
@@ -111,6 +112,8 @@ export class ReportDeliveryDetailsComponent implements OnInit {
         //console.log(this.CharReportDeliveryData);
         let data = [];
         for (let i = 0; i < this.CharReportDeliveryData.length; i++) {
+          let obj={};
+          obj=this.CharReportDeliveryData[i].statusName;
           data.push({name: this.CharReportDeliveryData[i].statusName, value: this.CharReportDeliveryData[i].count, statcode: this.CharReportDeliveryData[i].statusCode });
         }
         chart.data = data;
@@ -190,11 +193,6 @@ ngOnDestroy() {
         $(".dbtabheading").text("Final Report");
         this.stat_linkAdminApproval = false;
         this.stat_linkCandidateReport = true;
-      }else if(this.getReportDeliveryStatCodes === "PROCESSDECLINED"){
-        $(".dbtabheading").text("Process Declined");
-        this.stat_linkAdminApproval = false;
-        this.stat_linkCandidateReport = false;
-
       }
       this.containerStat = true;
       //isCBadmin required for drilldown dashboard at Superadmin
@@ -207,16 +205,17 @@ ngOnDestroy() {
     }
   }
 
-
-  linkAdminApproval(candidateCode:any){
-    const billUrl = 'admin/cReportApproval/'+[candidateCode];
+  
+  linkPendingApproval(candidateCode:any){
+    console.log(candidateCode,"-----------------------------------------------");
+    const billUrl = 'admin/C-Pending-Approval/'+candidateCode;
     this.router.navigate([billUrl]);
   }
-  linkCandidateReport(candidateCode:any){
-    const billUrl = 'admin/cFinalReport/'+[candidateCode];
+  finalapproval(candidateCode:any){
+    console.log(candidateCode,"-----------------------------------------------");
+    const billUrl = 'admin/CV-Final-Approval/'+candidateCode;
     this.router.navigate([billUrl]);
   }
-
   downloadPreApprovalReport(candidate: any) {
     console.log(candidate);
     for(let i=0; i<this.CharReportDelivery.length; i++) {
@@ -224,7 +223,7 @@ ngOnDestroy() {
       this.CharReportDelivery[i].pre_approval_content_id = (index != -1) ? this.CharReportDelivery[i].contentDTOList[index].contentId : -1;
       console.log('Lavanyafinal',index)
       this.startpredownload=true
-
+     
     }
     if(this.startpredownload==true){
       if(candidate.pre_approval_content_id != -1) {
@@ -244,7 +243,7 @@ ngOnDestroy() {
       this.CharReportDelivery[i].pre_approval_content_id = (index != -1) ? this.CharReportDelivery[i].contentDTOList[index].contentId : -1;
       console.log('Lavanyafinal',index)
       this.startdownload=true
-
+     
     }
     if(this.startdownload==true){
       if(candidate.pre_approval_content_id != -1) {
@@ -258,3 +257,9 @@ ngOnDestroy() {
   }
 
 }
+
+
+  
+  
+
+

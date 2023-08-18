@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AdminSetupComponent implements OnInit {
   pageTitle = "Customer Admin Setup";
-
+  
   //public setupModel: ServiceSetup = new ServiceSetup;
   adminSetup = this.fb.group({
     roleId: ['2', Validators.required],
@@ -26,12 +26,12 @@ export class AdminSetupComponent implements OnInit {
     password: ['', Validators.required],
     isActive: ['']
   });
-
+  
   orgID: any;
   getCustID: any=[];
   getCustAdmin: any=[];
   useridcheck: any=[];
-  constructor(private customers:CustomerService, private router: Router, private fb: FormBuilder) {
+  constructor(private customers:CustomerService, private router: Router, private fb: FormBuilder) { 
     this.customers.getCustomersBill().subscribe((data: any)=>{
       this.getCustID=data.data;
     })
@@ -74,17 +74,17 @@ export class AdminSetupComponent implements OnInit {
           isActive: new FormControl(''),
         })
       }
-
+      
 
 
 
     })
   }
+  
 
-
-
-  ngOnInit(): void {
-
+  
+  ngOnInit(): void { 
+    
   }
 
   onSubmit() {
@@ -105,7 +105,7 @@ export class AdminSetupComponent implements OnInit {
 
 
     });
-
+    
   }
 
 }

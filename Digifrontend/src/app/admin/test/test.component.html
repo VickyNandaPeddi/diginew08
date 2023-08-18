@@ -1,0 +1,76 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">Add Role</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="addrole">
+                        <div class="row">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Role Name :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="15" class="form-control form-control-sm"
+                                            formControlName="roleName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Role Code :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="15" class="form-control form-control-sm"
+                                            formControlName="roleCode">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Role Access:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="15" class="form-control form-control-sm"
+                                            formControlName="roleAccess">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-3 pb-3">
+                                <button type="submit"  class="btn btn-primary btn-sm" (click)="onSubmit(addrole)">Sumbit</button>
+                                <a routerLink="../admindashboard" class="btn btn-danger btn-sm">Cancel</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+

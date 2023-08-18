@@ -1,0 +1,58 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Manage Roles</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="radiobtngroup"  *ngFor="let item of getRoleDropdown">
+                                <div class="single_radio">
+                                    <input type="radio" name="RoleDropdown" id="{{item.roleId}}" (click)="roleDropdown($event)"> {{item.roleName}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="cbox_container"  *ngFor="let item of getAllRolePermission">
+                                <div class="single_cboxes">
+                                    <h3> {{item.rolePermissionHead.permissionHeadName}} 
+                                        <!-- <input type="checkbox" class="selectAll" (click)="selectAll($event)"> -->
+                                    </h3>
+                                    <div class="cboxRoles" *ngFor="let cboxRoles of item.rolePermissionMaster">
+                                        <input type="checkbox"  class="rolecboxbtn{{cboxRoles.permissionId}} rolecboxbtn" value="{{cboxRoles.permissionId}}" id="{{cboxRoles.permissionId}}" (change)="roleCboxes($event)"> <span> {{cboxRoles.permissionName}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form [formGroup]="orgRoleMgmt" (ngSubmit)="onSubmit()">
+                        <div class="row text-center">
+                            <div class="col-md-12 text-center" style="margin-top: 10px;">
+                                <input type="hidden" value="" id="permissioninput" formControlName="permissionId">
+                                <input type="hidden" value="" formControlName="roleId">
+                                <button type="submit"  class="btn btn-primary btn-sm">Submit</button>
+                                <a routerLink="../orgadminDashboard" class="btn btn-danger btn-sm">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

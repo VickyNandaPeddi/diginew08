@@ -55,6 +55,40 @@
           </div>
         </div>
       </div>
+      <!--<div class="col-md-6" style="padding-left: 0 !important;">
+          <div class="card" style="z-index: 1;margin: -10px 0 10px 0;box-shadow: 0px 7px 14px #00000017;">
+              <div class="card-body" style="padding: 15px 20px 10px;">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <button class="btn btn-sm btn-primary" (click)="triggerModal(modalData)" *ngIf="authService.roleMatch(['ROLE_ADMIN']) || AGENTUPLOAD_stat">
+                              <i class="fas fa-user-tie"></i> Upload Agent Data
+                          </button>
+
+
+                          <button class="btn btn-sm btn-info" (click)="triggerModal(modalCandidate)" *ngIf="(!isCBadmin && CANDIDATEUPLOAD_stat) || authService.roleMatch(['ROLE_ADMIN'])">
+                              <i class="fas fa-user"></i>
+                              Upload Candidate Data
+                          </button>
+
+                          <button class="btn btn-sm btn-info" (click)="triggerModal(Clientscope)" *ngIf=" authService.roleMatch(['ROLE_PARTNERADMIN','ROLE_ADMIN'])">
+                              <i class="fas fa-user"></i>
+                              Upload Client Scope
+                          </button>
+
+                          <select class="form-control" *ngIf="!authService.roleMatch(['ROLE_AGENTHR'])" #t (change)="getuserId(t.value)"
+                          style="display: inline-block;width: 185px;padding: 3px 10px;font-size: 13px;
+                          height: auto;">
+                              <option [value]="null" >--Go To Dashboard--</option>
+                              <option *ngFor="let item of getUserByOrganizationIdAndUserId" [value]="item.userId">{{ item.role.roleName }} ({{ item.userFirstName }}{{ item.userLastName }})</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</form>
+</div>-->
       <div class="container">
         <div class="row">
           <div class="col-md-6" style="padding-right: 8px;">
@@ -78,6 +112,9 @@
               <div class="card cardStat{{!isShowDiv}}">
                 <div class="card-header">
                   <h4 class="card-title">Report Delivery Details
+                    <!--<button (click)=toggleDisplayDiv() style="margin: -5px 0;" class="btn btn-sm btn-warning float-right">
+                        View Pending Details
+                    </button>-->
                   </h4>
                 </div>
                 <div class="card-body" style="padding: 10px 5px;">

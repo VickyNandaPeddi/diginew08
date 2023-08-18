@@ -1,0 +1,292 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container dashboard_container">
+    <form [formGroup]="dashboardFilter">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card" style="z-index: 1;margin: -10px 0 10px 0;box-shadow: 0px 7px 14px #00000017;">
+                    <div class="card-body" style="padding: 15px 20px 10px;">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group mb-0">
+                                    <div class="input-group date-picker">
+                                        <span>From</span>
+                                        <input #rangeFrom="ngbDatepicker" formControlName="fromDate" (dateSelect)="onfromDate($event)"  [maxDate]="getToday"
+                                        class="form-control form-control-sm text-right" ngbDatepicker readonly placeholder="From Date" id="inputFromDate"/>
+                                        <div class="input-group-append">
+                                            <button  class="btn btn-sm btn-outline-secondary" (click)="rangeFrom.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group mb-0">
+                                    <div class="input-group date-picker">
+                                        <span>To</span>
+                                        <input #rangeTo="ngbDatepicker" [startDate]="getMinDate" [minDate]="getMinDate" [maxDate]="getToday" 
+                                        formControlName="toDate" (dateSelect)="ontoDate($event)" 
+                                        class="form-control form-control-sm text-right" ngbDatepicker readonly  placeholder="To Date" id="inputToDate"/>
+                                        <div class="input-group-append">
+                                            <button  class="btn btn-sm btn-outline-secondary" (click)="rangeTo.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-0">
+                                    <button type="button" (click)="onSubmitFilter(dashboardFilter)" 
+                                    class="btn btn-sm btn-success btn-block">Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="padding-left: 0 !important;">
+                <div class="card" style="z-index: 1;margin: -10px 0 10px 0;box-shadow: 0px 7px 14px #00000017;">
+                    <div class="card-body" style="padding: 15px 20px 10px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-sm btn-primary" (click)="triggerModal(modalData)" *ngIf="authService.roleMatch(['ROLE_ADMIN']) || AGENTUPLOAD_stat">
+                                    <i class="fas fa-user-tie"></i> Upload Agent Data
+                                </button>
+
+
+                                <button class="btn btn-sm btn-info" (click)="triggerModal(modalCandidate)" *ngIf="(!isCBadmin && CANDIDATEUPLOAD_stat) || authService.roleMatch(['ROLE_ADMIN','ROLE_PARTNERADMIN']) || authService.roleMatch(['ROLE_AGENTHR'])">
+                                    <i class="fas fa-user"></i>
+                                    Upload Candidate Data
+                                </button>
+
+                                <button class="btn btn-sm btn-info" (click)="triggerModal(Clientscope)" *ngIf=" authService.roleMatch(['ROLE_PARTNERADMIN','ROLE_ADMIN'])">
+                                    <i class="fas fa-user"></i>
+                                    Upload Client Scope
+                                </button>
+            
+                                <!--<select class="form-control" *ngIf="!authService.roleMatch(['ROLE_AGENTHR'])" #t (change)="getuserId(t.value)"
+                                style="display: inline-block;width: 185px;padding: 3px 10px;font-size: 13px;
+                                height: auto;">
+                                    <option [value]="null" >--Go To Dashboard--</option>
+                                    <option *ngFor="let item of getUserByOrganizationIdAndUserId" [value]="item.userId">{{ item.role.roleName }} ({{ item.userFirstName }}{{ item.userLastName }})</option>
+                                </select>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="row">
+            <div class="col-md-6" style="padding-right: 8px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Upload Details
+                            <a routerLink="../pendingconventional" type="button" class="btn btn-sm btn-warning float-right">New Uploads-Conventional</a>
+                            <a routerLink="../candidateMgmt" class="btn btn-sm btn-warning float-right">View Uploads</a>
+                        </h4>
+                    </div>
+                      
+                    <div class="card-body" style="padding: 10px 5px;">
+                        <div class="row">
+                            <div class="col-md-12">
+                               
+                                <div id="chartdiv" style="width: 100%; height: 250px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="padding-left: 8px; position: relative;" >
+                <div class="toggleDivContainer">
+                    <div class="card cardStat{{!isShowDiv}}" >
+                        <div class="card-header">
+                            <h4 class="card-title">Report Delivery Details
+                                <button (click)=toggleDisplayDiv() style="margin: -5px 0;" class="btn btn-sm btn-warning float-right">
+                                    View Pending Details
+                                </button>  
+                            </h4>
+                        </div>
+                        <div class="card-body" style="padding: 10px 5px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="chartReportDelivery" style="width: 100%; height: 250px"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card cardStat{{isShowDiv}}">
+                        <div class="card-header">
+                            <h4 class="card-title">Pending Details
+                                <button (click)=toggleDisplayDiv() style="margin: -5px 0;" class="btn btn-sm btn-warning float-right">View Report Delivery Details</button>
+                            </h4>
+                        </div>
+                        <div class="card-body" style="padding: 10px 5px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="chartPendingDetails" style="width: 100%; height: 250px"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 containerStat{{containerStat}}">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title dbtabheading"></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 orgadmin_uploaddetails">
+                                <app-pending-details></app-pending-details>
+                                <app-report-delivery-details></app-report-delivery-details>
+                                <app-orgadmin-uploaddetails></app-orgadmin-uploaddetails>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+
+</div>
+
+
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Upload Agent Data</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form >
+            <div class="row text-center">
+                <div class="col">
+                    <a href="./assets/docs/Agent.csv" class="btn btn-primary btn-sm">
+                        Sample CSV <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="./assets/docs/Agent.xlsx" class="btn btn-primary btn-sm">
+                        Sample XLS <i class="fas fa-download"></i>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <div class="col">
+                            <input type="file" class="form-control-file form-control" required (change)="selectFile($event)"  accept=".xlsx, .xls, .csv">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="uploadAgents()">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+
+  <ng-template #modalCandidate let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Upload Candidate Data</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form >
+            <div class="row text-center">
+                <div class="col">
+                    <a href="./assets/docs/candidate.csv" class="btn btn-primary btn-sm">
+                        Sample CSV <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="./assets/docs/candidate.xlsx" class="btn btn-primary btn-sm">
+                        Sample XLS <i class="fas fa-download"></i>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <div class="col">
+                            <input type="file" class="form-control-file form-control" required (change)="selectFile($event)"  accept=".xlsx, .xls, .csv">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="uploadCandidate()">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+ 
+  <ng-template #Clientscope let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Upload Client Scope</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form >
+            <div class="row text-center">
+                <div class="col">
+                    <a href="./assets/docs/Client_Scope.csv" class="btn btn-primary btn-sm">
+                        Sample CSV <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="./assets/docs/Client_Scope.xlsx" class="btn btn-primary btn-sm">
+                        Sample XLS <i class="fas fa-download"></i>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <div class="col">
+                            <input type="file" class="form-control-file form-control" required (change)="selectFile($event)"  accept=".xlsx, .xls, .csv">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="uploadClientscope()">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </ng-template> 
+
+
+
+ 

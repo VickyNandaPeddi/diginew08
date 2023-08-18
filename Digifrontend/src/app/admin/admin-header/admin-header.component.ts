@@ -49,6 +49,7 @@ export class AdminHeaderComponent implements OnInit {
   message: any;
 
   generateConventionalExcelReport() {
+    debugger
     this.candidateservice.generateDataForExcel()
       .subscribe((data:any) => {
         const link = document.createElement('a');

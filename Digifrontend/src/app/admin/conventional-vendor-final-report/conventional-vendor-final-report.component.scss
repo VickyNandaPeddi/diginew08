@@ -1,0 +1,154 @@
+@import  "../../../assets/scss/admin.scss";
+.reportStat-false .card_Criminal_stat,
+.reportStat-false .card_globalDatabaseCase_stat,
+.reportStat-true .card_Criminal_stat.isCRIMINAL_false,
+.reportStat-true .card_globalDatabaseCase_stat.isGLOBAL_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isPAN_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isUAN_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDRIVE_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDGREE_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC1_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC2_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC3_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC4_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC5_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC6_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC7_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC8_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC9_false{
+    display: none;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDOC0_false{
+    display: none;
+}
+
+.reportStat-true .card_globalDatabaseCase_stat.isVendor_false{
+    display: none;
+}
+.reportheader{text-align:center;color:#0087c0;}
+.companydetails{background-color:#0087c0; vertical-align: middle;width:60%}
+.companyname{color:#fff;font-size:1.2em; }
+.companyadd{color:#f0e8e8;font-size:1em;}
+.logo{width:30%}
+.summhead-1{background-color: #0087c0; font-weight:600; color:#fff;}
+.rowbackground{background-color:#dfe2e6;}
+.profilebackground{margin-left: 1.5%; margin-top: 2%; width:97%;}
+.table-bordered td, .table-bordered th {    
+    border: 1px solid #c3c3c3 !important;
+}
+
+table tr .detail-1:nth-child(1){
+  background-color: #0087c0 !important;
+  font-weight:600;
+  color:#fff;
+  width:20% !important;
+}
+table tr .detail-2:nth-child(2){
+  background-color: #f2f2f2;
+  width:20% !important;
+}
+table tr .detail-3:nth-child(3){
+  background-color: #0087c0;
+  font-weight:600;
+  color:#fff;
+  width:20% !important;
+}
+table tr .detail-4:nth-child(4){
+  background-color: #f2f2f2;
+  width:20% !important;
+}
+.reportStat-true .card_Criminal_stat,
+.reportStat-true .card_globalDatabaseCase_stat,
+.reportStat-true .card_Criminal_stat.isCRIMINAL_true,
+.reportStat-true .card_globalDatabaseCase_stat.isGLOBAL_true{
+    display: block;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isPAN_true{
+    display: block;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isUAN_true{
+    display: block;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDRIVE_true{
+    display: block;
+}
+.reportStat-true .card_globalDatabaseCase_stat.isDGREE_true{
+    display: block;
+}
+.candidate_report{
+    table{
+        margin-bottom: 0;
+    }
+    .bg_profile{
+        tbody{
+            tr{
+                td:first-child{
+                    background: #f7f7f7;
+                    font-weight: 600;
+                    width: 40%;
+                }
+            }
+        }
+    }
+}
+.card-header{
+    padding: 12px 20px !important;
+    h6{
+        font-size: 15px;
+        font-weight: 600 !important;
+    }
+}
+.aadhar{
+    table{
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+}
+
+
+@media print {
+    .admin_header{
+        display: none;
+    }
+    .content_body{
+        padding: 0 0 0 0 !important;
+    }
+    .btn-print, .pageHeader, .card_Criminal_stat, .card_globalDatabaseCase_stat{
+        display: none !important;
+    }
+    .card{
+        box-shadow: none !important;
+    }
+}

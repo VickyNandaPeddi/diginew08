@@ -14,15 +14,15 @@
                 <div class="card-body" style="padding: 15px 20px 10px;">
                     <div class="row">
                         <div class="col-md-4">
-                            <button type="button" (click)="filterToday()" 
+                            <button type="button" (click)="filterToday()"
                             class="btn btn-sm btn-primary btn-block">Today</button>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" (click)="filterLast7days()" 
+                            <button type="button" (click)="filterLast7days()"
                              class="btn btn-sm btn-primary btn-block">Last 7 Day</button>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" (click)="filterLast30days()" 
+                            <button type="button" (click)="filterLast30days()"
                             class="btn btn-sm btn-primary btn-block">Last 30 Day</button>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
                                         <div class="form-group mb-0">
                                             <div class="input-group date-picker">
                                                 <span>To</span>
-                                                <input #rangeTo="ngbDatepicker" [startDate]="getMinDate" [minDate]="getMinDate" [maxDate]="getToday" 
-                                                formControlName="toDate" id="inputToDate" (dateSelect)="ontoDate($event)" 
+                                                <input #rangeTo="ngbDatepicker" [startDate]="getMinDate" [minDate]="getMinDate" [maxDate]="getToday"
+                                                formControlName="toDate" id="inputToDate" (dateSelect)="ontoDate($event)"
                                                 class="form-control form-control-sm text-right" ngbDatepicker readonly  placeholder="To Date"/>
                                                 <div class="input-group-append">
                                                     <button  class="btn btn-sm btn-outline-secondary" (click)="rangeTo.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group mb-0">
-                                            <button type="button" (click)="onSubmitFilter(dashboardFilter)" 
+                                            <button type="button" (click)="onSubmitFilter(dashboardFilter)"
                                             class="btn btn-sm btn-success btn-block">Filter</button>
                                         </div>
                                     </div>
@@ -80,9 +80,9 @@
             <app-customer-activities></app-customer-activities>
         </div>
 
-        <div class="col-md-6">
-            <app-selected-activities></app-selected-activities>
-        </div>
+<!--        <div class="col-md-6">-->
+<!--            <app-selected-activities></app-selected-activities>-->
+<!--        </div>-->
 
         <div class="col-md-6">
             <app-rate-per-item></app-rate-per-item>

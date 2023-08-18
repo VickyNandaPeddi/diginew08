@@ -1,0 +1,881 @@
+<div class="pageHeader">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <form [formGroup]="formReportApproval">
+        
+    <div class="row" style="margin: 0 25px;">
+        <div class="col-xl-9">
+            <div class="card shadow mb-4 stat_cards">
+                <!-- Card Header -->
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>
+                                <i class="fas fa-user"></i>
+                                <span style="padding: 12px 0 0 0;">{{ candidateName }}
+                                    <button type="button" (click)="openResume(modalResume)" *ngIf="this.candidateResume != null"
+                                    class="btn btn-danger float-right" style="margin-left: 30px;" title="View Uploaded Resume">
+                                        <i class="fa fa-file-pdf" aria-hidden="true"></i>
+                                    </button>
+                                </span>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card stat_cards">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>
+                                <i class="fas fa-address-card"></i>
+                                <span class="text-center">{{panNumber == null ? 'Not Available': panNumber}}</span>
+                                <b>PAN</b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Education Details
+                    </h6>
+                    <button type="button" class="btn btn-sm btn-success float-right" (click)="openAddEducationModal(modalEducation)">
+                        Add Education Details</button>
+                </div>
+                    <!-- <button  type="button" class="btn btn-primary" (click)="openaddEmploymentModal">Add Employment details</button> -->
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Degree</th>
+                                        <th>College</th>
+                                        <th>University/Board</th>
+                                        <th>Year of Passing</th>
+                                        <th>% or CGPA</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateEduData; let i=index;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.qualificationName}}</td>
+                                        <td>{{item.schoolOrCollegeName}}</td>
+                                        <td>{{item.boardOrUniversityName}}</td>
+                                        <td>{{item.yearOfPassing}}</td>
+                                        <td>{{item.percentage}}</td>
+                                        <td><span class=" bg-result" [style.color]="item.colorColorHexCode">{{ item.colorColorName }}</span></td>
+                                        <td class="btngroup">
+                                            <span *ngIf="item.colorColorName == 'Green'">No Action</span>
+
+                                            <button *ngIf="item.colorColorName !== 'Green'" type="button" data-toggle="tooltip" class="btn btn-warning btn-sm" title="Edit" 
+                                            id="edit{{i}}" (click)="openEducationModal(modalEducation, item.candidateCafEducationId,
+                                            item.qualificationId,item.qualificationName,item.schoolOrCollegeName,
+                                                                item.boardOrUniversityName,item.yearOfPassing,item.percentage)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button *ngIf="item.colorColorName !== 'Green'" type="button" (click)="inactiveCustEducation(item.candidateCafEducationId)" class="btn btn-danger btn-sm" title="delete" data-toggle="tooltip"><i class="fas fa-times"></i></button>
+                                        </td>
+                                        <td>{{item.remarkMasterDescription}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-4" *ngIf="!isFresher">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Employment Details
+                    </h6>
+                    <button type="button" class="btn btn-sm btn-success float-right" (click)="openAddExperienceModal(modalExperience)">
+                        Add Employment Details</button>
+                    
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                            <div class="col-md-6 mb-1">
+                                <h6>PAN : <span class="text-primary"> {{panNumber}}</span></h6>
+                            </div>
+                            <div class="col-md-6 text-right mb-1">
+                                <h6 *ngIf="candidateUan != ''">UAN : <span class="text-primary"> {{candidateUan}}</span></h6>
+                            </div>
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Company Name</th>
+                                        <th>DOJ</th>
+                                        <th>DOE</th>
+                                        <th>Result</th>
+                                        <th>Action</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateEXPData; let i=index;">
+                                        <td>{{ i+1 }}</td>
+                                        <td>{{ item.candidateEmployerName }}</td>
+                                        <td>{{ item.inputDateOfJoining }}</td>
+                                        <td>{{ i==0 && item.inputDateOfExit == null?'Not-Available': item.inputDateOfExit}}</td>
+                                        <td><span class=" bg-result" [style.color]="item.colorColorHexCode">{{ item.colorColorName }}</span></td>
+                                        <td>
+                                            <span *ngIf="item.colorColorName == 'Green'">No Action</span>
+                                            <button *ngIf="item.colorColorName !== 'Green'" type="button" data-toggle="tooltip" class="btn btn-warning btn-sm" title="Edit" 
+                                            id="edit{{i}}" (click)="openExperienceModal(modalExperience, item.candidateCafExperienceId,
+                                            item.candidateEmployerName, item.inputDateOfJoining, item.inputDateOfExit)">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button *ngIf="item.colorColorName !== 'Green'" type="button" (click)="inactiveCust(item.candidateCafExperienceId)" class="btn btn-danger btn-sm" data-toggle="tooltip"><i class="fas fa-times"></i></button>
+                                        </td>
+                                        <td>{{ item.remarkMasterDescription == null?'Not Available' : item.remarkMasterDescription}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Address
+                    </h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="3">S.No</th>
+                                        <th rowspan="3">Name</th>
+                                        <th rowspan="3">Address</th>
+                                        <th rowspan="3">Source</th>
+                                        <th colspan="3" style="text-align: center;"> Address Section
+                                        </th>
+                                        <th rowspan="2">Status</th>
+                                        <th rowspan="2">Action</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;">Communication
+                                        </th>
+                                        <th style="text-align: center;">Present</th>
+                                        <th style="text-align: center;">Permanent </th>
+                                    </tr>
+
+
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateAddressData; let i=index;">
+                                        <td>{{ i+1 }}</td>
+                                        <td>{{ item.name }}
+                                            <span *ngIf="item.name == 'LANDLORD'"
+                                            (click)="openLandlordAgreement(modalLandlordAgreement,item.addressVerificationCandidateCafRelationshipDocumentUploaded)"
+                                            style="display: block;font-weight: 600;cursor: pointer;color: #106aff;font-size: 13px;">
+                                                (View Agreement)
+                                            </span>
+                                        </td>
+                                        <td>{{ item.candidateAddress }}</td>
+                                        <td>{{ item.serviceName }}</td>
+                                        <td> 
+                                            <!-- <i class="fas customColors customIcon customIcon"></i></td> -->
+                                            <i class="fas customColors customIcon customIcon{{ item.isAssetDeliveryAddress }}"></i></td>
+                                        <td><i class="fas customColors customIcon customIcon{{ item.isPermanentAddress }}"></i></td>
+                                        <td><i class="fas customColors customIcon customIcon{{ item.isPresentAddress }}"></i></td>
+                                        <td><span class=" bg-result" [style.color]="item.colorColorHexCode">{{ item.colorColorName }}</span></td>
+                                        <td>
+                                            <span *ngIf="item.colorColorName == 'Green'">No Action</span>
+                                            <button class="btn btn-warning btn-sm" title="Edit"
+                                            (click)="openModalAddress(modalAddress, item.candidateCafAddressId,item.isAssetDeliveryAddress,
+                                            item.isPermanentAddress,item.isPresentAddress)">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- ANNEXURE – II Starts -->
+                        <div class="card shadow mb-2" *ngIf="this.getServiceConfigCodes.includes('EPFO') && !isFresher">
+                            <!-- Card Header -->
+                            <div class="card-header py-3 d-flex ">
+                                <div class="col-md-5">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        ANNEXURE – II
+                                    </h6>
+                                </div>
+                                <div class="">
+                                    <h6 class="m-0 font-weight-bold text-dark">
+                                        Output as per EPFO Service History
+                                    </h6>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- <div class="col-md-12 mt-1">
+                                            <b>UAN : <span class="text-success">100232287019</span></b>
+                                        </div> -->
+                                        <p class="text-center text-danger font-bold" *ngIf="epfoSkipped">
+                                            <b>EPFO step SKIPPED</b>
+                                        </p>
+                                        <table class="table table-bordered mt-2" *ngIf="!epfoSkipped">
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="2">Employer Name</th>
+                                                    <th colspan="2" style="text-align: center;">Tenure</th>
+                                                </tr>
+            
+                                                <tr>
+                                                    <th style="text-align: center;"> EPFO DOJ</th>
+                                                    <th style="text-align: center;">EPFO LWD
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of candidateEXPData; let i=index;">
+                                                    <td style="text-align: center;" *ngIf="item.serviceName == 'EPFO'">{{ item.candidateEmployerName }}</td>
+                                                    <td *ngIf="item.serviceName == 'EPFO'">{{ item.outputDateOfJoining }}</td>
+                                                    <td *ngIf="item.serviceName == 'EPFO'">{{ i==0 && item.outputDateOfExit == null?'Not-Available': item.outputDateOfExit}}</td>
+                                                </tr>
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- ANNEXURE – II Ends -->
+                        
+                        <!-- ANNEXURE – III Start -->
+                        <div class="card shadow mb-2" *ngIf="this.getServiceConfigCodes.includes('ITR') && !isFresher">
+                            <!-- Card Header -->
+                            <div class="card-header py-3 d-flex ">
+                                <div class="col-md-5">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        ANNEXURE – III
+                                    </h6>
+                                </div>
+                                <div class="ml-4">
+                                    <h6 class="m-0 font-weight-bold text-dark">
+                                        26AS Statement
+                                    </h6>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12 mt-1">
+                                            <b>PAN : <span class="text-success">{{panNumber}}</span></b>
+                                        </div>
+            
+                                        <table class=" table table-bordered mt-2" style="
+                                        border-bottom: 1px solid black;">
+                                            <thead style="display: table-row-group;">
+                                                <tr>
+                                                    <th>S.No</th>
+                                                    <th>Financial Year </th>
+                                                    <th>TAN</th>
+                                                    <th>Deductor</th>
+                                                    <th>Section</th>
+                                                    <th>Date</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of candidateITRData; let i=index;">
+                                                    <td>{{ i+1 }}</td>
+                                                    <td>{{ item.financialYear }}</td>
+                                                    <td>{{ item.tan }}</td>
+                                                    <td>{{ item.deductor }}</td>
+                                                    <td>{{ item.section }}</td>
+                                                    <td>{{ item.date}}</td>
+                                                    <td>{{ item.amount }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ANNEXURE – III End -->
+                        <div class="card shadow mb-2" *ngIf="employ">
+                           
+                            <div class="card-header py-3 d-flex ">
+                                <div class="col-md-5">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        ANNEXURE - IV
+                                    </h6>
+                                </div>
+                                <div class="ml-4">
+                                    <h6 class="m-0 font-weight-bold text-dark">
+                                        Vendor Proofs
+                                    </h6>
+                                </div>
+                            </div>
+                           
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+            
+                                        <table class=" table table-bordered mt-2" style="
+                                        border-bottom: 1px solid black;">
+                                            <thead style="display: table-row-group;">
+                                                <tr>
+                                                    <th>S.No</th>
+                                                    <th>vendor name</th>
+                                                    <th>Document Name</th>
+                                                    <th>View Document</th>
+                                                    <th>Result</th>
+                                                    <th>Action</th>
+                                                  
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of employ; let i=index;">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{item.userFirstName}}</td>
+                                                    <td>{{item.documentname}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-primary" title="View Document"
+                                                        (click)="openCertificate(modalCertificate, item.document)">
+                                                        <i class="fa fa-eye"></i>
+                                                       </button>
+                                                        <!-- <span (click)="openModal(modalData)" *ngIf="item.document != null" style="cursor: pointer;color: #0074f1;text-decoration: underline;">
+                                                            (View Document)
+                                                        </span> -->
+                                                    </td>
+                                                    <td><span class=" bg-result" [style.color]="item.colorHexCode">{{ item.agentColor }}</span></td>
+                                                    
+                                                    <td>
+                                                        <span *ngIf="item.agentColor == 'Green'">No Action</span>
+                                                        <button *ngIf="item.agentColor !== 'Green'" class="btn btn-warning btn-sm" title="Edit"
+                                                        id="edit{{i}}" (click)="openVendorModal(modalVendor, item.vendorChecks)">
+                                                            <i class="fas fa-pen"></i>
+                                                        </button>
+                                                    </td>
+                                                  
+                                                    
+                                                </tr>
+                                               
+                                             
+                                            </tbody>
+                                        </table>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+
+            <div class="row">
+                <div class="col-md-6" *ngIf="this.getServiceConfigCodes.includes('CRIMINAL')" style="padding-right: 8px;">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header -->
+                        <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Upload Case Details
+                            </h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <label> Does Case Exist ?</label>
+                                    <label *ngFor="let item of getColors">
+                                        <span class="colorId{{item.colorId}}">
+                                            <input type="radio" name="criminalVerificationColorId" formControlName="criminalVerificationColorId" [value]="item.colorId">
+                                            {{ item.colorName }}
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="file" class="form-control" (change)="uploadCaseDetails($event)" accept=".pdf" id="" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="this.getServiceConfigCodes.includes('GLOBAL')" style="padding-left: 8px;">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header -->
+                        <div
+                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Upload Global Database Case Details
+                            </h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <label> Does Case Exist ?</label>
+                                    <label *ngFor="let item of getColors">
+                                        <span class="colorId{{item.colorId}}">
+                                            <input type="radio" name="globalDatabseCaseDetailsColorId" formControlName="globalDatabseCaseDetailsColorId" [value]="item.colorId">
+                                            {{ item.colorName }}
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="file" class="form-control" (change)="uploadGlobalCaseDetails($event)" accept=".pdf">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-12 mt-4 mb-4 text-center">
+                <button type="button" (click)="openAddcommentModal(modalAddcomments)" class="btn btn-primary">Add Comments</button>
+                <button type="button" (click)="enteruan()" class="btn btn-primary">Enter UAN</button>
+                <button type="button" (click)="initiatevendor()" class="btn btn-primary">Initiate vendor checks</button>
+                <button type="button"  (click)="submitReportApproval(formReportApproval)" class="btn btn-primary">Approve Report</button>
+            </div>
+        </div>
+    </div>
+    </form>
+
+</div>
+
+<ng-template #modalCertificate let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">View Certificate</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <iframe id="viewcandidateCertificate" style="width: 100%;height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+
+<ng-template #modalEducation let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Education Status</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body" >
+        <form [formGroup]="formEditEdu" (ngSubmit)="submitEditEdu(formEditEdu)">
+            <input type="hidden"  formControlName="id">
+            <div class="row " >
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="">Degree</label>
+                        <select class="form-control form-control-sm" formControlName="qualificationId">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of QualificationList" [value]="item.qualificationId">{{ item.qualificationName }}</option>
+                        </select>                   
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="">University/Board</label>
+                        <input type="text"   formControlName="boardOrUniversityName" 
+                            class="form-control form-control-sm">
+                    </div>
+                </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="" class="">Collage</label>
+                <input type="text" class="form-control form-control-sm" formControlName="schoolOrCollegeName">
+            </div>
+        </div>  
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="">Year of Passing</label>
+                        <input type="text"  formControlName="yearOfPassing" 
+                            class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="">% or CGPA</label>
+                        <input type="text" formControlName="percentage" 
+                            class="form-control form-control-sm">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="required">Status</label>
+                        <select class="form-control form-control-sm" formControlName="colorId">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getColors" [value]="item.colorId">{{ item.colorName }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="required">Remarks</label>
+                        <select class="form-control form-control-sm" formControlName="remarkId">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getEducationRemarkType" [value]="item.remarkId" >{{ item.description }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit" [disabled]="!formEditEdu.valid" class="btn btn-primary btn-sm">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #modalVendor let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Vendor proofs Status</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <!-- <form > -->
+            <form [formGroup]="formEditDOC" (ngSubmit)="submitEditDOC()">
+            <input type="hidden"  formControlName="id">
+            <div class="row " >
+              
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="" class="required">Result</label>
+                        <select class="form-control form-control-sm" formControlName="colorId">
+                            <!-- <option [ngValue]="null" disabled>{{ item.colorColorName }}</option> -->
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getColors" [value]="item.colorId" >{{ item.colorName }}</option>
+                        </select>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+
+<ng-template #modalExperience let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Experience Status</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formEditEXP" (ngSubmit)="submitEditEXP()">
+            <input type="hidden"  formControlName="id">
+            <div class="row " >
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Company Name</label>
+                        <input type="text" formControlName="candidateEmployerName" class="form-control form-control-sm" >
+                        <!-- value="item1.candidateEmployerName"> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row " >
+                <div class="col-md-6">
+                     <div class="form-group"> 
+                        <label for="" class="required">DOJ</label>
+                        <div class="input-group"> 
+                            <input type="date" class="form-control form-control-sm"  [(ngModel)]="getMinDate" formControlName="inputDateOfJoining" (click)="fetchjoinDateSelected()">
+                         </div> 
+                    </div> 
+                </div>
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                        <label for="" class="required">DOE</label>
+                        <div class="input-group">
+                            <input type="date" class="form-control form-control-sm" [(ngModel)]="Dateofexit" formControlName="inputDateOfExit"(click)="fetchexitDateSelected()">
+                        </div> 
+                    </div>
+            </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="required">Result</label>
+                        <select class="form-control form-control-sm" formControlName="colorId">
+                            <!-- <option [ngValue]="null" disabled>{{ item.colorColorName }}</option> -->
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getColors" [value]="item.colorId" >{{ item.colorName }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="required">Remarks</label>
+                        <select class="form-control form-control-sm" formControlName="remarkId">
+                            <!-- <option [ngValue]="null" disabled>{{ item.remarkMasterDescription == null?'Not Available' : item.remarkMasterDescription}}</option> -->
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getEmploymentRemarkType" [value]="item.remarkId" >{{ item.description }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit"  [disabled]="!formEditEXP.valid" class="btn btn-primary btn-sm">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #modalAddress let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Address</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="formEditADRS" (ngSubmit)="submitEditADRS()">
+            <input type="hidden"  formControlName="id">
+            <div class="row">
+                <div class="col-md-4 text-center mt-3 pb-3">
+                    <div class="form-group">
+                        <label for="" class="">
+                        <input type="checkbox" formControlName="isAssetDeliveryAddress" (change)="roleCboxes($event)"/> Communication</label>
+                        <i class="fas customColors customIcon customIcon"></i> 
+                    </div>
+                </div>
+                    <div class="col-md-4 text-center mt-3 pb-3">
+                        <div class="form-group">
+                            <label for="" class="">
+                            <input type="checkbox" formControlName="isPermanentAddress" > Present</label>
+                        </div>
+                    </div>
+                        <div class="col-md-4 text-center mt-3 pb-3"> 
+                            <div class="form-group">
+                                <label for="" class="">
+                                <input type="checkbox" formControlName="isPresentAddress" > Permanent</label>
+                            </div>
+                        </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="required">Status</label>
+                        <select class="form-control form-control-sm" formControlName="colorId">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getColors" [value]="item.colorId"><div style="color: #fff;">{{ item.colorName }}</div></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="" class="required">Remarks</label>
+                        <select class="form-control form-control-sm" formControlName="remarkId">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getAddressRemarkType" [value]="item.remarkId" >{{ item.description }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit"  class="btn btn-primary btn-sm">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+
+  <ng-template #modalResume let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">View Resume</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <iframe id="viewcandidateResume" style="width: 100%;height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalLandlordAgreement let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">View Landlord Agreement</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <iframe id="viewLandlordAgreement" style="width: 100%;height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalEmployment let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Employme</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <!-- <input type="hidden" formControlName="organizationId">
+            <input type="hidden" formControlName="userId"> -->
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Employee ID</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="required">Degree</label>
+                                <input type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                        </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Collage</label>
+                        <input type="text" class="form-control form-control-sm">
+                    </div>
+                </div>
+                    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="required">University/Board</label>
+                                <input type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="">% or CGPA</label>
+                                <input type="text"
+                                    class="form-control form-control-sm">
+                            </div>
+                        </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Status</label>
+                        <input type="text" class="form-control form-control-sm" >
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Remarks</label>
+                        <!-- <select class="form-control">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getOrgroles" [value]="item.roleId">{{ item.roleName }}</option>
+                        </select> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit"  class="btn btn-primary btn-sm" >Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+  <ng-template #modalAddcomments let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">AddComments Status</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body" >
+        <form [formGroup]="formAddcomment" (ngSubmit)="submitAddcomment(formAddcomment)">
+            <input type="hidden"  formControlName="id">
+            <div class="row " >
+
+               
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="" class="col-md-12">Comments:
+                            </label>
+                            <div class="col-md-12">
+                                <textarea  
+                                    formControlName="addComments" style="font-family:sans-serif;font-size:2.1em;" >
+                                </textarea>
+                            </div>
+                        </div>
+                    </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit" [disabled]="!formAddcomment.valid" class="btn btn-primary btn-sm">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

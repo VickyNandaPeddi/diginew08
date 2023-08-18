@@ -31,13 +31,11 @@ export class AgentDetailsComponent implements OnInit {
         //console.log(this.CharReportDelivery);
         let data = [];
         for (let i = 0; i < this.CharReportDelivery.length; i++) {
-          let obj={};
-          obj=this.CharReportDelivery[i].statusName;
           data.push({name: this.CharReportDelivery[i].id, value: this.CharReportDelivery[i].id});
         }
         chart.data = data;
       });
-      
+
 // Add and configure Series
 var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 categoryAxis.dataFields.category = "name";
@@ -67,7 +65,7 @@ valueAxis.renderer.grid.template.strokeDasharray = "4,4";
 ];
 
     });
-   
+
 }
 
   ngOnDestroy() {

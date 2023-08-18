@@ -1,0 +1,88 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container dashboard_container">
+    <form [formGroup]="dashboardFilter">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="z-index: 1;margin: -10px 0 10px 0;box-shadow: 0px 7px 14px #00000017;">
+                    <div class="card-body" style="padding: 15px 20px 10px;">
+                        <div class="row">
+                            <div class="col-md-3 offset-2">
+                                <div class="form-group mb-0">
+                                    <div class="input-group">
+                                        <input #rangeFrom="ngbDatepicker" formControlName="fromDate" (dateSelect)="onfromDate($event)"  [maxDate]="getToday"
+                                        class="form-control form-control-sm" ngbDatepicker readonly placeholder="From Date" id="inputFromDate"/>
+                                        <div class="input-group-append">
+                                            <button  class="btn btn-sm btn-outline-secondary" (click)="rangeFrom.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group mb-0">
+                                    <div class="input-group">
+                                        <input #rangeTo="ngbDatepicker" [startDate]="getMinDate" [minDate]="getMinDate" [maxDate]="getToday" 
+                                        formControlName="toDate" (dateSelect)="ontoDate($event)" 
+                                        class="form-control form-control-sm" ngbDatepicker readonly  placeholder="To Date" id="inputToDate"/>
+                                        <div class="input-group-append">
+                                            <button  class="btn btn-sm btn-outline-secondary" (click)="rangeTo.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-0">
+                                    <button type="button" (click)="onSubmitFilter(dashboardFilter)" 
+                                    class="btn btn-sm btn-success btn-block">Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Candidate Management
+                        <button type="button" class="btn btn-sm btn-primary float-right" (click)="onBtExport()">
+                            Export
+                        </button>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ag-theme-alpine">
+                                <ag-grid-angular
+                                    style="width: 100%; height: 500px;"
+                                    class="ag-theme-alpine"
+                                    [suppressExcelExport]="true"
+                                    [pagination]="true"
+                                    [rowData]="candidateData"
+                                    [columnDefs]="columnDefs"
+                                    (gridReady)="onGridReady($event)">
+                                </ag-grid-angular>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center" style="margin:10px 0;">
+                            <a routerLink="../../" class="btn btn-danger btn-sm">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
