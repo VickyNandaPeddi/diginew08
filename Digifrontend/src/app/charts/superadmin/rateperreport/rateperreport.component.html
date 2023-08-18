@@ -1,0 +1,14 @@
+<div class="card dashboard_card">
+    <div class="card-header">
+        <h4 class="card-title">
+            Rate per Report
+            <select class="form-control form-control-sm float-right" #a (change)="rpiSource(a.value)">
+                <option [value]="0">All</option>
+                <option *ngFor="let item of getbgv" [value]="item.sourceId">{{item.sourceName}}</option>
+            </select>
+        </h4>
+    </div>
+    <div class="card-body">
+        <div id="rateperreport_chart" style="width: 100%; height: 250px"></div>
+    </div>
+</div>

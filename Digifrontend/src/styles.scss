@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/*+++++++++++++++++++++
+=====================================
+ Company Name : Aashdit Technologies LLP
+ Author Name : Kishore Kumar Jena
+ Version : 1.0
+===============================
++++++++++++++++++++*/
+html{
+  height: 100%;
+}
+body {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 13px !important;
+    background: #f4f4ff;
+    height: 100%;
+}
+input.ng-touched.ng-invalid {
+    border:1px solid red;
+}
+.form-group>*{
+  padding: 0;
+}
+.form-group .form-control {
+  padding: 0.25rem 0.5rem;
+}
+.form-group .form-control-sm {
+  padding: 0.25rem 0.5rem;
+}
+.form-group {
+  label {
+      display: block;
+      margin-bottom: 1px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #333;
+  }
+}
+.btn{
+  margin: 1px 1px;
+  font-size: 14px !important;
+}
+.btn-sm, .btn-group-sm > .btn {
+  font-size: 12px !important;
+}
+.form-control-sm {
+  font-size: 13px !important;
+}
+.input-group .btn.btn-sm{
+  margin: 0;
+  padding: 0 7px;
+}
+.input-group .btn.btn-sm>img{
+  height: 18px;
+  margin: -3px 0 0 0;
+}
+.modal {
+  .modal-content {
+    border: 0;
+    .modal-header{
+      padding: 12px 15px 14px;
+      background: #5d5aff;
+      border-bottom: 0;
+      box-shadow: 0px 2px 3px #00000059;
+      .modal-title {
+        font-size: 16px;
+        color: #ffffff;
+      }
+      .close {
+        color: #fff;
+      }
+      .close:focus,
+      .close:hover{
+        outline: 0;
+        opacity: 1;
+      }
+    }
+  }
+}
+.table {
+  box-shadow: 0px 0px 2px #00000042;
+  margin-bottom: 0;
+  thead{
+    th {
+      font-weight: 700;
+      background: #f3f4f5;
+      font-size: 13px;
+      border: 1px solid #c3c3c3;
+      border-bottom: 2px solid #d1d1d1;
+      text-align: center;
+    }
+  }
+  tbody{
+    td{
+      font-size: 13px;
+      padding: 8px 8px;
+      border: 1px solid #c3c3c3;
+      background: #ffffffa6;
+      color: #141414;
+      text-align: center;
+    }
+  }
+  .table-bordered th, .table-bordered td {
+    border: 1px solid #d4d4d5;
+  }
+}
+.stat_cards{
+  .card-body{
+    padding: 10px 15px;
+  }
+  p>i{
+    float: left;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      background: #fffcf7;
+      text-align: center;
+      border-radius: 50%;
+      color: #ff9900;
+      box-shadow: inset 2px 2px 4px #00000082, inset -1px -1px 2px #fff;
+      border: 1px solid #ff9900;
+      font-size: 25px;
+      margin-right: 8px;
+  }
+  p{
+    margin: 0;
+    b{
+      display: block;
+      text-align: center;
+      color: #ff9900;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    span{
+      display: block;
+      font-weight: 600;
+      color: #000;
+    }
+  }
+}
+
+.col-xl, .col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg, .col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md, .col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm, .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col, .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+.swal2-title {
+  padding: 0 0 5px 0 !important;
+  color: #424141 !important;
+  font-size: 18px !important;
+  border-bottom: 1px dashed #e5e5e5;
+}
+.dropdown-menu {
+  font-size: 14px !important;
+}
+.autocomplete-container {
+  box-shadow: none !important;
+  height: 30px !important;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+}
+.autocomplete-container .input-container input {
+  font-size: 12px !important;
+  line-height: 28px !important;
+  height: 28px !important;
+}
+.autocomplete-container .suggestions-container ul li a {
+  padding: 9px 15px !important;
+  font-size: 12px !important;
+  color: #000 !important;
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+/* Importing AG-Grid style files. */
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-alpine.css";

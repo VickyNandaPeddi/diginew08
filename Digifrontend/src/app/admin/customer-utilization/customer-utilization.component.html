@@ -1,0 +1,159 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+<form [formGroup]="utilizationReportFilter">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="z-index: 1;">
+                <div class="card-body" style="padding: 8px 20px 5px;">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="" class="required">From Date</label>
+                                <div class="input-group">
+                                    <input #rangeFrom="ngbDatepicker" formControlName="fromDate" (dateSelect)="onfromDate($event)"  [maxDate]="getToday"
+                                    class="form-control form-control-sm" ngbDatepicker readonly/>
+                                    <div class="input-group-append">
+                                        <button  class="btn btn-sm btn-outline-secondary" (click)="rangeFrom.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="" class="required">To Date</label>
+                                <div class="input-group">
+                                    <input #rangeTo="ngbDatepicker" [startDate]="getMinDate" [minDate]="getMinDate" [maxDate]="getToday" 
+                                    formControlName="toDate" (dateSelect)="ontoDate($event)" 
+                                    class="form-control form-control-sm" ngbDatepicker readonly/>
+                                    <div class="input-group-append">
+                                        <button  class="btn btn-sm btn-outline-secondary" (click)="rangeTo.toggle()" type="button"><img src="../assets/img/calendar.png"/></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" *ngIf="authService.roleMatch(['ROLE_CBADMIN'])">
+                            <div class="form-group">
+                                <label for="" class="required">Customer</label>
+                                <select class="form-control form-control-sm" #t (change)=getcustId(t.value) formControlName="organizationIds">
+                                    <option [value]="0" [selected]="true">All</option>
+                                    <option *ngFor="let item of getCustID" [value]="item.organizationId">{{ item.organizationName }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group" style="margin: 18px 0 0 0;">
+                                <button type="button" (click)="onSubmitFilter(utilizationReportFilter)" class="btn btn-sm btn-success btn-block">Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Customer Utilization Report
+                        <button  *ngIf="kyc" type="button" class="btn btn-sm btn-primary float-right" (click)="exportexcel()">
+                            Export
+                        </button>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive" id="excel-table" >
+                                <table  class="table table-bordered tbl-drilldown">
+                                    <thead>
+                                        <tr>
+                                            <th>Start Date : {{start_date}}</th>
+                                            <th>End Date : {{end_date}}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <table class="table table-bordered tbl-drilldown" >
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Company Name</th>
+                                            <th>New Uploads</th>
+                                            <th>Reinvites</th>
+                                            <th>Report Delivered</th>
+                                            <th>Pending Now</th>
+                                            <th>Process Declined</th>
+                                            <th>Invitation Expired</th>
+                                            <th>Total Agents</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of getCustomerUtilizationReport; let i=index">
+                                            <td>{{i+1}}</td>
+                                            <td>{{ item.name }}</td>
+                                            <td><span (click)="getData(item.id, item.newuploadStatusCode)">{{ item.newuploadcount }}</span></td>
+                                            <td><span (click)="getData(item.id, item.reinviteStatusCode)">{{ item.reinvitecount }}</span></td>
+                                            <td><span (click)="getData(item.id, item.finalReportStatusCode)">{{ item.finalreportCount }}</span></td>
+                                            <td><span (click)="getData(item.id, item.pendingStatusCode)">{{ item.pendingCount}}</span></td>
+                                            <td><span (click)="getData(item.id, item.processDeclinedStatusCode)">{{ item.processDeclinedCount}}</span></td>
+                                            <td><span (click)="getData(item.id, item.invitationExpiredStatusCode)">{{ item.invitationExpireCount}}</span></td>
+                                            <td><span (click)="getData(item.id, 'agent')">{{ item.agentCount}}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="table-responsive" *ngFor="let agent_item of agent_details; let i=index">
+                                    <table class="table table-bordered tbl-drilldown">
+                                        <thead>
+                                            <tr>
+                                                <th>Agent Name</th>
+                                                <th>{{agent_item.key}}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="table table-bordered tbl-drilldown">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No</th>
+                                                <th>Agent Name</th>
+                                                <th>New Uploads</th>
+                                                <th>Reinvites</th>
+                                                <th>Report Delivered</th>
+                                                <th>Pending Now</th>
+                                                <th>Process Declined</th>
+                                                <th>Invitation Expired</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of agent_item.value; let i=index">
+                                                <td>{{i+1}}</td>
+                                                <td>{{ item.name }}</td>
+                                                <td><span (click)="getData(item.id, item.newuploadStatusCode)">{{ item.newuploadcount }}</span></td>
+                                                <td><span (click)="getData(item.id, item.reinviteStatusCode)">{{ item.reinvitecount }}</span></td>
+                                                <td><span (click)="getData(item.id, item.finalReportStatusCode)">{{ item.finalreportCount }}</span></td>
+                                                <td><span (click)="getData(item.id, item.pendingStatusCode)">{{ item.pendingCount}}</span></td>
+                                                <td><span (click)="getData(item.id, item.processDeclinedStatusCode)">{{ item.processDeclinedCount}}</span></td>
+                                                <td><span (click)="getData(item.id, item.invitationExpiredStatusCode)">{{ item.invitationExpireCount}}</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

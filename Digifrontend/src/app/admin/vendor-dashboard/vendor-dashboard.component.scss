@@ -1,0 +1,29 @@
+@import  "../../../assets/scss/admin.scss";
+.toggleDivContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 16px);
+    height: 315px;
+    .card{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .card.cardStatfalse{
+        display: none;
+    }
+    .card-title .btn{
+        padding: 1px 10px 2px;
+    }
+}
+.containerStatfalse{
+    display: none;
+}
+.containerStattrue{
+    display: block;
+}
+
+

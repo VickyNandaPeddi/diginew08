@@ -1,0 +1,87 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Update Your Profile</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="formMyProfile">
+                        <input type="hidden" class="form-control form-control-sm"
+                                            formControlName="employeeId">
+                        <input type="hidden" class="form-control form-control-sm"
+                                            formControlName="userId">
+                        <input type="hidden" class="form-control form-control-sm"
+                                            formControlName="roleId">
+                        <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Name :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="userFirstName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Email :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="userEmailId">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Phone :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="10" class="form-control form-control-sm"
+                                            formControlName="userMobileNum">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Location :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="location">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Password :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="password">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-3 pb-3">
+                                <button type="button" [disabled]="!formMyProfile.valid" (click)="onSubmit(formMyProfile)" class="btn btn-primary btn-sm">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

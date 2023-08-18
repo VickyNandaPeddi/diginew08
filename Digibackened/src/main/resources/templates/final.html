@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DigiVerifier Pdf</title>
+    <meta charset="UTF-8"/>
+	<style>
+		.reportStat-false .card_Criminal_stat,
+		.reportStat-false .card_globalDatabaseCase_stat,
+		.reportStat-true .card_Criminal_stat.isCRIMINAL_false,
+		.reportStat-true .card_globalDatabaseCase_stat.isGLOBAL_false {
+			display: none;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isPAN_false {
+			display: none;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isUAN_false {
+			display: none;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isDRIVE_false {
+			display: none;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isDGREE_false {
+			display: none;
+		}
+	
+		.reportheader {
+			text-align: center;
+			color: #0087c0;
+		}
+	
+		.companydetails {
+			background-color: #0087c0;
+			vertical-align: middle;
+			width: 60%
+		}
+	
+		.companyname {
+			color: #fff;
+			font-size: 1.2em;
+		}
+	
+		.companyadd {
+			color: #f0e8e8;
+			font-size: 1em;
+		}
+	
+		.logo {
+			width: 30%
+		}
+	
+		.summhead-1 {
+			background-color: #0087c0;
+			font-weight: 600;
+			color: #fff;
+		}
+	
+		.rowbackground {
+			background-color: #dfe2e6;
+		}
+	
+		.profilebackground {
+			margin-left: 1.5%;
+			margin-top: 2%;
+			width: 97%;
+		}
+	
+		.table-bordered td,
+		.table-bordered th {
+			border: 1px solid #c3c3c3 !important;
+		}
+	
+		table tr .detail-1:nth-child(1) {
+			background-color: #0087c0 !important;
+			font-weight: 600;
+			color: #fff;
+			width: 20% !important;
+		}
+	
+		table tr .detail-2:nth-child(2) {
+			background-color: #f2f2f2;
+			width: 20% !important;
+		}
+	
+		table tr .detail-3:nth-child(3) {
+			background-color: #0087c0;
+			font-weight: 600;
+			color: #fff;
+			width: 20% !important;
+		}
+	
+		table tr .detail-4:nth-child(4) {
+			background-color: #f2f2f2;
+			width: 20% !important;
+		}
+	
+		.reportStat-true .card_Criminal_stat,
+		.reportStat-true .card_globalDatabaseCase_stat,
+		.reportStat-true .card_Criminal_stat.isCRIMINAL_true,
+		.reportStat-true .card_globalDatabaseCase_stat.isGLOBAL_true {
+			display: block;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isPAN_true {
+			display: block;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isUAN_true {
+			display: block;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isDRIVE_true {
+			display: block;
+		}
+	
+		.reportStat-true .card_globalDatabaseCase_stat.isDGREE_true {
+			display: block;
+		}
+	
+		.candidate_report {
+			/* table{
+	        margin-bottom: 0;
+	    } */
+			/* .bg_profile{
+	         tbody{
+	            tr{
+	                td:first-child{
+	                    background: #f7f7f7;
+	                    font-weight: 600;
+	                    width: 40%;
+	                }
+	            }
+	        } 
+	    } */
+		}
+	
+		/* .card-header{
+	    padding: 12px 20px !important;
+	    h6{
+	        font-size: 15px;
+	        font-weight: 600 !important;
+	    }
+	}
+	.aadhar{
+	    table{
+	        font-family: arial, sans-serif;
+	        border-collapse: collapse;
+	        width: 100%;
+	    }
+	    td, th {
+	        border: 1px solid #dddddd;
+	        text-align: left;
+	        padding: 8px;
+	      }
+	} */
+	
+	
+		@media print {
+			.admin_header {
+				display: none;
+			}
+	
+			.content_body {
+				padding: 0 0 0 0 !important;
+			}
+	
+			.btn-print,
+			.pageHeader,
+			.card_Criminal_stat,
+			.card_globalDatabaseCase_stat {
+				display: none !important;
+			}
+	
+			.card {
+				box-shadow: none !important;
+			}
+		}
+	</style>
+</head>    
+<body>
+ <div class="row" >
+    <div class="col-xl-12 ">
+         <div class="card shadow">
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="reportheader"><b>Digital Background Verification Report</b></h3><br>
+                        <table class="table table-bordered ">
+                            
+                                <tr>
+                                    <th class="companydetails">
+                                    <span class="companyname" th:text="${root.organizationName}"></span><br>
+                                    <span class="companyadd" th:text="${root.organizationLocation}"></span>
+                                    </th>
+                                    <!-- <th class="logo"><img [src]="logo()"></th> -->
+                                    <th class="logo" ><img style="width: 247px;height: 80px; display: block; margin-left: auto; margin-right: auto; width: 50%;" th:src="${root.organizationLogo}"></th>
+                                </tr>
+                            
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div>
+        
+        </div>
+       <div class="card shadow bg_profile">
+           <table class="table table-bordered profilebackground">
+        <tbody>
+                                <tr>
+                                    <td style="width:20%; background-color: #0087c0 ; color:#fff;"><h5><b>Background Profile</b></h5></td>
+                                    <td style="width:60%"><b>Color Code:</b> <span class="text-Red bg-result">DISCREPANCY</span> | <span class="text-Green bg-result">CLEARED</span> | <span class="text-Amber bg-result">
+                                            UNABLE TO VERIFY/ INACCESSIBLE</span></td>										
+                                </tr>
+                                <tr>
+                                </tbody>
+        </table>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                    
+                        <table class="table table-bordered">
+                           
+                            <tbody>
+                                <tr>
+                                    <td class="detail-1">Name of the Candidate</td>
+                                    <td class="detail-2 rowbackground" ><span th:text="${root.name}"></span></td>
+                                    <td class="detail-3">Date of Birth</td>
+                                    <td class="detail-4 rowbackground" ><span th:text="${root.dob}"></span></td>
+                                </tr>
+                                <tr>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="detail-1">Contact No</td>
+                                    <td class="detail-2 rowbackground" ><span th:text="${root.contactNo}"></span></td>
+                                    <td class="detail-3">Email ID</td>
+                                    <td class="detail-4 rowbackground" ><span th:text="${root.emailId}"></span></td>
+                                </tr>
+                                <tr>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="detail-1">Reference ID</td>
+                                    <td class="detail-2 rowbackground"><span th:text="${root.applicantId}"></span></td>
+                                    <td class="detail-3">Project/BU</td>
+                                    <td class="detail-4 rowbackground"><span th:text="${root.project}"></span></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="detail-1">Fresher/ Experienced</td>
+                                    <td class="detail-2 rowbackground"><span th:text="${root.experience}"></span>
+                                        <!-- {{isFresher == true ?'Fresher':'Experienced'}} -->
+                                    </td>
+                                    <td class="detail-3">Case Initiation Date</td>
+                                    <td class="detail-4 rowbackground"><span th:text="${root.caseInitiationDate}"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="detail-1">Report Delivered Date</td>
+                                    <td class="detail-2 rowbackground"><span th:text="${root.finalReportDate}"></span>
+                                    </td>
+                                    <td class="detail-3">Verification Status</td>
+                                    <td class="detail-4" th:switch="${root.verificationStatus.name()}">
+                                        <!-- <span class="text-{{candidateFinalReport_stat}} bg-result rowbackground">{{candidateFinalReport_stat}}</span> -->
+                                        <span class="green-status" th:case="'GREEN'" th:text="${root.verificationStatus}"></span>
+                                        <span class="amber-status" th:case="'AMBER'" th:text="${root.verificationStatus}"></span>
+                                        <span class="red-status" th:case="'RED'" th:text="${root.verificationStatus}"></span>
+                                        <span class="invalid-status grey-text" th:case="*">INVALID</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="detail-1">Remarks</td>
+                                    <td class="detail-2"></td>
+                                    <td class="detail-3"></td>
+                                    <td class="detail-4"></td>                                      
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-12">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ,,,, -->
+        <div class="card">
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h5><b>Executive Summary</b></h5>
+                
+            </div>
+        </div>
+        <div class="card shadow">
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h5><b>Section Ia: IDVerification</b></h5>                   
+                <h6 class="mr-3">Result : 
+                <span class="text-{{candidateIdItems_stat}} bg-result" th:text="${root.idConsolidatedStatus}">
+                </span>
+                </h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="summhead-1">Sl No.</th>
+                                    <th class="summhead-1">ID Items</th>
+                                    <th class="summhead-1">Name</th>
+                                    <th class="summhead-1">ID No</th>
+                                    <th class="summhead-1">Source</th>
+                                    <th class="summhead-1">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" th:each="employmentVerification,stat: ${root.idVerificationDTOList}">
+                                    <td class="grey-text text-center"><span  th:text="${stat.index + 1}"></span></td>
+                                    <td class="grey-text text-center"><span  th:text="${employmentVerification.iDtype}"></span></td>
+                                    <td class="grey-text text-center"><span  th:text="${employmentVerification.name}"></span></td>
+                                    <td class="grey-text text-center"><span  th:text="${employmentVerification.idNo}"></span></td>
+                                    <td class="grey-text text-center"><span  th:text="${employmentVerification.sourceEnum}"></span></td>
+                                    <td class="grey-text text-center" th:switch="${employmentVerification.verificationStatus.name()}">
+                                        <span class="green-status" style="font-size:12px" th:case="'GREEN'"  th:text="${employmentVerification.verificationStatus}"></span>
+                                        <span class="amber-status" style="font-size:12px" th:case="'AMBER'"  th:text="${employmentVerification.verificationStatus}"></span>
+                                        <span class="red-status" style="font-size:12px" th:case="'RED'"   th:text="${employmentVerification.verificationStatus}"></span>
+                                        <span class="invalid-status" style="font-size:12px" th:case="*" >INVALID</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow">
+            <!-- Card Header -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h5><b>Section Ib: AddressVerification</b></h5>                   
+                <h6 class="mr-3">Result :  <span class="text-{{candidateAddressData_stat}} bg-result" th:text="${root.addressConsolidatedStatus}"></span></h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="summhead-1">
+                                    <th rowspan="3" class="summhead-1">Sl No.</th>
+                                    <th rowspan="3" class="summhead-1">Name</th>
+                                    <th rowspan="3" class="summhead-1">Address</th>
+                                    <th rowspan="3" class="summhead-1">Source</th>
+                                    <th colspan="3" style="text-align: center;" class="summhead-1">Address Section
+                                    </th>
+                                    <th rowspan="3" class="summhead-1">Result</th>
+                                </tr>
+
+                               
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" th:each="address,stat: ${root.addressVerificationDtoList}">
+                                    <td class="grey-text text-center"><span style="font-size:10px" th:text="${stat.index + 1}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:10px" th:text="${address.type}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:10px" th:text="${address.input}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:10px" th:text="${address.source}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:10px" ></span></td>
+                                    <td style="border-collapse: collapse;border: 1px solid black;" th:switch="${address.verificationStatus.name()}">
+                                        <span class="green-status" style="font-size:12px" th:case="'GREEN'" th:text="${address.verificationStatus}"></span>
+                                        <span class="amber-status" style="font-size:12px" th:case="'AMBER'" th:text="${address.verificationStatus}"></span>
+                                        <span class="red-status" style="font-size:12px" th:case="'RED'" th:text="${address.verificationStatus}"></span>
+                                        <span class="invalid-status" style="font-size:12px" th:case="*" >INVALID</span>
+                                    </td>
+                        
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow" *ngIf="!isFresher">
+            <!-- Card Header -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">                    
+                <h5><b>Section II: Employment Verification</b></h5>                    
+                <h6 class="mr-3">Result : <span class="text-{{employmentDetails_stat}} bg-result" th:text="${root.employmentConsolidatedStatus}"></span></h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered rowbackground">
+                            <thead>
+                                <tr>
+                                    <th class="summhead-1">Sl No.</th>
+                                    <th class="summhead-1">Company Name</th>
+                                    <th class="summhead-1">Source</th>
+                                    <th class="summhead-1">Tenure</th>
+                                    <th class="summhead-1">Output Tenure</th>
+                                    <th class="summhead-1">Gap</th>
+                                    <th class="summhead-1">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" th:each="employmentTenureVerification,stat: ${root.employmentTenureVerificationDtoList}">
+                                    <td class="grey-text text-center"><span  th:text="${stat.index + 1}"></span></td>
+                                    <td class="grey-text text-center"><span th:text="${employmentTenureVerification.employerName}"></span></td>
+                                    <td class="grey-text text-center"><span th:text="${employmentTenureVerification.source}"></span></td>
+                                    <td class="grey-text text-center"><span  th:text="${employmentTenureVerification.input}"></span></td>
+                                    <td class="grey-text text-center"><span  th:text="${employmentTenureVerification.output}"></span></td>
+                                    <td class="grey-text text-center"><span  ></span></td>
+                                    <td style="border-collapse: collapse;border: 1px solid black;" th:switch="${employmentTenureVerification.verificationStatus.name()}">
+                                        <span class="green-status" style="font-size:12px" th:case="'GREEN'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                                        <span class="amber-status" style="font-size:12px" th:case="'AMBER'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                                        <span class="red-status" style="font-size:12px" th:case="'RED'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                                        <span class="invalid-status" style="font-size:12px" th:case="*" >INVALID</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <!-- <tfoot>
+                                <tr>
+                                    <td class="rowbackground" colspan="3">
+                                        Total
+                                    </td>
+                                    
+                                    <td class="rowbackground">
+                                        {{cApplicationFormDetails.inputTenureSum}}
+                                    </td>
+                                    <td class="rowbackground">
+                                        {{cApplicationFormDetails.outputTenureSum}}
+                                    </td>
+                                    <td class="rowbackground">
+                                        {{cApplicationFormDetails.gapSum}}
+                                    </td>
+                                   
+                                </tr>
+                            </tfoot> -->
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow" th:if="${!root.EducationVerificationDTOList.isEmpty()}" >
+            <!-- Card Header -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h5><b>Section III: Education Verification</b></h5>                   
+                <h6 class="mr-3">Result :  <span class="text-{{candidateEduData_stat}} bg-result" th:text="${root.educationConsolidatedStatus}"></span></h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered rowbackground">
+                            <thead>
+                                <tr>
+                                    <th class="summhead-1">Sl No.</th>
+                                    <th class="summhead-1">Degree</th>
+                                    <th class="summhead-1">College</th>
+                                    <th class="summhead-1">University/ Board</th>
+                                    <th class="summhead-1">Year Of Passing</th>
+                                    <th class="summhead-1">Total Marks Secured</th>
+                                    <th class="summhead-1">% or CGPA</th>
+                                    <th class="summhead-1">Result</th>
+                                    <th *ngIf="reportStat" class="summhead-1">Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" th:each="employmentTenureVerification,stat: ${root.educationVerificationDTOList}">
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${stat.index + 1}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${employmentTenureVerification.degree}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${employmentTenureVerification.university}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${employmentTenureVerification.university}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" ></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" ></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" ></span></td>
+                                    <td style="border-collapse: collapse;border: 1px solid black;" th:switch="${employmentTenureVerification.verificationStatus.name()}">
+                                        <span class="green-status" style="font-size:12px" th:case="'GREEN'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                                        <span class="amber-status" style="font-size:12px" th:case="'AMBER'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                                        <span class="red-status" style="font-size:12px" th:case="'RED'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                                        <span class="invalid-status" style="font-size:12px" th:case="*" >INVALID</span>
+                                    </td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" ></span></td>
+                        
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       
+      
+        <div class="card shadow mb-2 isCRIMINAL_{{isCRIMINAL}} card_Criminal_stat" >
+            
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    V. Criminal Verification
+                </h6>
+                <h6 class="mr-3">Case Exists : <span class="text-{{Criminal_stat}}">{{Criminal_stat}}</span></h6>
+            </div>
+            
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe id="viewcaseDetails" style="width: 100%;height: 600px;"></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow mb-2 isGLOBAL_{{isGLOBAL}} card_globalDatabaseCase_stat" >
+            
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    VI. Global Database Check
+                </h6>
+                <h6 class="mr-3">Case Exists : <span class="text-{{globalDatabaseCase_stat}}">{{globalDatabaseCase_stat}}</span></h6>
+            </div>
+           
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe id="viewGlobalDatabase" style="width: 100%;height: 600px;"></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow" *ngIf="isAAHAR" >
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex ">
+                <div class="col-md-5">
+                    <h5><b>ANNEXURE – I</b></h5>
+                </div>
+                <div class="">
+                    <h5><b>Aadhar Details</b></h5>                      
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <b>ANNEXURE – 1(A)</b>  -->
+                        <table class="table table-bordered rowbackground">
+                            <thead>
+                                <tr >
+                                    <!-- <th>SI#</th> -->
+                                    <td class="summhead-1">Name</td>
+                                    <td class="summhead-1">Fathers Name</td>
+                                    <td class="summhead-1">D.O.B</td>
+                                    <td class="summhead-1">Gender</td>
+                                    <td class="summhead-1">Aadhaar No</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr class="text-center" th:each="adhaar,stat: ${root.aadharCardVerification}">
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${adhaar.name}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${adhaar.fatherName}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${adhaar.dob}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${adhaar.source}"></span></td>
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${adhaar.aadharNo}"></span></td>
+                                 </tr>
+                            </tbody>
+                            <div  class="rowbackground" style="border: 1px solid #dee2e6" th:each="adhaar,stat: ${root.addressVerificationDtoList}">
+                                <label style="padding-left: 5px; padding-top: 14px;" th:if="${adhaar.input}" th:text="${adhaar.input}">< b>Address:</b></label>
+                            </div> 
+                        </table>
+                    </div>
+                    <br><br>                       
+
+                </div>
+            </div>
+        </div>
+           <div class="card shadow isPAN_{{isPAN}} card_globalDatabaseCase_stat" >
+        <!-- <div > -->
+            
+            <div 
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h5><b>PAN</b></h5>
+                
+                <!-- <h6 class="mr-3">Case Exists : <span class="text-{{globalDatabaseCase_stat}}">{{globalDatabaseCase_stat}}</span></h6> -->
+            </div>
+           
+            <div class="card-body" >
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe id="digiDoc" style="width: 100%;height: 600px;"></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow isUAN_{{isUAN}} card_globalDatabaseCase_stat" >
+            <!-- <div > -->
+                
+                <div 
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h5><b>UAN</b></h5>
+                    
+                    <!-- <h6 class="mr-3">Case Exists : <span class="text-{{globalDatabaseCase_stat}}">{{globalDatabaseCase_stat}}</span></h6> -->
+                </div>
+               
+                <div class="card-body" >
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe id="uanDoc" style="width: 100%;height: 600px;"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        <div class="card shadow isDRIVE_{{isDRIVE}} card_globalDatabaseCase_stat" >
+            
+            <div 
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">                   
+                <h5><b>DRIVING LICENSE</b></h5>
+            </div>
+           
+            <div class="card-body"  >
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe id="drivingDoc" style="width: 100%;height: 600px;"></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card shadow" *ngIf="this.getServiceConfigCodes.includes('EPFO') && !isFresher">
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex ">
+                <div class="col-md-5">
+                    <h5><b>ANNEXURE – IIa</b></h5>                       
+                </div>
+                <div class="">
+                    <h6 class="m-0 font-weight-bold text-dark">
+                        EPFO Service History
+                    </h6>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
+                            <b>UAN : <span class="text-success" th:text="${root.epfoData?.UANno}"></span></b>
+                        </div>
+                        <p class="text-center text-danger font-bold" *ngIf="epfoSkipped">
+                            <b>EPFO step SKIPPED</b>
+                        </p>
+                        <table class="table table-bordered mt-2" *ngIf="!epfoSkipped">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" class="summhead-1">Employer Name</th>
+                                    <th colspan="2" style="text-align: center;" class="summhead-1">Tenure</th>
+                                </tr>
+
+                                <tr>
+                                    <th style="text-align: center;" class="summhead-1"> EPFO DOJ</th>
+                                    <th style="text-align: center;" class="summhead-1">EPFO DOE
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" th:each="employmentVerification,stat: ${root.employmentVerificationDtoList}">
+                                    <td class="grey-text text-center"><span th:text="${employmentVerification.input}"></span></td>
+                                    <td class="grey-text text-center"><span th:text="${employmentVerification.doj}"></span></td>
+                                    <td class="grey-text text-center"><span  th:text="${employmentVerification.doe}"></span></td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow" *ngIf="this.getServiceConfigCodes.includes('ITR') && !isFresher">
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex ">
+                <div class="col-md-5">
+                    <h5><b>ANNEXURE – IIb</b></h5>                        
+                </div>
+                <div class="ml-4">
+                    <h5><b>26AS Statement</b></h5>
+                   
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
+                            <b>PAN : <span class="text-success" th:text="${root.itrData?.panNumber}"></span></b>
+                        </div>
+
+                        <table class=" table table-bordered mt-2" style="
+                        border-bottom: 1px solid black;">
+                            <thead style="display: table-row-group;">
+                                <tr>
+                                    <th class="summhead-1">Sl No.</th>
+                                    <th class="summhead-1">Financial Year </th>
+                                    <th class="summhead-1">TAN</th>
+                                    <th class="summhead-1">Deductor</th>
+                                    <th class="summhead-1">Section</th>
+                                    <th class="summhead-1">Date</th>
+                                    <th class="summhead-1">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="text-align:center;" th:each="itr,stat: ${root.itrData?.itrDataList}">
+                                    <td class="grey-text text-center"><span style="font-size:12px" th:text="${stat.index + 1}"></span></td>
+                                    <td><span class="grey-text text-center"><i th:text="${itr.financialYear}"></i></span></td>
+                                    <td><span class="common_padding grey-text text-center" ><i th:text="${itr.tan}"></i></span></td>
+                                    <td><span class="common_padding grey-text text-center" ><i th:text="${itr.deductor}"></i></span></td>
+                                    <td><span class="common_padding grey-text text-center" ><i th:text="${itr.section}"></i></span></td>
+                                    <td><span class="grey-text text-center"> <i th:text="${itr.date}"></i> </span></td>
+                                    <td><span class="common_padding grey-text text-center" ><i th:text="${itr.amount}"></i></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="card shadow isDGREE_{{isDGREE}} card_globalDatabaseCase_stat">
+             <div class="card-header py-3 d-flex ">
+                <div class="col-md-5">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        ANNEXURE – III
+                    </h6>
+                </div>
+                <div 
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">                   
+                    <h5><b>EDUCATION VERIFICATION</b></h5>
+                </div>
+                <div class="card-body"  >
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe id="degreeDoc" style="width: 100%;height: 600px;"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+         </div>
+         
+         
+        
+       
+    </div>
+
+</body>
+
+
+</html>

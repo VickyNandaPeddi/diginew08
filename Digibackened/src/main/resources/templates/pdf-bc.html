@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DigiVerifier Pdf</title>
+    <meta charset="UTF-8"/>
+    <!--    <link  th:href="@{styles/css/Metro.css}"  rel="stylesheet"/>-->
+    <link  th:href="@{styles/css/fonts.css}"  rel="stylesheet"/>
+    <link  th:href="@{styles/css/common.css}"  rel="stylesheet"/>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto}" rel="stylesheet"/>
+    <!--<script src='http://localhost:9090/chart.js'></script>-->
+    <style>
+        span {
+
+            font-family: 'Roboto';
+        }
+        .table-st {
+        clear:both;
+        width:100%;
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+
+        .table-st tr{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .text-center{
+          text-align:center;
+        }
+         .text-left{
+          text-align:left;
+        }
+         .table-st tr td{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+         .table-st tr td span{
+          margin-left: 5px;
+        }
+        .blue-bg{
+         background-color: #355794;
+         }
+
+        .td-heading {
+         color:#fff;
+         font-weight: bold;
+         font-size:18px;
+        }
+
+        .black-text{
+         color:#757575;
+         font-size: 10px;
+         font-weight: bold;
+         font-family: 'Roboto';
+         }
+         .white-text{
+         font-weight: bold;
+         color:#fff;
+         font-family: 'Roboto';
+         font-size:10px;
+         }
+         .line-break{
+            display: block;
+            height: 15px;
+         }
+         .sub-heading{
+         color: #000000;
+         text-align: center;
+         font-weight: bold;
+         font-size:20px;
+         }
+         .green-status{
+          margin:0px;
+         color: #008000;
+         font-weight:bold;
+         font-family: 'Roboto';
+         font-size:12px;
+         }
+        .amber-status{
+         margin:0px;
+         color: #ffA500;
+         font-weight:bold;
+         font-family: 'Roboto';
+         font-size:12px;
+         }
+          .red-status{
+           margin:0px;
+         color: #ff0000;
+         font-weight:bold;
+         font-family: 'Roboto';
+         font-size:12px;
+         }
+         .invalid-status{
+         margin:0px;
+         color: #000000;
+         font-weight:bold;
+         font-family: 'Roboto';
+         font-size:12px;
+         }
+    </style>
+</head>
+<body style="background-color:#fff;padding:0px;margin:0px;position:relative;font-family: 'Roboto', sans-serif;color:#666666;">
+<section class="wrapper" style="width:100%;margin:0 auto;height:80%;">
+    <span class="line-break"></span>
+    <span class="line-break"></span>
+    <table class="table_head table-st">
+        <!--concept Title head-->
+        <tr>
+            <td class="blue-bg text-center" colspan="4">
+                <span class="td-heading">Background Verification Report</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%;" class="blue-bg text-left">
+                <span class="white-text">
+                    <b>Name of Candidate</b>
+                </span>
+            </td>
+            <td style="width: 25%;" class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.name}" ></b>
+                </span>
+            </td>
+            <td style="width: 25%;" class="blue-bg text-left">
+                <span  class="white-text">
+                    <b>Report Type</b>
+                </span>
+            </td>
+            <td style="text-align:left;width: 25%;">
+                <span class="black-text">
+                    <b th:text="${root.reportType}"></b>
+                </span>
+            </td>
+        </tr>
+        <tr >
+            <td style="width: 25%;" class="blue-bg text-left">
+                <span  class="white-text">
+                    <b>Applicant ID</b>
+                </span>
+            </td>
+            <td style="width: 25%" class="text-left">
+                <span  class="black-text">
+                    <b th:text="${root.applicantId}"></b>
+                </span>
+            </td>
+            <td style="width: 25%;" class="blue-bg text-left">
+                <span class="white-text">
+                    <b>Case Inititaion Date</b>
+                </span>
+            </td>
+            <td style="width: 25%" class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.caseInitiationDate}"></b>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%;" class="blue-bg text-left">
+                <span class="white-text">
+                    <b th:text="${root.organizationName}"></b>
+                </span>
+            </td>
+            <td style="width: 25%" class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.organizationDOJ}"></b>
+                </span>
+            </td>
+            <td style="width: 25%;" class="blue-bg text-left">
+                <span class="white-text">
+                    <b>Interim report Date</b>
+                </span>
+            </td>
+            <td style="width: 25%;" class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.interimReportDate}"></b>
+                </span>
+            </td>
+        </tr>
+        <tr >
+            <td style="width: 25%;" class="blue-bg text-left">
+                <span  class="white-text">
+                    <b>URN No.</b>
+                </span>
+            </td>
+            <td style="width: 25%;"class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.URNno}"></b>
+                </span>
+            </td>
+            <td style="text-align:left;width: 25%;" class="blue-bg">
+                <span  class="white-text">
+                    <b>Final Report Date</b>
+                </span>
+            </td>
+            <td style="width: 25%;"class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.finalReportDate}"></b>
+                </span>
+            </td>
+        </tr>
+        <tr >
+            <td style="text-align:left;width: 25%;" class="blue-bg">
+                <span  class="white-text">
+                    <b>Joining Location</b>
+                </span>
+            </td>
+            <td style="width: 25%;"class="text-left">
+                <span  class="black-text">
+                    <b th:text="${root.jobLocation}"></b>
+                </span>
+            </td>
+            <td style="text-align:left;width: 25%;" class="blue-bg">
+                <span class="white-text">
+                    <b>SR Report Date</b>
+                </span>
+            </td>
+            <td style="width: 25%;"class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.SrReportDate}"></b>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left;width: 25%;" class="blue-bg">
+                <span  class="white-text">
+                    <b>Project</b>
+                </span>
+            </td>
+            <td style="width: 25%;"class="text-left">
+                <span class="black-text">
+                    <b th:text="${root.project}"></b>
+                </span>
+            </td>
+            <td style="text-align:left;width: 25%;" class="blue-bg">
+                <span class="white-text">
+                    <b>Verification Status</b>
+                </span>
+            </td>
+            <td style="border-collapse: collapse;border: 1px solid black;" th:switch="${root.verificationStatus.name()}">
+                <span class="green-status"  th:case="'GREEN'" th:text="${root.verificationStatus}"></span>
+                <span class="amber-status" th:case="'AMBER'" th:text="${root.verificationStatus}"></span>
+                <span class="red-status" th:case="'RED'" th:text="${root.verificationStatus}"></span>
+                <span class="invalid-status" th:case="*">INVALID</span>
+            </td>
+        </tr>
+    </table>
+
+    <span class="line-break"></span>
+    <span class="line-break"></span>
+    <p class="sub-heading"> Executive Summary </p>
+
+    <table class="table-st executive-summary" border="0">
+        <tr>
+            <td style="width: 5%;" class="blue-bg text-center"><span class="white-text">S. No.</span></td>
+            <td style="width: 35%;" class="blue-bg text-center"><span class="white-text">Verification</span></td>
+            <td style="width: 35%;" class="blue-bg text-center"><span class="white-text">Details</span></td>
+            <td style="width: 10%;" class="blue-bg text-center"><span class="white-text">Status</span></td>
+        </tr>
+        <tr style="text-align:center; font-size:10px" th:each="executive,stat: ${root.executiveSummaryList}">
+            <td class="black-text"><p style="font-size:10px;padding:0px;margin:0px;" th:text="${stat.index + 1}"></p></td>
+            <td class="black-text"><p style="font-size:10px;padding:0px;margin:0px;" th:text="${executive.verificationItem}"></p></td>
+            <td class="black-text"><p style="font-size:10px;padding:0px;margin:0px;" th:text="${executive.details}"></p></td>
+            <td  th:switch="${executive.verificationStatus.name()}">
+                <p class="green-status" th:case="'GREEN'" style="font-size:10px;padding:0px;margin:0px;" th:text="${executive.verificationStatus}"></p>
+                <p class="amber-status" th:case="'AMBER'" style="font-size:10;padding:0px;margin:0px;" th:text="${executive.verificationStatus}"></p>
+                <p class="red-status" th:case="'RED'" style="font-size:10px;padding:0px;margin:0px;" th:text="${executive.verificationStatus}"></p>
+                <p class="invalid-status" style="font-size:10px;padding:0px;margin:0px;" th:case="*" >INVALID</p>
+            </td>
+        </tr>
+    </table>
+
+    <div style="page-break-after:always;"> <!-- content --></div>
+    <span class="line-break"></span><span class="line-break"></span>
+    <p class ="sub-heading">Employment Verification Report</p>
+
+    <table class="table-st employer-name-verification" border="0">
+        <tr class="blue-bg text-center">
+            <td class="white-text" colspan="5">
+                <span class="td-heading"><b>Employer Name Verification</b>
+                </span>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td class="blue-bg" style="width:5%"><span class="white-text" >S. No.</span></td>
+            <td class="blue-bg" style="width:30%"><span class="white-text" >Employers as per Input</span></td>
+            <td class="blue-bg" style="width:30%"><span class="white-text" >Employers as per Output</span></td>
+            <td class="blue-bg" style="width:10%"><span class="white-text" >Source</span></td>
+            <td class="blue-bg" style="width:10%"><span class="white-text" >Result</span></td>
+        </tr>
+        <tr class="text-center" th:each="employmentVerification,stat: ${root.employmentVerificationDtoList}">
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${stat.index + 1}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${employmentVerification.input}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${employmentVerification.output}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${employmentVerification.source}"></span></td>
+            <td class="black-text text-center" th:switch="${employmentVerification.verificationStatus.name()}">
+                <span class="green-status" style="font-size:10px" th:case="'GREEN'"  th:text="${employmentVerification.verificationStatus}"></span>
+                <span class="amber-status" style="font-size:10px" th:case="'AMBER'"  th:text="${employmentVerification.verificationStatus}"></span>
+                <span class="red-status" style="font-size:10px" th:case="'RED'"   th:text="${employmentVerification.verificationStatus}"></span>
+                <span class="invalid-status" style="font-size:10px" th:case="*" >INVALID</span>
+            </td>
+        </tr>
+    </table>
+
+    <span class="line-break"></span><span class="line-break"></span>
+    <table class="table-st" border="0">
+        <tr >
+            <td colspan="6" class="text-center blue-bg ">
+                <span class="td-heading"><b>Employment Tenure Verification</b>
+                </span>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td class=" blue-bg" style="width:5%;"><span class="white-text text-center">S. No.</span></td>
+            <td class=" blue-bg" style="width:30%;"><span class="white-text text-center">Employers</span></td>
+            <td class=" blue-bg" style="width:15%;"><span class="white-text text-center">Tenure as per Input</span></td>
+            <td class=" blue-bg" style="width:15%;"><span class="white-text text-center">Tenure as per Output</span></td>
+            <td class="blue-bg" style="width:10%;"><span class="white-text text-center">Source</span></td>
+            <td class=" blue-bg" style="width:10%;"><span class="white-text text-center">Result</span></td>
+        </tr>
+        <tr class="text-center" th:each="employmentTenureVerification,stat: ${root.employmentTenureVerificationDtoList}">
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${stat.index + 1}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${employmentTenureVerification.employerName}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${employmentTenureVerification.input}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${employmentTenureVerification.output}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${employmentTenureVerification.source}"></span></td>
+            <td style="border-collapse: collapse;border: 1px solid black;" th:switch="${employmentTenureVerification.verificationStatus.name()}">
+                <span class="green-status" style="font-size:10px" th:case="'GREEN'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                <span class="amber-status" style="font-size:10px" th:case="'AMBER'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                <span class="red-status" style="font-size:10px" th:case="'RED'" th:text="${employmentTenureVerification.verificationStatus}"></span>
+                <span class="invalid-status" style="font-size:10px" th:case="*" >INVALID</span>
+            </td>
+
+        </tr>
+    </table>
+
+    <span class="line-break"></span><span class="line-break"></span>
+
+    <table class="table-st" border="0">
+        <tr rowspan="2" class="blue-bg text-center">
+            <td style="width:5.5%" class="white-text text-center">
+                <span class="white-text">S. No.
+                </span>
+            </td>
+
+            <td style="width:33%" class="white-text text-center">
+                <span class="white-text">Employer Name
+                </span>
+            </td>
+            <td style="width:55%" colspan="2" class="blue-bg text-center">
+                <span class="white-text">Tenure
+                </span>
+            </td>
+        </tr>
+        <tr class="blue-bg text-center">
+            <td></td>
+            <td></td>
+            <td class="blue-bg text-center">
+                <span class="white-text">EPFO DOJ
+                </span>
+            </td>
+            <td class="blue-bg text-center">
+                <span class="white-text"> EPFO LWD
+                </span>
+            </td>
+        </tr>
+        <tr class="text-center" th:each="epfo,stat: ${root.epfoData.epfoDataList}">
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${stat.index + 1}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${epfo.company}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${epfo.doj}"></span></td>
+            <td class="black-text text-center"><span style="font-size:10px" th:text="${epfo.doe}"></span></td>
+        </tr>
+    </table>
+
+    <div style="page-break-after:always;"> <!-- content --></div>
+
+    <p class="sub-heading">26AS Statement</p>
+
+    <table class="mars_tab table-st itr-data" style="margin-top:20px;background:transparent;clear:both;" border="0">
+        <tr class="blue-bg">
+            <td class="blue-bg text-center" style="width: 5%;"><span class="white-text">Financial Year</span></td>
+            <td class="blue-bg text-center" style="width: 10%;"><span class="white-text">TAN</span></td>
+            <td class="blue-bg text-center" style="width: 25%;"><span class="white-text">Deductor</span></td>
+            <td class="blue-bg text-center" style="width: 5%;"><span class="white-text">Section</span></td>
+            <td class="blue-bg text-center" style="width: 15%;"><span class="white-text">Date</span></td>
+            <td class="blue-bg text-center" style="width: 10%;"><span class="white-text">Amount</span></td>
+        </tr>
+        <tr style="text-align:center;" th:each="itr,stat: ${root.itrData.itrDataList}">
+            <td><span class="black-text text-center"><i th:text="${itr.financialYear}"></i></span></td>
+            <td><span class="common_padding black-text text-center" ><i th:text="${itr.tan}"></i></span></td>
+            <td><span class="common_padding black-text text-center" ><i th:text="${itr.deductor}"></i></span></td>
+            <td><span class="common_padding black-text text-center" ><i th:text="${itr.section}"></i></span></td>
+            <td><span class="black-text text-center"> <i th:text="${itr.date}"></i> </span></td>
+            <td><span class="common_padding black-text text-center" ><i th:text="${itr.amount}"></i></span></td>
+        </tr>
+
+    </table>
+
+    <div style="page-break-after:always;"> <!-- content --></div>
+
+
+    <p class ="sub-heading text-center"><b>  Identity Check Report</b></p>
+
+    <table class="table-st pan-card" style="clear:both;margin-top: 30px;" border="0">
+        <tr class="blue-bg">
+            <td class="white-text text-center" colspan="5">
+                <span class="td-heading"><b>ID Check - PAN Card Verification</b>
+                </span>
+            </td>
+        </tr>
+        <tr class="blue-bg">
+            <td class="blue-bg text-center white-text" style="width: 5%;"><span ><b>S No</b></span></td>
+            <td class="blue-bg text-center white-text" style="width: 30%;"><span><b>PAN as per Input</b></span></td>
+            <td class="blue-bg text-center white-text" style="width: 30%;"><span><b>PAN as per Output</b></span></td>
+            <td class="blue-bg text-center white-text" style="width: 10%;"><span><b>Source</b></span></td>
+            <td class="blue-bg text-center white-text" style="width: 10%;"><span><b>Result</b></span></td>
+        </tr>
+        <tr class="text-center">
+            <td class="black-text text-center"><p >1</p></td>
+            <td class="black-text text-center"><p style="font-size:10px" th:text="${root.panCardVerification.input}"></p></td>
+            <td class="black-text text-center"><p style="font-size:10px" th:text="${root.panCardVerification.output}"></p></td>
+            <td class="black-text text-center"><p style="font-size:10px" th:text="${root.panCardVerification.source}"></p></td>
+            <td class=" text-center" th:switch="${root.panCardVerification.verificationStatus.name()}">
+                <p class="green-status" style="font-size:10px" th:case="'GREEN'" th:text="${root.panCardVerification.verificationStatus}"></p>
+                <p class="amber-status" style="font-size:10px" th:case="'AMBER'" th:text="${root.panCardVerification.verificationStatus}"></p>
+                <p class="red-status" style="font-size:10px" th:case="'RED'" th:text="${root.panCardVerification.verificationStatus}"></p>
+                <p class="invalid-status" style="font-size:10px" th:case="*" >INVALID</p>
+            </td>
+        </tr>
+    </table>
+
+    <span class="line-break"></span><span class="line-break"></span>
+
+    <table style="margin-top: 30px;" class="table-st aadhar-data" border="0">
+        <tr class="text-center">
+            <td class="blue-bg white-text text-center" style="width:6%"><span><b>S No</b></span></td>
+            <td class="blue-bg white-text text-center" style="width:44%"><span><b>Particulars</b></span></td>
+            <td class="blue-bg white-text text-center" style="width:45%"><span><b>Remarks</b></span></td>
+        </tr>
+        <tr >
+            <td class="blue-bg white-text text-center"><span style="font-size:10px"><b>1</b></span></td>
+            <td class="blue-bg white-text text-left"><span style="font-size:10px"><b>Name in the Aadhar</b></span></td>
+            <td class="text-center"><p style="margin: 0px;" class="black-text" th:text="${root.aadharCardVerification.name}"></p></td>
+        </tr>
+        <tr >
+            <td class="blue-bg white-text text-center"><span style="font-size:10px"><b>2</b></span></td>
+            <td class="blue-bg white-text text-left"><span style="font-size:10px"><b>Date of Birth</b></span></td>
+            <td class="text-center"><p style="margin: 0px;" class="black-text" th:text="${root.aadharCardVerification.dob}"></p></td>
+        </tr>
+        <tr >
+            <td class="blue-bg white-text text-center"><span style="font-size:10px"><b>3</b></span></td>
+            <td class="blue-bg white-text text-left"><span style="font-size:10px"><b>Father Name</b></span></td>
+            <td class="text-center"><p style="margin: 0px;" class="black-text" th:text="${root.aadharCardVerification.fatherName}"></p></td>
+        </tr>
+        <tr >
+            <td class="blue-bg white-text text-center"><span style="font-size:10px"><b>4</b></span></td>
+            <td class="blue-bg white-text text-left"><span style="font-size:10px"><b>Aadhar Number</b></span></td>
+            <td class="text-center"><p style="margin: 0px;" class="black-text" th:text="${root.aadharCardVerification.aadharNo}"></p></td>
+        </tr>
+        <tr >
+            <td class="blue-bg white-text text-center"><span><b>5</b></span></td>
+            <td class="blue-bg white-text text-left"><span><b>Remarks</b></span></td>
+            <td class="text-center"><p style="margin: 0px;" class="black-text" th:text="${root.aadharCardVerification.remarks}"></p></td>
+        </tr>
+    </table>
+
+
+    <p class ="sub-heading text-center"><b>- End of the report -</b></p>
+</section>
+</body>
+</html>

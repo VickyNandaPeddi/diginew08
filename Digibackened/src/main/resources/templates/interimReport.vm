@@ -1,0 +1,695 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Digiverifier</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <meta name="keywords" content="digiverifier" />
+    <meta name="keywords" content="DigiVerifier" />
+    <meta name="author" content="Aashdit Technologies">
+
+
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .resultcls{
+            background: #ffffff0d;
+            padding: 4px;
+            color: #272727;
+            box-shadow: 0 0px 3px #2d2d2dee;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+				<!-- Main Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h4 mb-0 text-gray-800">$report</h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 ">
+                            <div class="card shadow mb-4">
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead style="text-align: center;">
+                                                    <tr>
+                                                        <th>CROSSBOW GLOBAL MARKETPLACE
+                                                            SOLUTIONS PRIVATE LIMITED</th>
+                                                        <th style="background-color: rgb(21, 21, 100); color:white">
+                                                            Digital
+                                                            Employment BGC
+                                                            Report</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>18 & 18/1,Bikaner Signature Towers, Richmond Road,
+                                                            Benguluru, Karnataka 560025, India</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead style="background-color: grey;">
+                                                    <tr>
+                                                        <th colspan="3" style="font-size: 20px;">BACKGROUND PROFILE</th>
+                                                    </tr>
+                                                    <tr>
+
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Name of the Candidate</td>
+                                                        <td>$data.candidate.candidateName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Date of Birth</td>
+                                                        <td>$data.candidate.dateOfBirth</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Contact No</td>
+                                                        <td>$data.candidate.contactNumber</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Email ID</td>
+                                                        <td>$data.candidate.emailId</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Reference ID</td>
+                                                        <td>$data.candidate.applicantId</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Project/BU</td>
+                                                        <td>$data.candidate.organization.organizationName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Fresher/ Experienced</td>
+                                                        <td>
+															#if($data.candidate.isFresher==true)
+																Fresher
+															#else
+																Experienced
+															#end
+														</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Case Initiation Date & Time</td>
+                                                        <td>$date.format("dd-MM-yyyy H:m:s", $data.emailStatus.dateOfEmailInvite)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Report Delivered Date & Time</td>
+                                                        <td>$date.format("dd-MM-yyyy H:m:s", $data.candidate.submittedOn)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background-color: grey;">Verification Status</td>
+                                                        <td>
+                                                            <span id="verificationStatus">$candidateFinalReport_stat</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-md-12 mt-4">
+                                            <div class="col-md-12 text-center p-2" style="background-color: grey;
+                                                color:rgb(0, 0, 0); text-transform: uppercase; font-weight:bold; ">
+                                                Color Code
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead style="text-align: center;">
+                                                    <tr>
+                                                        <th>
+                                                            DISCREPANCY - <span class="text-danger">RED</span>
+                                                        </th>
+                                                        <th>
+                                                            CLEARED - <span class="text-success">Green</span>
+
+                                                        </th>
+                                                        <th>
+                                                            UNABLE TO VERIFY/ INACCESSIBLE -<span class="text-warning">
+                                                                Amber</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <p style="font-size: 12px;font-weight: 800;">
+                                                Disclaimer: This report only sets out information obtained from records
+                                                searched by CROSSBOW. And is issued on “as is where is” basis. No
+                                                opinion is provided in respect ofthe corporate entities or individuals
+                                                who are the subject of the report here in. CROSSBOW abides by the FCPA
+                                                (ForeignCorruptPractices Act)& FCRA(FairCredit Reporting
+                                                Act)Policies.This report does not constitute recommendations as to what
+                                                action should be taken.
+                                                It is difficult to verify all aspects of the information obtained due to
+                                                the nature of the research and the limitations of
+                                                obtaining such information from public records.
+                                                Thus while due care has
+                                                been taken to ensure the accuracy of the compilation of information
+                                                contained in this report,given the limitations of obtaining such information
+                                                as noted above,no responsibility will be taken by CROSSBOW for the
+                                                consequences of relying upon information contained in this report
+                                                .All
+                                                information supplied in this report is intended to be for the sole
+                                                purpose of
+                                                the client’s evaluation and is not intended for public dissemination.
+
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        Executive Summary
+                                    </h6>
+                                    <h6 class="mr-3 resultcls">Result : <span>$executiveSummary_stat</span></h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 70px; text-align: center;">Sl No.</th>
+                                                        <th style="width:350px;">Verification Items</th>
+                                                        <th>Source</th>
+                                                        <th>Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($summary in $data.executiveSummary)
+                                                    <tr>
+                                                        <td style="text-align: center;">$velocityCount</td>
+                                                        <td>$summary.verificationItem </td>
+                                                        <td>$summary.source </td>
+                                                        <td class="text-success">$summary.result </td>
+                                                    </tr>
+                                                    #end
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        I. ID Proofs
+                                    </h6>
+                                    <h6 class="mr-3 resultcls">Result : <span class="text-success">$candidateIdItems_stat</span></h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+														<th style="width: 70px; text-align: center;">Sl No.</th>
+                                                        <th>ID Items</th>
+                                                        <th>Name</th>
+                                                        <th>ID No</th>
+                                                        <th>Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($items in $data.candidateIdItems)
+                                                    <tr>
+                                                    	<td style="text-align: center;">$velocityCount</td>
+                                                        <td>$items.serviceSourceMaster.serviceName</td>
+                                                        <td>$items.idHolder</td>
+                                                        <td>$items.idNumber</td>
+                                                        <td><span class="text-success">$items.color.colorName</span></td>
+                                                    </tr>
+                                                    #end
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        II. Education Details
+                                    </h6>
+                                    <h6 class="mr-3 resultcls">Result : <span class="text-success">$candidateEducation_stat</span></h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                    	<th style="width: 70px; text-align: center;">Sl No.</th>
+                                                        <th>Degree</th>
+                                                        <th>College</th>
+                                                        <th>University/ Board</th>
+                                                        <th>Year Of Passing</th>
+                                                        <th>% or CGPA</th>
+                                                        <th>Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($education in $data.candidateCafEducationDto)
+	                                                    <tr>
+	                                                        <td style="text-align: center;">$velocityCount</td>
+					                                        <td>$education.qualificationName</td>
+					                                        <td>$education.schoolOrCollegeName</td>
+					                                        <td>$education.boardOrUniversityName</td>
+					                                        <td>$education.yearOfPassing</td>
+					                                        <td>$education.percentage</td>
+					                                        <td>$education.colorColorName</td>
+	                                                    </tr>
+	                                                   #end
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        III. Employment Details
+                                    </h6>
+                                    <h6 class="mr-3 resultcls">Result : <span class="text-warning">$candidateEmployment_stat</span></h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>SL No</th>
+				                                        <th>Company Name</th>
+				                                        <th>Source</th>
+				                                        <th>Input Tenure</th>
+				                                        <th>Output Tenure</th>
+				                                        <th>Gap</th>
+				                                        <th>Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($employment in $data.employmentDetails)
+	                                                    <tr>
+	                                                        <td style="text-align: center;">$velocityCount</td>
+					                                        <td>$employment.companyName</td>
+					                                        <td>$employment.source</td>
+					                                        <td>$employment.inputTenure</td>
+					                                        <td>$employment.outputTenure</td>
+					                                        <td>$employment.gap</td>
+					                                        <td>$employment.result</td>
+	                                                    </tr>
+	                                                 #end
+                                                </tbody>
+                                                <tfoot>
+				                                    <tr>
+				                                        <td colspan="3">
+				                                            Total
+				                                        </td>
+				                                        
+				                                        <td>
+				                                           $data.inputTenureSum
+				                                        </td>
+				                                        <td>
+				                                            $data.outputTenureSum
+				                                        </td>
+				                                        <td>
+				                                            $data.gapSum
+				                                        </td>
+				                                        <td>
+				                                           
+				                                        </td>
+				                                    </tr>
+				                                </tfoot>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        IV. Address
+                                    </h6>
+                                    <h6 class="mr-3 resultcls">Result : <span class="text-success">$candidateAddress_stat</span></h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                    	<th rowspan="3">SL No.</th>
+                                                        <th rowspan="3">Name</th>
+                                                        <th rowspan="3">Address</th>
+                                                        <th rowspan="3">Source</th>
+                                                        <th colspan="3" style="text-align: center;">Address Section
+                                                        </th>
+                                                        <th rowspan="2">Result</th>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th style="text-align: center;">Communication</th>
+                                                        <th style="text-align: center;">Present</th>
+                                                        <th style="text-align: center;">Permanent </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($address in $data.candidateCafAddressDto)
+	                                                    <tr>
+	                                                        <td style="text-align: center;">$velocityCount</td>
+					                                        <td>$address.name</td>
+					                                        <td>
+					                                        	#if($address.candidateAddress == "")
+																	NA
+																#else
+																	$address.candidateAddress
+																#end
+					                                        </td>
+					                                        <td>
+					                                        	#if($address.serviceName == "")
+																	Candidate
+																#else
+																	$address.serviceName
+																#end
+															</td>
+					                                        <td>$address.isAssetDeliveryAddress</td>
+					                                        <td>$address.isPermanentAddress</td>
+					                                        <td>$address.isPresentAddress</td>
+					                                        <td>$address.colorColorName</td>
+	                                                    </tr>
+	                                                 #end
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex ">
+                                    <div class="col-md-5">
+                                        <h6 class="m-0 font-weight-bold text-primary">
+                                            ANNEXURE – I
+                                        </h6>
+                                    </div>
+                                    <div class="">
+                                        <h6 class="m-0 font-weight-bold text-dark">
+                                            Input As per the Application form data
+                                        </h6>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <b>ANNEXURE – 1(A)</b>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                    	<th style="width: 70px; text-align: center;">Sl No.</th>
+                                                        <th>Degree</th>
+                                                        <th>College</th>
+                                                        <th>University/ Board</th>
+                                                        <th>Year Of Passing</th>
+                                                        <th>% or CGPA</th>
+                                                        <th>Result</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($educations in $data.candidateCafEducationDto)
+	                                                    <tr>
+	                                                        <td style="text-align: center;">$velocityCount</td>
+					                                        <td>$educations.qualificationName</td>
+					                                        <td>$educations.schoolOrCollegeName</td>
+					                                        <td>$educations.boardOrUniversityName</td>
+					                                        <td>$educations.yearOfPassing</td>
+					                                        <td>$educations.percentage</td>
+					                                        <td>$educations.colorColorName</td>
+					                                        <td>$educations.remarkMasterDescription</td>
+	                                                    </tr>
+	                                                   #end
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <b>ANNEXURE – 1(B)</b>
+                                            <table class="table table-bordered mt-2">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2">Employer Name</th>
+                                                        <th colspan="2" style="text-align: center;">Tenure</th>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th style="text-align: center;">DOJ</th>
+                                                        <th style="text-align: center;">LWD
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($exp in $data.candidateCafExperienceDto)
+                                                		#if($exp.serviceName == 'EPFO')
+	                                                    <tr>
+	                                                        <td> $exp.candidateEmployerName</td>
+					                                        <td> $exp.outputDateOfJoining</td>
+					                                        <td> 
+					                                        	#if(!${exp.outputDateOfExit})
+																	Not-Available
+																#else
+																	$exp.outputDateOfExit
+																#end
+					                                        </td>
+	                                                    </tr>
+	                                                    #end
+	                                                #end
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex ">
+                                    <div class="col-md-5">
+                                        <h6 class="m-0 font-weight-bold text-primary">
+                                            ANNEXURE – II
+                                        </h6>
+                                    </div>
+                                    <div class="">
+                                        <h6 class="m-0 font-weight-bold text-dark">
+                                            Output as per EPFO Service History
+                                        </h6>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered mt-2">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2">Employer Name</th>
+                                                        <th colspan="2" style="text-align: center;">Tenure</th>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th style="text-align: center;"> EPFO DOJ</th>
+                                                        <th style="text-align: center;">EPFO LWD
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        #foreach ($outexp in $data.candidateCafExperienceDto)
+		                                                    #if ($outexp.serviceName == 'EPFO')
+			                                                    <tr>
+			                                                        <td> $outexp.candidateEmployerName</td>
+							                                        <td> $outexp.outputDateOfJoining</td>
+						                                        	#if(!${outexp.outputDateOfExit})
+																		<td> Not-Available</td>
+																	#else
+																		<td> $outexp.outputDateOfExit</td>
+																	#end
+							                                        
+			                                                    </tr>
+		                                                   #end
+	                                               		#end
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <!-- Card Header -->
+                                <div class="card-header py-3 d-flex ">
+                                    <div class="col-md-5">
+                                        <h6 class="m-0 font-weight-bold text-primary">
+                                            ANNEXURE – III
+                                        </h6>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h6 class="m-0 font-weight-bold text-dark">
+                                            26AS Statement
+                                        </h6>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-12 mt-1">
+                                                <b>PAN : <span class="text-success">$data.candidate.panNumber</span></b>
+                                            </div>
+
+                                            <table class=" table table-bordered mt-2" style="
+                                            border-bottom: 1px solid black;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>SL#</th>
+				                                        <th>Financial Year </th>
+				                                        <th>TAN</th>
+				                                        <th>Deductor</th>
+				                                        <th>Section</th>
+				                                        <th>Date</th>
+				                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	#foreach ($itr in $data.iTRDataFromApiDto)
+	                                                    <tr>
+	                                                    	<td style="text-align: center;">$velocityCount</td>
+	                                                        <td>$itr.financialYear</td>
+					                                        <td>$itr.tan</td>
+					                                        <td>$itr.deductor</td>
+					                                        <td>$itr.section</td>
+					                                        <td>$itr.date</td>
+					                                        <td>$itr.amount</td>
+	                                                    </tr>
+	                                                 #end
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- End Main Content -->
+
+            </div>
+        </div>
+    </div>
+
+<!--<script type="text/javascript" src="/digiverifier/src/main/webapp/WEB-INF/javascripts/report.js"></script>-->
+</body>
+
+</html>

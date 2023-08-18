@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DigiVerifier Pdf</title>
+    <meta charset="UTF-8"/>
+    <!--    <link  th:href="@{styles/css/Metro.css}"  rel="stylesheet"/>-->
+    <link th:href="@{styles/css/fonts.css}" rel="stylesheet"/>
+    <link th:href="@{styles/css/common.css}" rel="stylesheet"/>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto}" rel="stylesheet"/>
+    <!--<script src='http://localhost:9090/chart.js'></script>-->
+    <style>
+        span {
+
+            font-family: 'Roboto';
+        }
+
+        .table-st {
+            clear: both;
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .table-st tr {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .table-st tr td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+
+        .table-st tr td span {
+            margin-left: 5px;
+        }
+
+        .blue-bg {
+            background-color: #355794;
+        }
+
+        .grey-bg {
+            background-color: #A8A8A8;
+        }
+
+
+        .black-text {
+            color: black;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: 'Roboto';
+        }
+
+        .grey-text {
+            color: #141414;
+            font-size: 12px !important;
+            font-weight: bold;
+            font-family: 'Roboto';
+        }
+
+        .white-text {
+            font-weight: bold;
+            color: #fff;
+            font-family: 'Roboto';
+            font-size: 10px;
+        }
+
+        .td-heading {
+
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .line-break {
+            display: block;
+            height: 15px;
+        }
+
+        .sub-heading {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .green-status {
+            margin: 0px;
+            color: #008000;
+            font-weight: bold;
+            font-family: 'Roboto';
+            font-size: 12px;
+        }
+
+        .amber-status {
+            margin: 0px;
+            color: #ffA500;
+            font-weight: bold;
+            font-family: 'Roboto';
+            font-size: 12px;
+        }
+
+        .red-status {
+            margin: 0px;
+            color: #ff0000;
+            font-weight: bold;
+            font-family: 'Roboto';
+            font-size: 12px;
+        }
+
+        .invalid-status {
+            margin: 0px;
+            color: #000000;
+            font-weight: bold;
+            font-family: 'Roboto';
+            font-size: 12px;
+        }
+
+        .black-box {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body style="background-color:#fff;padding:0px;margin:0px;position:relative;font-family: 'Roboto', sans-serif;color:#666666;">
+<section class="wrapper" style="width:100%;margin:0 auto;height:80%;">
+    <span class="line-break"></span>
+    <span class="line-break"></span>
+
+    <table class="table-st">
+        <tr>
+            <td class="text-left">
+               <span class="grey-text" style="width:50%;font-size:14px">
+                    <b th:text="${root.organizationName}"></b>
+                </span>
+            </td>
+            <td class="text-center blue-bg" style="width:50%;">
+                <span class="white-text blue-bg" style="font-size:15px;padding:2px;">
+                    <b> Conventional Employment BGC Report</b>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left">
+               <span class="grey-text" style="font-size:10px; width:50%">
+                    <b th:text="${root.organizationLocation}"></b>
+                </span>
+            </td>
+            <td class="text-center" style="width:50%;">
+                <img style="height: auto;width: 75px;" th:src="${root.organizationLogo}"/>
+            </td>
+        </tr>
+    </table>
+    <span class="line-break"></span>
+    <span class="line-break"></span>
+
+    <table class="table_head table-st">
+        <!--concept Title head-->
+        <tr>
+            <td class="grey-bg" colspan="2">
+                <span class="td-heading black-text">BACKGROUND PROFILE</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;" class="grey-bg text-left">
+                <span class="black-text">
+                    <b>Name of the Candidate</b>
+                </span>
+            </td>
+            <td style="padding: 5px;" class="text-left">
+                <span class="grey-text">
+                    <b th:text="${root.name}"></b>
+                </span>
+            </td>
+        </tr>
+        <!--        <tr>-->
+        <!--            <td style="padding: 5px;" class="grey-bg text-left" >-->
+        <!--                <span class="black-text">-->
+        <!--                    <b>Date of Birth</b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--            <td style="padding: 5px;" class="text-left">-->
+        <!--                <span class="grey-text">-->
+        <!--                    <b th:text="${root.dob}"></b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+        <!--        <tr>-->
+        <!--            <td style="padding: 5px;" class="grey-bg text-left">-->
+        <!--                <span class="black-text">-->
+        <!--                    <b>Contact No</b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--            <td style="padding: 5px;" class="text-left">-->
+        <!--                <span class="grey-text">-->
+        <!--                    <b th:text="${root.contactNo}"></b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+        <!--        <tr>-->
+        <!--            <td style="padding: 5px;" class="grey-bg text-left">-->
+        <!--                <span class="black-text">-->
+        <!--                    <b>Email ID</b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--            <td style="padding: 5px;" class="text-left">-->
+        <!--                <span class="grey-text">-->
+        <!--                    <b th:text="${root.emailId}"></b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+        <tr>
+            <td style="padding: 5px;" class="grey-bg text-left">
+                <span class="black-text">
+                    <b>Reference No</b>
+                </span>
+            </td>
+            <td style="padding: 5px;" class="text-left">
+                <span class="grey-text">
+                    <b th:text="${root.applicantId}"></b>
+                </span>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding: 5px;" class="grey-bg text-left">
+                <span class="black-text">
+                    <b>Candidate Id</b>
+                </span>
+            </td>
+            <td style="padding: 5px;" class="text-left">
+                <span class="grey-text">
+                    <b th:text="${root.candidateId}"></b>
+                </span>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td style="padding: 5px;" class="grey-bg text-left">
+                <span class="black-text">
+                    <b>Location/Hr/Catogery</b>
+                </span>
+            </td>
+            <td style="padding: 5px;" class="text-left">
+                <span class="grey-text">
+                    <b th:text="${root.address}"></b>
+                </span>
+            </td>
+        </tr>
+        <!--        <tr>-->
+        <!--            <td style="text-align:left;padding: 5px;" class="grey-bg">-->
+        <!--                <span class="black-text">-->
+        <!--                    <b>Project/BU</b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--            <td style="padding: 5px;" class="text-left">-->
+        <!--                <span class="grey-text">-->
+        <!--                    <b th:text="${root.project}"></b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+        <!--        <tr>-->
+        <!--            <td style="text-align:left;padding: 5px;" class="grey-bg">-->
+        <!--                <span class="black-text">-->
+        <!--                    <b>Fresher/ Experienced</b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--            <td style="padding: 5px" class="text-left">-->
+        <!--                <span class="grey-text">-->
+        <!--                    <b th:text="${root.experience}"></b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+        <!--            <tr>-->
+        <!--            <td style="padding: 5px" class="grey-bg text-left">-->
+        <!--                <span  class="black-text">-->
+        <!--                    <b>Report Type</b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--            <td style="text-align:left;padding: 5px;">-->
+        <!--                <span class="grey-text">-->
+        <!--                    <b th:text="${root.reportType}"></b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+
+        <!--        <tr>-->
+        <!--            <td style="padding: 5px" class="grey-bg text-left">-->
+        <!--                <span class="black-text">-->
+        <!--                    <b>Case Inititaion Date & Time</b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--            <td style="padding: 5px" class="text-left">-->
+        <!--                <span class="grey-text">-->
+        <!--                    <b th:text="${root.caseInitiationDate}"></b>-->
+        <!--                </span>-->
+        <!--            </td>-->
+        <!--        </tr>-->
+
+        <tr>
+            <td style="padding: 5px" class="grey-bg text-left">
+                <span class="black-text">
+                    <b>Report Date</b>
+                </span>
+            </td>
+            <td style="padding: 5px;" class="text-left">
+                <span class="grey-text">
+                    <b th:text="${root.finalReportDate}"></b>
+                </span>
+            </td>
+        </tr>
+
+
+        <tr style="padding:5px">
+            <td style="text-align:left;width: 25%;padding: 10px 5px;" class="grey-bg">
+                <span class="black-text">
+                    <b>Report Type</b>
+                </span>
+            </td>
+            <td style="border-collapse: collapse;border: 1px solid black; padding: 10px 5px;"
+                th:switch="${root.verificationStatus.name()}">
+                <span class="green-status" th:case="'CLEAR'" th:text="${root.verificationStatus}"></span>
+                <span class="green-status" th:case="'INPROGRESS'" th:text="${root.verificationStatus}"></span>
+                <span class="green-status" th:case="'INSUFFICIENCY'" th:text="${root.verificationStatus}"></span>
+                <span class="amber-status" th:case="'MAJORDISCREPANCY'" th:text="${root.verificationStatus}"></span>
+                <span class="red-status" th:case="'MINORDISCREPANCY'" th:text="${root.verificationStatus}"></span>
+                <span class="red-status" th:case="'UNABLETOVERIFIY'" th:text="${root.verificationStatus}"></span>
+                <span class="invalid-status grey-text" th:case="*">INVALID</span>
+            </td>
+        </tr>
+    </table>
+    <span class="line-break"></span>
+    <span class="line-break"></span>
+
+    <!--    <table class="table-st">-->
+    <!--        <tr>-->
+    <!--            <td colspan="3" class="grey-bg text-center">-->
+    <!--                <span class="td-heading black-text" style="font-size:10px">COLOR CODE</span>-->
+    <!--            </td>-->
+    <!--        </tr>-->
+
+    <!--    </table>-->
+
+    <div>
+        <p class="grey-text" style="font-size:10px">
+            Disclaimer: This report only sets out information obtained from records searched by CROSSBOW. And is issued
+            on “as is
+            where is” basis. No opinion is provided in respect of the corporate entities or individuals who are the
+            subject of the report here
+            in. CROSSBOW abides by the FCPA (Foreign Corrupt Practices Act) & FCRA (Fair Credit Reporting Act) Policies.
+            This report does
+            not constitute recommendations as to what action should be taken. It is difficult to verify all aspects of
+            the information
+            obtained due to the nature of the research and the limitations of obtaining such information from public
+            records. Thus, while
+            due care has been taken to ensure the accuracy of the compilation of information contained in this report,
+            given the limitations
+            of obtaining such information as noted above, no responsibility will be taken by CROSSBOW for the
+            consequences of relying
+            upon information contained in this report. All information supplied in this report is intended to be for the
+            sole purpose of the
+            client’s evaluation and is not intended for public dissemination.
+        </p>
+    </div>
+    <span class="line-break"></span>
+    <!--    <table class="table-st">-->
+
+    <!--        <tr class="text-center">-->
+
+    <!--            <td style="width:33%">-->
+    <!--        <span style="font-size:10px;font-weight: bold;" class="grey-text">-->
+    <!--            DISCREPANCY - <b style="color:#ff0000">RED</b>-->
+    <!--        </span>-->
+    <!--            </td>-->
+    <!--            <td style="width:33%">-->
+    <!--        <span style="font-size:10px;font-weight: bold;-->
+    <!--    " class="grey-text">-->
+    <!--            CLEARED - <b style="color:#008000">GREEN</b>-->
+    <!--        </span>-->
+    <!--            </td>-->
+    <!--            <td style="width:33%">-->
+    <!--        <span style="font-size:10px;font-weight: bold;" class="grey-text">-->
+    <!--             UNABLE TO VERIFY/ DUAL - <b style="color:#ffA500">AMBER</b>-->
+    <!--        </span>-->
+    <!--            </td>-->
+
+    <!--        </tr>-->
+    <!--    </table>-->
+    <span class="line-break"></span><span class="line-break"></span>
+
+
+    <div style="page-break-after:always;"> <!-- content --></div>
+    <span class="line-break"></span><span class="line-break"></span>
+    <p class="grey-text sub-heading">Licheck Details</p>
+
+    <table class="table-st employer-name-verification" border="0">
+        <tr class="blue-bg text-center">
+            <td class="white-text" colspan="6">
+                    <span class="td-heading"><b>Section Ⅰ: LicheckDetails </b>
+                    </span>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td class="blue-bg" style="width:2%"><span class="white-text">S. No.</span></td>
+            <td class="blue-bg" style="width:2%"><span class="white-text">CheckCode</span></td>
+            <!--            <td class="blue-bg" style="width:5%"><span class="white-text">CheckName</span></td>-->
+            <td class="blue-bg" style="width:2%"><span class="white-text">CheckStatus</span></td>
+            <td class="blue-bg" style="width:2%"><span class="white-text">CheckRemarks</span></td>
+            <!--            <td class="blue-bg" style="width:5%"><span class="white-text">ModeOfVerficationRequired</span></td>-->
+            <!--            <td class="blue-bg" style="width:5%"><span class="white-text">ModeOfVerficationPerformed</span></td>-->
+            <!--            <td class="blue-bg" style="width:5%"><span class="white-text">CompletedDate</span></td>-->
+        </tr>
+        <tr class="text-center"
+            th:each="licheck,stat: ${root.liChecksDetails}">
+            <td class="grey-text text-center"><span th:text="${stat.index + 1}"></span></td>
+            <td class="grey-text text-center"><span th:text="${licheck.checkName}"></span></td>
+            <!--            <td class="grey-text text-center"><span th:text="${licheck.CheckName}"></span></td>-->
+            <td class="grey-text text-center"><span th:text="${licheck.CheckStatus.checkStatusCode}"></span></td>
+            <td class="grey-text text-center"><span th:text="${licheck.CheckRemarks}"></span></td>
+            <!--            <td class="grey-text text-center"><span th:text="${licheck.modeOfVerificationRequired}"></span></td>-->
+            <!--            <td class="grey-text text-center"><span th:text="${licheck.modeOfVerificationPerformed}"></span></td>-->
+            <!--            <td class="grey-text text-center"><span th:text="${licheck.CompletedDate}"></span></td>-->
+        </tr>
+    </table>
+    <span class="line-break"></span><span class="line-break"></span>
+
+
+    <!--    <div th:each="vendorUploadChecks : ${root.vendorProofDetails}">-->
+    <!--        <div class="table-st employer-name-verification" border="0">-->
+    <!--            <div>-->
+    <!--                <table th:each="vendoratts:${vendorUploadChecks.vendorAttirbuteValue}">-->
+    <!--                    <tr>-->
+    <!--                        <thead class="blue-bg" th:text="${vendoratts.sourceName}"></thead>-->
+    <!--                    </tr>-->
+
+    <!--                    <tr>-->
+    <!--                        <td>Particular</td>-->
+    <!--                        <td>Remarks</td>-->
+    <!--                    </tr>-->
+    <!--                    <tr th:each="attribute : ${vendoratts.vendorAttirbuteValue}">-->
+    <!--                        <div th:with="splitValue=${#strings.listSplit(attribute, '=')}">-->
+    <!--                            <td class="grey-text text-center"><span th:text="${splitValue[0]}"></span></td>-->
+    <!--                            <td class="grey-text text-center"><span th:text="${splitValue[1]}"></span></td>-->
+    <!--                        </div>-->
+    <!--                    </tr>-->
+    <!--                    <br>-->
+    <!--                </table>-->
+
+    <!--            </div>-->
+
+    <!--        </div>-->
+    <!--    </div>-->
+
+
+    <!--    third code-->
+    <!--    <div th:each="vendorUploadChecks : ${root.vendorProofDetails}">-->
+    <!--        <div class="table-st employer-name-verification" border="0">-->
+    <!--            <div>-->
+    <!--                <table>-->
+    <!--                    <tr>-->
+    <!--                        <thead class="blue-bg">-->
+    <!--                        <th th:text="${vendorUploadChecks.sourceName}"></th>-->
+    <!--                        </thead>-->
+    <!--                    </tr>-->
+    <!--                    <tr>-->
+    <!--                        <td>Particular</td>-->
+    <!--                        <td>Remarks</td>-->
+    <!--                    </tr>-->
+    <!--                    <tr th:each="attribute : ${vendorUploadChecks.vendorAttirbuteValue}">-->
+    <!--                        <div th:with="splitValue=${#strings.listSplit(attribute, '=')}">-->
+    <!--                            <td class="grey-text text-center"><span th:text="${splitValue[0]}"></span></td>-->
+    <!--                            <td class="grey-text text-center"><span th:text="${splitValue[1]}"></span></td>-->
+    <!--                        </div>-->
+    <!--                    </tr>-->
+    <!--                    <br>-->
+    <!--                </table>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+
+    <!--    secound code-->
+
+
+    <table class="table-st employer-name-verification" border="0"
+           th:each="vendorUploadChecks : ${root.vendorProofDetails}">
+
+        <div th:each="vendorsourcename:${vendorUploadChecks.vendorAttirbuteValue}">
+            <span th:text="${vendorsourcename.sourceName}"
+                  th:if="${not #lists.isEmpty(vendorsourcename.vendorAttirbuteValue)}"></span>
+            <tr th:if="${not #lists.isEmpty(vendorsourcename.vendorAttirbuteValue)}">
+                <td>Particular</td>
+                <td>Remarks</td>
+            </tr>
+            <tr th:each="vendoratts : ${vendorsourcename.vendorAttirbuteValue}"
+                th:if="${not #lists.isEmpty(vendorsourcename.vendorAttirbuteValue)}">
+                <td class="grey-text text-center" th:with="splitValue=${#strings.listSplit(vendoratts, '=')}">
+                    <span th:if="${splitValue.size() &gt;= 1}" th:text="${splitValue[0]}"></span>
+                </td>
+                <td class="grey-text text-center" th:with="splitValue=${#strings.listSplit(vendoratts, '=')}">
+                    <span th:if="${splitValue.size() &gt;= 2}" th:text="${splitValue[1]}"></span>
+                </td>
+
+            </tr>
+        </div>
+    </table>
+    <br><br>
+
+</section>
+
+</body>
+</html>

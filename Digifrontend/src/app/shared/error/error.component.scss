@@ -1,0 +1,55 @@
+.sharedpage{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 120px 7% 50px;
+    background-color: #fdfeff;
+    background-image: radial-gradient(circle at center center, #ffffff, #ffffff), repeating-radial-gradient(circle at center center, #ffffff, #f6f8fb, 10px, transparent 20px, transparent 10px);
+    background-blend-mode: multiply;
+    .sharedpage_content{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0px 8px 16px #0000006b;
+        border-radius: 10px;
+        padding: 50px 65px;
+        background: #fff;
+        text-align: left;
+        overflow: hidden;
+    }
+    .sharedpage_content:before{
+        content: "";
+        position: absolute;
+        top: -65%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f6f9ff;
+        transform: scale(1.5) rotate(
+    140deg);
+    }
+    img{
+        position: absolute;
+        right: 0;
+    }
+    h2{
+        font-size: 50px;
+        font-weight: 600;
+        margin: 20px 0 0 0;
+        color: #000000;
+        b{
+            display: block;
+            font-weight: 900;
+            font-size: 62px;
+            text-shadow: 1px 1px 1px #000;
+        }
+    }
+    p{
+        font-weight: 600;
+        font-size: 15px;
+    }
+}

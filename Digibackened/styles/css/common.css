@@ -1,0 +1,64 @@
+.unbreakable
+{
+    display:inline-block;
+}
+.unbreakable:after
+{
+    display:block;
+    height:0px;
+    visibility: hidden;
+}
+.mars_tab table {
+    border: 1px solid;
+    border-color: #E8E7E7;
+}
+.mars_tab th {
+    border: 1px solid;
+    border-color: #E8E7E7;
+}
+.mars_tab td {
+    border: 1px solid;
+    border-color: #E8E7E7;
+}
+.second_table_header {
+  padding: 10px;
+}
+.common_padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+ span {
+            font-size: 14px;
+            font-family: 'Roboto';
+ }
+
+ .line-break {
+    display:block;
+ }
+
+@page {
+    margin:50pt;
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+    border-bottom-width: thin;
+
+    @bottom-right {
+        content: url("https://digiverifier-new.s3.ap-south-1.amazonaws.com/Assets/digiverifier_logo_2.jpg");
+        transform: scale(.2);
+    }
+    @bottom-left {
+        content: "Registered Office: CROSSBOW Global Marketplace Solutions Private Limited No.18 & 18/1, Bikaner Signature Towers, Richmond Rd, Bengaluru, Karnataka 560025.";
+        font-family: sans-serif;
+        font-weight: lighter;
+        font-size: 10px;
+        max-width : 30%
+    }
+
+    @bottom-center {
+        content: "Page " counter(page) " of " counter(pages);
+        font-family: sans-serif;
+        font-weight: lighter;
+        font-size: 10px;
+    }
+}
+

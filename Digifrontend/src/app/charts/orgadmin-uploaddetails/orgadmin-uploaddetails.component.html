@@ -1,0 +1,105 @@
+
+                        <div class="table-responsive" *ngIf="containerStat">
+                            <table class="table table-bordered" id="tbl-uploaddetails">
+                                <thead>
+                                    <th>S.No</th>
+                                    <th>Agent Name</th>
+                                    <th>Candidate Name</th>
+                                    <th>Email ID</th>
+                                    <th>Contact Number</th>
+                                    <th>Applicant ID</th>
+                                    <th>Data uploaded</th>
+                                    <th>Status</th>
+                                    <th *ngIf="stat_INVITATIONSENT">Action</th>
+                                    <th *ngIf="stat_INVITATIONSENT"><input type="checkbox" (click)="selectAll($event)"></th>
+
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of ChartDataListing; let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{ item.createdByUserFirstName }} {{ item.createdByUserLastName }}</td>
+                                        <td>{{item.candidateName}}</td>
+                                        <td>{{item.emailId}}</td>
+                                        <td>{{item.contactNumber}}</td>
+                                        <td>{{item.applicantId}}</td>
+                                        <td>{{item.createdOn}}</td>
+                                        <td>{{item.candidateStatusName}}</td>
+                                        <td *ngIf="stat_INVITATIONSENT">
+                                            <div style="min-width: 80px;text-align: center;">
+                                                <button type="button"  (click)="openModal(modalData, item.candidateCode)" class="btn btn-warning btn-sm" *ngIf="EDITCANDIDATE_stat || authService.roleMatch(['ROLE_ADMIN'])" title="Edit"><i class="cellRenderFramework:(params)=>" class="fas fa-edit"></i></button>
+                                                <button type="button" *ngIf="stat_NEWUPLOAD" (click)="activeInactive(item.candidateCode)" class="btn btn-danger btn-sm" title="Cancel Candidate"><i class="fas fa-times"></i></button>
+                                            </div>
+                                        </td>
+                                        <td *ngIf="stat_INVITATIONSENT"><input type="checkbox" id="{{item.candidateCode}}" value="{{item.candidateCode}}" class="childCheck" (change)="childCheck($event)"></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <form [formGroup]="formSendInvitation" *ngIf="containerStat">
+                            <input type="hidden" formControlName="candidateReferenceNo">
+                            <input type="hidden" formControlName="statuscode">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" *ngIf="stat_btn_SendInvi" (click)="sendinvitation()" class="btn btn-sm btn-success">Send Invitation</button>
+                                    <button type="submit" *ngIf="stat_btn_ReInvite" (click)="reInvite()" class="btn btn-sm btn-success ">Re-Invite</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <ng-template #modalData let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Update Candidate</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">×</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <form [formGroup]="updateCandidate">
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="" class="required">Candidate Name</label>
+                                                <input type="text" class="form-control form-control-sm" id="" formControlName="candidateName">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="" class="required">Agent Name</label>
+                                                <input type="text" readonly class="form-control form-control-sm" id="" formControlName="createdByUserFirstName">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 d-none">
+                                            <div class="form-group">
+                                                <label for="" class="required">Reference No</label>
+                                                <input type="text" readonly class="form-control form-control-sm" id="" formControlName="candidateCode">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="" class="">Applicant Id</label>
+                                                <input type="text" class="form-control form-control-sm" id="" formControlName="applicantId">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="" class="">Contact Number</label>
+                                                <input type="text" class="form-control form-control-sm" minlength="10" maxlength="10" id="" formControlName="contactNumber">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="" class="required">Email ID</label>
+                                                <input type="text" class="form-control form-control-sm" id="" formControlName="emailId">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center mt-3 pb-3">
+                                            <button type="button" (click)="onSubmit(updateCandidate)" class="btn btn-primary btn-sm">Submit</button>
+                                            <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                          </ng-template>

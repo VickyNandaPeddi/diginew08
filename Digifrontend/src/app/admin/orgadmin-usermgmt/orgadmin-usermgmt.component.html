@@ -1,0 +1,159 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Manage Users
+                        <button type="button" class="btn btn-sm btn-success float-right" (click)="triggerModal(modalData)">Add User</button>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>S.No</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email ID</th>
+                                        <th>Mobile Number</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of getOrgUsers;let i = index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{ item.userFirstName }}</td>
+                                            <td>{{ item.userLastName }}</td>
+                                            <td>{{ item.userEmailId }}</td>
+                                            <td>{{ item.userMobileNum }}</td>
+                                            <td>{{ item.roleName }}</td>
+                                            <td>{{ item.isActive == true ?'Active':'Inactive'}}</td>
+                                            <td class="btngroup isAdmin-{{admin_active}} btngroup-{{ item.isActive }}">
+                                                <button type="button" id="edit{{i}}" (click)="openModal(modalData, item.userId)" class="btn btn-warning btn-sm d-none" data-toggle="tooltip" title="Edit"><i class="fas fa-edit"></i></button>
+                                                <button type="button" id="inactiveCust_d{{i}}" class="btn btn-danger btn-sm d-none" (click)="inactiveCust(item.userId, item.isActive)"  data-toggle="tooltip" title="Inactive"><i class="fas fa-trash-alt"></i></button>
+                                                <button type="button" id="inactiveCust_p{{i}}" class="btn btn-primary btn-sm d-none" (click)="inactiveCust(item.userId, item.isActive)"  data-toggle="tooltip" title="Active"><i class="fas fa-check-square"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add User</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addOrgUser" (ngSubmit)="onSubmit()">
+            <input type="hidden" formControlName="organizationId">
+            <input type="hidden" formControlName="userId">
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Employee ID</label>
+                        <input type="text" class="form-control form-control-sm" id="employeeId" formControlName="employeeId">
+                    </div>
+                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="required">First Name</label>
+                                <input type="text"
+                                    class="form-control form-control-sm" formControlName="userFirstName">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="required">Last Name</label>
+                                <input type="text"
+                                    class="form-control form-control-sm" formControlName="userLastName">
+                            </div>
+                        </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Email ID</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="userEmailId">
+                    </div>
+                </div>
+                    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="required">Mobile</label>
+                                <input type="text"
+                                    class="form-control form-control-sm" maxlength="10" formControlName="userMobileNum">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="">Landline</label>
+                                <input type="text"
+                                    class="form-control form-control-sm" maxlength="8" formControlName="userLandlineNum">
+                            </div>
+                        </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Location</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="location">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required">Role</label>
+                        <select class="form-control" formControlName="roleId" (change)="selectroleId($event)">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getOrgroles" [value]="item.roleId">{{ item.roleName }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group" *ngIf="stat_roleId">
+                        <label for="" class="required">Agent Supervisor</label>
+                        <select class="form-control"  formControlName="agentSupervisorId" >
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getSupervisor" [value]="item.userId">{{ item.userFirstName }} {{ item.userLastName }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="required required_toggle">Password</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="password">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit"  class="btn btn-primary btn-sm" [disabled]="!addOrgUser.valid">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+
+
+
+

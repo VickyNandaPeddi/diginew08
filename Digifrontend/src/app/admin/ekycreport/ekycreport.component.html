@@ -1,0 +1,91 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <form [formGroup]="ekycReportFilter">
+        <input type="hidden" formControlName="userId">
+        <div class="row" *ngIf="authService.roleMatch(['ROLE_CBADMIN','ROLE_ADMIN','ROLE_PARTNERADMIN','ROLE_AGENTSUPERVISOR'])">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3" *ngIf="authService.roleMatch(['ROLE_CBADMIN'])">
+                                <div class="form-group">
+                                    <label for="" class="required">Customer</label>
+                                    <select class="form-control form-control-sm" #a (change)=getcustId(a.value) formControlName="organizationIds">
+                                        <option *ngFor="let item of getCustID" [value]="item.organizationId">{{ item.organizationName }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" *ngIf="authService.roleMatch(['ROLE_CBADMIN','ROLE_ADMIN','ROLE_PARTNERADMIN','ROLE_AGENTSUPERVISOR'])">
+                                <div class="form-group">
+                                    <label for="" class="">Agent</label>
+                                    <select class="form-control form-control-sm" #b (change)=getagentId(b.value) formControlName="agentIds">
+                                        <option value="0">--Select--</option>
+                                        <option *ngFor="let item of getAgentID" [value]="item.userId">{{ item.userFirstName }} {{ item.userLastName}} ({{ item.employeeId}})</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group" style="margin: 18px 0 0 0;">
+                                    <button type="button" (click)="onSubmitFilter(ekycReportFilter)" class="btn btn-sm btn-success btn-block">Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">e-KYC Report</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered tbl-drilldown">
+                                    <thead>
+                                        <th>S.No</th>
+                                        <th>Candidate Name</th>
+                                        <th>Relationship</th>
+                                        <th>Relative Name</th>
+                                        <th>DOB</th>
+                                        <th>Address</th>
+                                        <th>PAN</th>
+                                        <th>UAN</th>
+                                        <th>Aadhar</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of geteKycReport; let i=index">
+                                            <td>{{i+1}}</td>
+                                            <td>{{ item.candidateName }}</td>
+                                            <td>{{item.relationship}}</td>
+                                            <td>{{item.relationName}}</td>
+                                            <td>{{ item.dateOfBirth}}</td>
+                                            <td>{{ item.address}}</td>
+                                            <td>{{ item.panNumber}}</td>
+                                            <td>{{ item.candidateUan}}</td>
+                                            <td>{{ item.aadharNumber}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

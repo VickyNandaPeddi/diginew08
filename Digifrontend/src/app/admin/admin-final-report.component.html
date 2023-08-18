@@ -1,0 +1,759 @@
+<div class="pageHeader">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle" *ngIf="reportStat">Final Report</h2>
+                <h2 class="pageTitle" *ngIf="!reportStat">Interim Report</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid candidate_report reportStat-{{reportStat}}">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-md-12" style="justify-content: flex-end;margin: -16px 0 4px 0;text-align: right;">
+            <button type="button" class="btn btn-primary btn-sm btn-print" (click)="printDiv()">Download</button>
+        </div>
+    </div>
+    <div class="row" id="print_sec">
+        <div class="col-xl-12 ">
+            <div class="card shadow mb-2">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead style="text-align: center;">
+                                    <tr>
+                                        <th>CROSSBOW GLOBAL MARKETPLACE
+                                            SOLUTIONS PRIVATE LIMITED</th>
+                                        <th style="background-color: rgb(21, 21, 100); color:white">
+                                            Digital Background Verification Report </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>18 & 18/1,Bikaner Signature Towers, Richmond Road,
+                                            Benguluru, Karnataka 560025, India</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-2 bg_profile">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead style="background-color: grey;">
+                                    <tr>
+                                        <th colspan="3" style="font-size: 20px;">BACKGROUND PROFILE</th>
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Name of the Candidate</td>
+                                        <td>{{ candidateName }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Birth</td>
+                                        <td>{{dateOfBirth}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact No</td>
+                                        <td>{{contactNumber}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email ID</td>
+                                        <td>{{emailId}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Applicant ID</td>
+                                        <td>{{applicantId}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Project/BU</td>
+                                        <td>{{organizationName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fresher/ Experienced</td>
+                                        <td>{{isFresher == true ?'Fresher':'Experienced'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Initiation Date
+                                        </td>
+                                        <td>{{dateOfEmailInvite | date: 'dd-MM-yyyy' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Report Delivered Date
+                                        </td>
+                                        <td>{{submittedOn | date: 'dd-MM-yyyy' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Verification Status</td>
+                                        <td>
+                                            <span class="text-{{candidateFinalReport_stat}} bg-result">{{candidateFinalReport_stat}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Remarks</td>
+                                        <td>
+                                            <!-- <span class="text-{{candidateFinalReport_stat}} bg-result">{{candidateFinalReport_stat}}</span> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-12 mt-4">
+                            <div class="col-md-12 text-center p-2" style="background-color: grey;
+                                color:rgb(0, 0, 0); text-transform: uppercase; font-weight:bold; ">
+                                Color Code
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead style="text-align: center;">
+                                    <tr>
+                                        <th>
+                                            DISCREPANCY - <span class="text-Red bg-result">RED</span>
+                                        </th>
+                                        <th>
+                                            CLEARED - <span class="text-Green bg-result">Green</span>
+
+                                        </th>
+                                        <th>
+                                            UNABLE TO VERIFY/ INACCESSIBLE -<span class="text-Amber bg-result">
+                                                Amber</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <!-- <p style="font-size: 13px;text-align: justify;line-height: 24px;color: #222;">
+                                Disclaimer: This report only sets out information obtained from records
+                                searched by CROSSBOW. And is issued on “as is where is” basis. No
+                                opinion is provided in respect ofthe corporate entities orindividuals
+                                who are the subject of the report here in. CROSSBOW abides by the FCPA
+                                (ForeignCorruptPractices Act)& FCRA(FairCredit Reporting
+                                Act)Policies.Thisreportdoes notconstituterecommendations astowhat
+                                actionshouldbetaken.
+                                It is difficult to verify all aspects of the information obtained due to
+                                the nature of the research and the limitations of
+                                obtaining such information from public records.
+                                Thus while due care has
+                                been takentoensure the accuracy ofthe compilation ofinformation
+                                containedinthis report,giventhe limitations of obtaining such informatio
+                                as noted above,no responsibility will be taken by CROSSBOW for the
+                                consequences of relying upon information contained in this report
+                                .All
+                                information supplied in this report is intended to be for the sole
+                                purpose of
+                                the client’s evaluation and is not intended for public dissemination.
+
+                            </p> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-2">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Executive Summary
+                    </h6>
+                    <!-- <h6 class="mr-3">
+                        Result : <span class="text-{{executiveSummary_stat}} bg-result">{{executiveSummary_stat}}</span>
+                    </h6> -->
+                </div>
+                <!-- Card Body -->
+                <!-- <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 70px; text-align: center;">Sl No.</th>
+                                        <th style="width:350px;">Verification Items</th>
+                                        <th>Source</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of executiveSummary; let i=index;">
+                                        <td>{{ i+1 }}</td>
+                                        <td>{{ item.verificationItem }}</td>
+                                        <td>{{ item.source }}</td>
+                                        <td><span [style.color]="item.colorHexCode" class="bg-result">{{ item.result }}</span></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div> -->
+            </div>
+            <div class="card shadow mb-2">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Section Ia: IDVerification
+                    </h6>
+                    <h6 class="mr-3">Result : <span class="text-{{candidateIdItems_stat}} bg-result">{{candidateIdItems_stat}}</span></h6>
+
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>ID Items</th>
+                                        <th>Name</th>
+                                        <th>ID No</th>
+                                        <th>Source</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateIdItems; let i=index;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.serviceSourceMaster.serviceName}}</td>
+                                        <td>{{item.idHolder}}</td>
+                                        <td>{{item.idNumber}}</td>
+                                        <td> </td>
+                                        <td><span [style.color]="item.color.colorHexCode" class="bg-result">{{ item.color.colorName }}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-2">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Section Ib: AddressVerification
+                    </h6>
+                    <h6 class="mr-3">Result :  <span class="text-{{candidateAddressData_stat}} bg-result">{{candidateAddressData_stat}}</span></h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="3">S.No</th>
+                                        <th rowspan="3">Name</th>
+                                        <th rowspan="3">Address</th>
+                                        <th rowspan="3">Source</th>
+                                        <th colspan="3" style="text-align: center;">Address Section
+                                        </th>
+                                        <th rowspan="3">Result</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="text-align: center;">Communication</th>
+                                        <th style="text-align: center;">Present</th>
+                                        <th style="text-align: center;">Permanent </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateAddressData; let i=index;">
+                                        <td>{{ i+1 }}</td>
+                                        <td>{{ item.name }}
+                                            <span *ngIf="item.name == 'LANDLORD'"
+                                            (click)="openLandlordAgreement(modalLandlordAgreement,item.addressVerificationCandidateCafRelationshipDocumentUploaded)"
+                                            style="display: block;font-weight: 600;cursor: pointer;color: #106aff;font-size: 13px;">
+                                                (View Agreement)
+                                            </span>
+                                        </td>
+                                        <td>{{ item.candidateAddress == null ?'NA':item.candidateAddress}}</td>
+                                        <td>{{ item.serviceName == null ?'Candidate':item.serviceName}}</td>
+                                        <td><i class="fas customColors customIcon customIcon{{ item.isAssetDeliveryAddress }}"></i></td>
+                                        <td><i class="fas customColors customIcon customIcon{{ item.isPermanentAddress }}"></i></td>
+                                        <td><i class="fas customColors customIcon customIcon{{ item.isPresentAddress }}"></i></td>
+                                        <td><span [style.color]="item.colorColorHexCode" class="bg-result">{{ item.colorColorName }}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-2" *ngIf="!isFresher">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Section II: Employment Verification
+                    </h6>
+                    <h6 class="mr-3">Result : <span class="text-{{employmentDetails_stat}} bg-result">{{employmentDetails_stat}}</span></h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Company Name</th>
+                                        <th>Source</th>
+                                        <th>Tenure</th>
+                                        <!-- <th>Output Tenure</th> -->
+                                        <!-- <th>Gap</th> -->
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of employmentDetails; let i=index;">
+                                        <td>{{ i+1 }}</td>
+                                        <td>{{ item.companyName }}</td>
+                                        <td>{{ item.source }}</td>
+                                        <td>{{ item.inputTenure }}</td>
+                                        <!-- <td class="outTenures">{{ item.outputTenure }}</td> -->
+                                        <!-- <td class="gaps">{{ item.gap }}</td> -->
+                                        <td><span [style.color]="item.colorHexCode" class="bg-result">{{ item.result }}</span></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            Total
+                                        </td>
+                                        
+                                        <td>
+                                            {{cApplicationFormDetails.inputTenureSum}}
+                                        </td>
+                                        <td>
+                                            {{cApplicationFormDetails.outputTenureSum}}
+                                        </td>
+                                        <td>
+                                            {{cApplicationFormDetails.gapSum}}
+                                        </td>
+                                        <td>
+                                           
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-2">
+                <!-- Card Header -->
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Section III: Education Verification
+                    </h6>
+                    <h6 class="mr-3">Result :  <span class="text-{{candidateEduData_stat}} bg-result">{{candidateEduData_stat}}</span></h6>
+
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Degree</th>
+                                        <th>College</th>
+                                        <th>University/ Board</th>
+                                        <th>Year Of Passing</th>
+                                        <!-- <th>Total Marks Secured</th> -->
+                                        <th>% or CGPA</th>
+                                        <th>Result</th>
+                                        <th *ngIf="reportStat">Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateEduData; let i=index;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.qualificationName}}</td>
+                                        <td>{{item.schoolOrCollegeName}}</td>
+                                        <td>{{item.boardOrUniversityName}}</td>
+                                        <td>{{item.yearOfPassing}}</td>
+                                        <!-- <td>{{item.totalMarks}}</td> -->
+                                        <td>{{item.percentage}}</td>
+                                        <td><span [style.color]="item.colorColorHexCode" class="bg-result">{{ item.colorColorName }}</span></td>
+                                        <td *ngIf="reportStat">{{item.remarkMasterDescription}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+           
+          
+            <!-- <div class="card shadow mb-2 isCRIMINAL_{{isCRIMINAL}} card_Criminal_stat" >
+                
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        V. Criminal Verification
+                    </h6>
+                    <h6 class="mr-3">Case Exists : <span class="text-{{Criminal_stat}}">{{Criminal_stat}}</span></h6>
+                </div>
+                
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe id="viewcaseDetails" style="width: 100%;height: 600px;"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="card shadow mb-2 isGLOBAL_{{isGLOBAL}} card_globalDatabaseCase_stat" >
+                
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        VI. Global Database Check
+                    </h6>
+                    <h6 class="mr-3">Case Exists : <span class="text-{{globalDatabaseCase_stat}}">{{globalDatabaseCase_stat}}</span></h6>
+                </div>
+               
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe id="viewGlobalDatabase" style="width: 100%;height: 600px;"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="card shadow mb-2">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex ">
+                    <div class="col-md-5">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            ANNEXURE – I
+                        </h6>
+                    </div>
+                    <div class="">
+                        <h6 class="m-0 font-weight-bold text-dark">
+                            Input As per the Application form data
+                        </h6>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <b>ANNEXURE – 1(A)</b>  -->
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr >
+                                        <!-- <th>SI#</th> -->
+                                        <td>Name</td>
+                                        <td>Fathers Name</td>
+                                        <td>D.O.B</td>
+                                        <td>Gender</td>
+                                        <td>Aadhaar No</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateIdItems; let i=index; ">
+                                        <!-- <td>{{i+1}}</td> -->
+                                        <td *ngIf="item.serviceSourceMaster.serviceName == 'Aadhar'">{{item.candidate.aadharName}}</td>
+                                        <td *ngIf="item.serviceSourceMaster.serviceName == 'Aadhar'">{{item.candidate.aadharFatherName}}</td>
+                                        <td *ngIf="item.serviceSourceMaster.serviceName == 'Aadhar'">{{item.candidate.aadharDob}}</td>
+                                        <td *ngIf="item.serviceSourceMaster.serviceName == 'Aadhar'">{{item.candidate.aadharGender}}</td>
+                                        <td *ngIf="item.serviceSourceMaster.serviceName == 'Aadhar'">{{item.candidate.aadharNumber}}</td>
+                                    </tr>
+                                </tbody>
+                                <div *ngFor="let item of candidateAddressData; let i=index; ">
+                                    <label *ngIf="item.serviceName == 'Aadhar'">Address:{{item.candidateAddress}}</label>
+                                </div>
+                            </table>
+                        </div>
+                        
+                       
+                        <!-- <div class="col-md-12">
+                            <b>ANNEXURE – 1(A)</b>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>SI#</th>
+                                        <th>Degree</th>
+                                        <th>College</th>
+                                        <th>University/ Board</th>
+                                        <th>Year Of Passing</th>
+                                        <th>% or CGPA</th>
+                                        <th>View Certificate</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateEduData; let i=index;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.qualificationName}}</td>
+                                        <td>{{item.schoolOrCollegeName}}</td>
+                                        <td>{{item.boardOrUniversityName}}</td>
+                                        <td>{{item.yearOfPassing}}</td>
+                                        <td>{{item.percentage}}</td> 
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-primary" title="View Certificate"
+                                             (click)="openCertificate(modalCertificate, item.certificate)">
+                                             <i class="fa fa-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+                        <!-- <div class="col-md-12 mt-3" *ngIf="!isFresher">
+                            <b>ANNEXURE – 1(B)</b>
+                            <table class="table table-bordered mt-2">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2">SI#</th>
+                                        <th rowspan="2">Employer Name</th>
+                                        <th colspan="2" style="text-align: center;">Tenure</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="text-align: center;">DOJ</th>
+                                        <th style="text-align: center;">LWD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateEXPData; let i=index;">
+                                        <td>{{ i+1 }}</td>
+                                        <td>{{ item.candidateEmployerName }}</td>
+                                        <td>{{ item.inputDateOfJoining }}</td>
+                                        <td>{{ i==0 && item.inputDateOfExit == null?'Not-Available': item.inputDateOfExit}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-2 isGLOBAL_{{isGLOBAL}} card_globalDatabaseCase_stat" >
+                
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                       Pan
+                    </h6>
+                    <!-- <h6 class="mr-3">Case Exists : <span class="text-{{globalDatabaseCase_stat}}">{{globalDatabaseCase_stat}}</span></h6> -->
+                </div>
+               
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe id="digiDoc" style="width: 100%;height: 600px;"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-2 isGLOBAL_{{isGLOBAL}} card_globalDatabaseCase_stat" >
+                
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        DRIVING LICENSE
+                    </h6>
+                    
+                </div>
+               
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe id="drivingDoc" style="width: 100%;height: 600px;"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow mb-2" *ngIf="this.getServiceConfigCodes.includes('EPFO') && !isFresher">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex ">
+                    <div class="col-md-5">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            ANNEXURE – IIa
+                        </h6>
+                    </div>
+                    <div class="">
+                        <h6 class="m-0 font-weight-bold text-dark">
+                            Output as per EPFO Service History
+                        </h6>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <div class="col-md-12 mt-1">
+                                <b>UAN : <span class="text-success">100232287019</span></b>
+                            </div> -->
+                            <p class="text-center text-danger font-bold" *ngIf="epfoSkipped">
+                                <b>EPFO step SKIPPED</b>
+                            </p>
+                            <table class="table table-bordered mt-2" *ngIf="!epfoSkipped">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2">Employer Name</th>
+                                        <th colspan="2" style="text-align: center;">Tenure</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="text-align: center;"> EPFO DOJ</th>
+                                        <th style="text-align: center;">EPFO LWD
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateEXPData; let i=index;">
+                                        <td *ngIf="item.serviceName == 'EPFO'">{{ item.candidateEmployerName }}</td>
+                                        <td *ngIf="item.serviceName == 'EPFO'">{{ item.outputDateOfJoining }}</td>
+                                        <td *ngIf="item.serviceName == 'EPFO'">{{ i==0 && item.outputDateOfExit == null?'Not-Available': item.outputDateOfExit}}</td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-2" *ngIf="this.getServiceConfigCodes.includes('ITR') && !isFresher">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex ">
+                    <div class="col-md-5">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            ANNEXURE – IIb
+                        </h6>
+                    </div>
+                    <div class="ml-4">
+                        <h6 class="m-0 font-weight-bold text-dark">
+                            26AS Statement
+                        </h6>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12 mt-1">
+                                <b>PAN : <span class="text-success">{{panNumber}}</span></b>
+                            </div>
+
+                            <table class=" table table-bordered mt-2" style="
+                            border-bottom: 1px solid black;">
+                                <thead style="display: table-row-group;">
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Financial Year </th>
+                                        <th>TAN</th>
+                                        <th>Deductor</th>
+                                        <th>Section</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of candidateITRData; let i=index;">
+                                        <td>{{ i+1 }}</td>
+                                        <td>{{ item.financialYear }}</td>
+                                        <td>{{ item.tan }}</td>
+                                        <td>{{ item.deductor }}</td>
+                                        <td>{{ item.section }}</td>
+                                        <td>{{ item.date}}</td>
+                                        <td>{{ item.amount }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="card shadow mb-2" *ngIf="this.getServiceConfigCodes.includes('EPFO') && !isFresher">
+                <!-- Card Header -->
+                <!-- <div class="card-header py-3 d-flex ">
+                    <div class="col-md-5">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            ANNEXURE – III
+                        </h6>
+                    </div>
+                    <div class="">
+                        <h6 class="m-0 font-weight-bold text-dark">
+                            Education Verifivation
+                        </h6>
+                    </div>
+                </div> -->
+            <!-- </div> --> -->
+
+        </div>
+    </div>
+
+
+</div>
+
+<ng-template #modalCertificate let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">View Certificate</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <iframe id="viewcandidateCertificate" style="width: 100%;height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalLandlordAgreement let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">View Landlord Agreement</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <iframe id="viewLandlordAgreement" style="width: 100%;height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+  </ng-template>

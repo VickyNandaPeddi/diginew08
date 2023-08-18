@@ -1,0 +1,119 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Admin Setup
+                        <small class="text-danger float-right">(Note: Employee Id will be the username while login)</small>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="adminSetup" (ngSubmit)="onSubmit()">
+                        <input type="hidden" formControlName="roleId">
+                        <input type="hidden" formControlName="userId">
+                        <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Customer Name :</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control form-control-sm" #t (change)="getCustomerData(t.value)"
+                                            formControlName="organizationId">
+                                                <option [value]="" disabled>--Select--</option>
+                                                <option *ngFor="let item of getCustID" [value]="item.organizationId">{{ item.organizationName }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Employee ID :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm empid"
+                                            formControlName="employeeId" value="{{ getCustAdmin.employeeId }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Employee Name :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="userFirstName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Mobile  :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="10" class="form-control form-control-sm"
+                                            formControlName="userMobileNum">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Email ID :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="userEmailId">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Location :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="location">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Set Password :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 isactivestat d-none" >
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Is Active ? :</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control form-control-sm"
+                                            formControlName="isActive">
+                                                <option value="true" selected>Yes</option>
+                                                <option value="false">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-3 pb-3">
+                                <button type="submit" [disabled]="!adminSetup.valid" class="btn btn-primary btn-sm">Submit</button>
+                                <a routerLink="../admindashboard" class="btn btn-danger btn-sm">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

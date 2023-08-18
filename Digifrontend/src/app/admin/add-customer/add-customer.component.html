@@ -1,0 +1,271 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Add Customer Details</h4>
+                </div>
+                <div class="card-body">
+                    <h6 class="color">Basic Details</h6><br/>
+                    <form [formGroup]="addCustomers">
+                        <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Logo :</label>
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control-file form-control-xs"
+                                             (change)="selectLogo($event)"
+                                                style="border: 1px solid rgba(104, 102, 102, 0.363);" accept='image/jpeg,image/png'>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">GST No :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="15" class="form-control form-control-sm"
+                                            formControlName="gstNumber">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Pan :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="15" class="form-control form-control-sm"
+                                            formControlName="panNumber">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">SAAC Code :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="15" class="form-control form-control-sm"
+                                            formControlName="saacCode">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Billing Address :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="billingAddress">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Url :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="organizationWebsite">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <h6 class="color">SPOC Details</h6><br/>
+                                <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Customer Name :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="organizationName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">POC Name :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="pocName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Customer Phone :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="10" class="form-control form-control-sm"
+                                            formControlName="customerPhoneNumber">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="color">Finance Contact Details</h6><br/>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Phone (POC):
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" maxlength="10" class="form-control form-control-sm"
+                                            formControlName="accountsPocPhoneNumber">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Accounts POC :
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="accountsPoc">
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Email (POC):
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="accountPocEmail">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                           
+                                <!-- don't need -->
+                                <h6 class="color">Custom Details</h6><br/>
+                            <div class="row">
+                                <div class="">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Email Template Selection :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="emailTemplate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 ">Email Config:</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="emailConfig">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 ">No.of.days to purge :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="daysToPurge">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 ">Report backupemail id to collect from client:</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="reportBackupEmail">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">No.of.Years to be verified :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="noYearsToBeVerified">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- old -->
+
+                                 <div class="">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12 required">Customer Email :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="organizationEmailId">
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                               
+
+                                
+                                <div class="">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-12">Shipment Address :</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control form-control-sm"
+                                            formControlName="shipmentAddress">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div >
+                                        <label><b>Show validation form to candidate:</b>
+                                         <div class="showvalid">
+                                            <div class="checkbox">                                
+                                                <span><label class="firstcheckbox" >Yes</label></span>
+                                                <span><input type="checkbox" class="inputcheckbox"(click)="selectshowValidation($event)" name="showValidation" value="true" ></span>
+                                                <span><label class="firstcheckbox">NO</label></span>
+                                                <span><input type="checkbox" class="inputcheckbox"(click)="selectshowValidation($event)" name="showValidation" value="false" ></span>
+                                            </div>
+                                        </div>
+                                          <!-- <div class="checkbox">
+                                            <label class="switch">
+                                            <input type="checkbox" class="form-control form-control-sm"(click)="selectshowValidation($event)" name="showValidation" value="true" >  
+                                            </label>                      
+                                            <b>Yes</b> 
+                                          </div>  -->
+                                          <!-- <div class="">  
+                                            <label class="switch">                                                                
+                                            <input type="checkbox" class="form-control form-control-sm"
+                                            (click)="selectshowValidation($event)" name="showValidation" value="false">                                          
+                                            </label>    
+                                            <b >No</b>
+                                        </div> -->
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                               
+
+                               
+                                
+                                
+                                </div>
+                               
+                                
+
+                            
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-3 pb-3">
+                                <button type="submit" [disabled]="!addCustomers.valid"  (click)="onSubmit(addCustomers)" class="btn btn-primary btn-sm">Go to Billing</button>
+                                <a routerLink="../admindashboard" class="btn btn-danger btn-sm">Cancel</a>
+                            </div>
+                        </div>
+                       
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+

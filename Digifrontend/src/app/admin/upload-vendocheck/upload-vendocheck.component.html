@@ -1,0 +1,205 @@
+<div class="pageHeader">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="pageTitle">{{ pageTitle }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <form [formGroup]="utilizationReportFilter">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="z-index: 1;">
+          <div class="card-body" style="padding: 8px 20px 5px;">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="" class="required">From Date</label>
+                  <div class="input-group">
+                    <input #rangeFrom="ngbDatepicker" formControlName="fromDate" (dateSelect)="onfromDate($event)"
+                           id="inputFromDateVendor"
+                           [maxDate]="getToday" class="form-control form-control-sm" ngbDatepicker readonly/>
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-outline-secondary" (click)="rangeFrom.toggle()" type="button"><img
+                        src="../assets/img/calendar.png"/></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="" class="required">To Date</label>
+                  <div class="input-group">
+                    <input #rangeTo="ngbDatepicker" [startDate]="getMinDate" [minDate]="getMinDate" [maxDate]="getToday"
+                           formControlName="toDate" (dateSelect)="ontoDate($event)" class="form-control form-control-sm"
+                           id="inputToDateVendor"
+                           ngbDatepicker readonly/>
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-outline-secondary" (click)="rangeTo.toggle()" type="button"><img
+                        src="../assets/img/calendar.png"/></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group" style="margin: 18px 0 0 0;">
+                  <button type="button" (click)="onSubmitFilter()" class="btn btn-sm btn-success btn-block">Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12" style="width: 1800px;">
+        <div class="table-responsive">
+          <table class="table table-bordered tbl-drilldown table-responsive-sm">
+            <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Check Unique Id</th>
+              <th>CheckStatus</th>
+              <th>Candidadate Name</th>
+              <th>Agent Name</th>
+              <th>Source Name</th>
+              <th>Document Name</th>
+              <th>Reference Data</th>
+              <th>document download</th>
+              <th>Mode Of verification To Perform</th>
+              <th>Proofs</th>
+              <th>Verification Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let item of vendorchecksupload;let i = index;">
+              <td>{{i + 1}}</td>
+              <td>{{item.checkUniqueId}}</td>
+              <td>{{item.vendorCheckStatusMaster?.checkStatusCode}}</td>
+              <td>{{item.candidate.candidateName}}</td>
+              <td>{{item.candidate.createdBy.userName}}</td>
+              <!-- <td>{{item.emailId}}</td> -->
+              <td>{{item.source.sourceName}}</td>
+              <td>{{item.documentname}}</td>
+              <td>
+                <!--                        pathKey-->
+                <button type="button" class="btn btn-sm btn-primary" title="Download Document"
+                        (click)="downloadReferenceExcelData(item.candidate.candidateName,item.source.sourceName,item.candidate.candidateId,item.source.sourceId)">
+                  <i class="fa fa-download"></i></button>
+              </td>
+              <td>
+                <!--                        pathKey-->
+                <button type="button" class="btn btn-sm btn-primary" title="Download Document"
+                        (click)="downloadPdf(item.pathKey)">
+                  <i class="fa fa-download"></i></button>
+              </td>
+              <td>{{item.modeOfVerificationPerformed}}</td>
+              <td>
+                <button class="btn btn-sm btn-info" data-toggle="tooltip" [disabled]="isUploadButtonDisabled(item)"
+                        (click)="triggerModal(modalCandidate, item.documentname,item.vendorcheckId)">
+                  Upload
+                </button>
+              </td>
+
+              <td *ngIf="item.isproofuploaded">Completed</td>
+              <td *ngIf="!item.isproofuploaded">Pending</td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<ng-template #modalCandidate let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Upload Proof</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="vendorlist">
+      <div class="form-group">
+        <!-- <div class="col-md-7">
+            <label> Does Source Exist ?</label>
+            <label *ngFor="let item of getColors">
+                <span class="colorId{{item.colorId}}">
+                    <input type="radio" name="sourceVerificationColorId" (change)="getcolor($event)" [value]="item.colorId">
+                    {{ item.colorName }}
+                </span>
+            </label>
+        </div> -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="" class="">Document Name</label>
+              <input type="text" class="form-control form-control-sm" formControlName="documentname">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="">Status</label>
+              <select class="form-control form-control-sm" #b (change)=getVendorStatusID(b.value)
+                      formControlName="status">
+                <option [value]="null">--Select--</option>
+                <option *ngFor="let item of vendorCheckStatus;" [value]="item.vendorCheckStatusMasterId">{{
+                  item.checkStatusCode }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="">Vendor Remarks</label>
+              <input type="text" class="form-control form-control-sm" formControlName="remarks" required minlength="15">
+              <div *ngIf="getRemarks().touched && getRemarks().errors?.required" class="d-block invalid-feedback">
+                please provide Remarks
+              </div>
+              <div *ngIf="getRemarks().touched && getRemarks().dirty && getRemarks().hasError('minlength')"
+                   class="d-block invalid-feedback">
+                please provide at least 15 characters
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <label class="">Upload Document</label>
+            <input type="file" class="form-control form-control-sm" (change)="uploadGlobalCaseDetails($event)"
+                   accept=".pdf">
+            <!--           -->
+          </div>
+          <!-- ------------------------------------------------venderAttributeCheck------------------------------------------------------- -->
+          <div *ngFor="let attribute of  venderAttributeValue" class="col-md-12">
+            <div class="form-group">
+              <label class="required">{{attribute.label}}</label>
+              <input type="text" formControlName="value" [(ngModel)]="attribute.value"
+                     class="form-control form-control-sm">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center mt-3 pb-3">
+          <button type="button" [disabled]="!proofDocumentNew || isButtonDisabled || !vendorlist.valid"
+                  (click)="onSubmit(vendorlist)"
+                  class="btn btn-success btn-sm">Submit
+          </button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="modal.dismiss('Cross click')">Close</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

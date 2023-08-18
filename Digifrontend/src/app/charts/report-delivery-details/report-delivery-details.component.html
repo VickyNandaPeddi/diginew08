@@ -1,0 +1,43 @@
+
+        <div class="table-responsive" *ngIf="containerStat">
+            <table class="table table-bordered" id="tbl-uploaddetails">
+                <thead>
+                    <th>S.Ndsfaso</th>
+                    <th>Agent Name</th>
+                    <th>Candidate Name</th>
+                    <th>Contact Number</th>
+                    <th>Email ID</th>
+                    <th>Applicant ID</th>
+                    <th>Data uploaded</th>
+                    <th>Invited On</th>
+                    <th>CAF Submitted On</th>
+                    <th>Pre Approval Report</th>
+                    <th *ngIf="finalreport">Final/Interium Report</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of CharReportDelivery; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{ item.createdByUserFirstName }} {{ item.createdByUserLastName }}</td>
+                        <td>{{item.candidateName}}</td>
+                        <td>{{item.contactNumber}}</td>
+                        <td>{{item.emailId}}</td>
+                        <td>{{item.applicantId}}</td>
+                        <td>{{item.createdOn}}</td>
+                        <td>{{item.dateOfEmailInvite}}</td>
+                        <td>{{item.submittedOn}}</td>
+                        <td>
+                            <button type="button" (click)="downloadPreApprovalReport(item)" class="btn btn-sm btn-primary" title="View Report"><i class="fas fa-eye"></i></button>
+                        </td>
+                        <td *ngIf="finalreport">
+                            <button type="button"  (click)="downloadFinalReport(item)" class="btn btn-sm btn-primary" title="View Report"><i class="fas fa-eye"></i></button>
+                        </td>
+                        <td>
+                            <button type="button" *ngIf="stat_linkAdminApproval" (click)="linkAdminApproval(item.candidateCode)" class="btn btn-sm btn-warning" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button type="button" *ngIf="stat_linkCandidateReport" (click)="linkCandidateReport(item.candidateCode)" class="btn btn-sm btn-primary" title="View Report"><i class="fas fa-eye"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+

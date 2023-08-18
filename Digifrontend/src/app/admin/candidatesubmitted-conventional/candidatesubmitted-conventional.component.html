@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <table class="table table-bordered" id="tbl-uploaddetails">
+    <thead>
+    <th>S.No</th>
+    <th>Agent Name</th>
+    <th>Candidate Name</th>
+    <th>PS.No</th>
+    <th>Request Type</th>
+    <th>Request ID</th>
+    <th>Vendor ID</th>
+    <th>Applicant ID</th>
+    <th>Data uploaded</th>
+    <th>Status</th>
+    <th>Interim Report</th>
+    <th>Final Report</th>
+    <th>Action</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of candidateData; let i=index">
+      <td>{{i + 1}}</td>
+      <td>{{ item.createdBy.userFirstName + " " + item.createdBy.userLastName}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.psNo}}</td>
+      <td>{{item.requestType}}</td>
+      <td>{{item.requestId}}</td>
+      <td>{{item.vendorId}}</td>
+      <td>{{item.applicantId}}</td>
+      <td>{{item.createdOn | date}}</td>
+      <td>{{item.status.statusCode}}</td>
+      <td>
+        <button
+          [disabled]="item.status.statusCode === 'NEWUPLOAD'  ||getStatcodeFromLocalStorage() === 'FINALREPORT'"
+          type="button" title="View Report" (click)="getInterimReport(item.requestId)"
+          class="btn btn-sm btn-primary"><i
+          class="fas fa-eye"></i></button>
+      </td>
+      <td>
+        <button
+          [disabled]="item.status.statusCode === 'NEWUPLOAD'||getStatcodeFromLocalStorage() === 'INTERIMREPORT'"
+          type="button" title="View Report" (click)="getFinalReport(item.requestId)"
+          class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></button>
+      </td>
+      <td>
+        <button type="button" (click)="conventionalvendor(item.requestId,item.status.statusCode)"
+                [disabled]="addcheckDisabled"
+                class="btn btn-sm btn-warning"
+                title="Add Check"><i class="fas fa-plus"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

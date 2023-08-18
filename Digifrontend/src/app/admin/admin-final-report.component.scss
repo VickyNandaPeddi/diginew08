@@ -1,0 +1,62 @@
+@import  "../../../assets/scss/admin.scss";
+.reportStat-false .card_Criminal_stat,
+.reportStat-false .card_globalDatabaseCase_stat,
+.reportStat-true .card_Criminal_stat.isCRIMINAL_false,
+.reportStat-true .card_globalDatabaseCase_stat.isGLOBAL_false{
+    display: none;
+}
+.reportStat-true .card_Criminal_stat,
+.reportStat-true .card_globalDatabaseCase_stat,
+.reportStat-true .card_Criminal_stat.isCRIMINAL_true,
+.reportStat-true .card_globalDatabaseCase_stat.isGLOBAL_true{
+    display: block;
+}
+.candidate_report{
+    table{
+        margin-bottom: 0;
+    }
+    .bg_profile{
+        tbody{
+            tr{
+                td:first-child{
+                    background: #f7f7f7;
+                    font-weight: 600;
+                    width: 40%;
+                }
+            }
+        }
+    }
+}
+.card-header{
+    padding: 12px 20px !important;
+    h6{
+        font-size: 15px;
+        font-weight: 600 !important;
+    }
+}
+.aadhar{
+    table{
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+}
+@media print {
+    .admin_header{
+        display: none;
+    }
+    .content_body{
+        padding: 0 0 0 0 !important;
+    }
+    .btn-print, .pageHeader, .card_Criminal_stat, .card_globalDatabaseCase_stat{
+        display: none !important;
+    }
+    .card{
+        box-shadow: none !important;
+    }
+}

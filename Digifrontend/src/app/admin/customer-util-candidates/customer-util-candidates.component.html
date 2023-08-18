@@ -1,0 +1,81 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Candidate Utilization Report
+                        <button type="button" class="btn btn-sm btn-primary float-right" (click)="exportexcel()">
+                            Export
+                        </button>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="excel-table">
+                                    <thead>
+                                        <tr>
+                                            <th>SI#</th>
+                                            <th>Agent Name</th>
+                                            <th>Candidate Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Email ID</th>
+                                            <th>PAN Number</th>
+                                            <th>Applicant Id</th>
+                                            <th>Data Uploaded</th>
+                                            <th>Invited On</th>
+                                            <th>NoE</th>
+                                            <th>Report Status</th>
+                                            <!-- <th>Report Delivered Date</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of getCandidateUtilizationReport; let i=index">
+                                            <td>{{i+1}}</td>
+                                            <td>{{ item.createdByUserFirstName }} {{ item.createdByUserLastName }}</td>
+                                            <td>{{ item.candidateName }}</td>
+                                            <td>{{ item.contactNumber }}</td>
+                                            <td>{{ item.emailId }}</td>
+                                            <td>{{ item.panNumber}}</td>
+                                            <td>{{ item.applicantId}}</td>
+                                            <td>{{ item.createdOn | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                                            <td>{{ item.dateOfEmailInvite | date: 'dd-MM-yyyy HH:mm:ss'}}</td>
+                                            <td>{{ item.experienceInMonth}}</td>
+                                            <td>{{ item.statusName}}</td>
+                                            <!-- <td>{{ item.statusDate}}</td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<form [formGroup]="utilizationReportClick">
+    <input type="hidden" formControlName="fromDate">
+    <input type="hidden" formControlName="toDate">
+    <input type="hidden" formControlName="organizationIds">
+    <input type="hidden" formControlName="statusCode">
+    <input type="hidden" formControlName="agentIds">
+</form>
+

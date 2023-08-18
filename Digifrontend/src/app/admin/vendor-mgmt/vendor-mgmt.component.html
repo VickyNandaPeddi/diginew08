@@ -1,0 +1,95 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">Vendor Management</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <form [formGroup]="vendorlist">
+        <input type="hidden" formControlName="userId">
+        <div class="row" >
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                           
+                            <div class="col-md-3" >
+                                <div class="form-group">
+                                    <label *ngIf="!vendoruser" for="" class="">Vendor</label>
+                                    <h6>{{ vendoruser }} </h6>
+                                    <select  *ngIf="!vendoruser" class="form-control form-control-sm" #b (change)=getvendorid(b.value) formControlName="vendorIds" >
+                                        <option [value]="null">--Select--</option>
+                                        <option *ngFor="let item of getVendorID" [value]="item.userId">{{ item.userFirstName }} {{ item.userLastName}} ({{ item.employeeId}})</option>
+                                    </select>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered mt-2">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Vendor Checks</th>
+                                            <th>Unit price</th>
+                                            <th>TAT(Time)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of getbgv;let i = index;">
+                                            <td>
+                                                <input type="hidden" class="billServiceId{{item.sourceId}}" [(ngModel)]="item.serviceId">{{i+1}}
+                                            </td>
+                                            <td>
+                                                {{item.sourceName}}
+                                            </td>
+                                            <td>
+                                                <input type="text" (keyup)="onKeyUp()" class="form-control form-control-sm x-billcomponents billrpp{{item.sourceId}}" id="ratePerItem{{i+1}}" [(ngModel)]="item.ratePerItem"/>
+                                            </td>
+                                            <td>
+                                                <input type="text" (keyup)="onKeyUp()" class="form-control form-control-sm x-billcomponents billrpi{{item.sourceId}}" id="tatPerItem{{i+1}}" [(ngModel)]="item.tatPerItem"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-3 pb-3">
+                                <button type="button" (click)="billsubmit()" class="btn btn-primary btn-sm">Submit</button>
+                                <button type="button" (click)="billUpdate()"  class="btn btn-primary btn-sm">Update</button>
+                                <!-- <a routerLink="../../admindashboard" class="btn btn-danger btn-sm">Cancel</a> -->
+                                 <!-- *ngIf="this.getBillValues == null"
+                                -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,146 @@
+<div class="pageHeader">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="pageTitle">{{ pageTitle }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow mb-4 stat_cards">
+                <!-- Card Header -->
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>
+                                <i class="fas fa-user"></i>
+                                <span style="padding: 12px 0 0 0;">{{ candidateName }}
+                                </span>                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="card shadow mb-2">
+            <div class="card-header py-3 d-flex ">
+               <div class="col-md-5">
+                   <h6 class="m-0 font-weight-bold text-primary">
+    
+                   </h6>
+               </div>
+               <div class="ml-4">
+                   <h6 class="m-0 font-weight-bold text-primary">
+                       Vendor Proofs
+                   </h6>
+               </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                   <div class="col-md-12">
+                        <table class=" table table-bordered mt-2" style="border-bottom: 1px solid black;">
+                        <thead style="display: table-row-group;">
+                           <tr>
+                               <th>S.No</th>
+                               <th>vendor name</th>
+                               <th>Document Name</th>
+                               <th>View Document</th>
+                               <th>Result</th>
+                               <th>Action</th>                  
+                           </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of employ; let i=index;">
+                                <td>{{i+1}}</td>
+                                <td>{{item.userFirstName}}</td>
+                                <td>{{item.documentname}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-primary" title="View Document"
+                                    (click)="openCertificate(modalCertificate, item.document)">
+                                    <i class="fa fa-eye"></i>
+                                   </button>
+                                    <!-- <span (click)="openModal(modalData)" *ngIf="item.document != null" style="cursor: pointer;color: #0074f1;text-decoration: underline;">
+                                        (View Document)
+                                    </span> -->
+                                </td>
+                                <td><span class=" bg-result" [style.color]="item.colorHexCode">{{ item.agentColor }}</span>
+                                </td>                                
+                                <td>
+                                    <span *ngIf="item.agentColor == 'Green'">No Action</span>
+                                    <button *ngIf="item.agentColor !== 'Green'" class="btn btn-warning btn-sm" title="Edit"
+                                    id="edit{{i}}" (click)="openVendorModal(modalVendor, item.vendorChecks)">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </td>                          
+                            </tr>                                           
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>    
+</div>
+<div class="col-md-12 mt-4 mb-4 text-center">
+    <button type="button"  (click)="InterimReport()" class="btn btn-primary">Generate Interim Report</button>
+    <button type="button" (click)="FinalReportApproval(formReportApproval)" class="btn btn-primary">Final Approval Report</button>
+</div>
+
+<ng-template #modalCertificate let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">View Certificate</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <iframe id="viewcandidateCertificate" style="width: 100%;height: 600px;"></iframe>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalVendor let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Vendor proofs Status</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <!-- <form > -->
+            <form [formGroup]="formEditDOC" (ngSubmit)="submitEditDOC()">
+            <input type="hidden"  formControlName="id">
+            <div class="row " >
+              
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="" class="required">Result</label>
+                        <select class="form-control form-control-sm" formControlName="colorId">
+                            <!-- <option [ngValue]="null" disabled>{{ item.colorColorName }}</option> -->
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let item of getColors" [value]="item.colorId" >{{ item.colorName }}</option>
+                        </select>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3 pb-3">
+                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="modal.close('Save click')">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+    
+

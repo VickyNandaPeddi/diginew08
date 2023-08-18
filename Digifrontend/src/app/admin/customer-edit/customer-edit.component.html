@@ -1,0 +1,202 @@
+<div class="pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="pageTitle">{{ pageTitle }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Update Customer Details</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="updateCustomers">
+                        <div class="row">
+                            <input type="hidden" formControlName="organizationId">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12 required">Customer Name :</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="organizationName" [readonly]="readonlyStat">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12 required">Customer Email :</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="organizationEmailId" [readonly]="readonlyStat">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Customer Phone :</label>
+                                    <div class="col-md-12">
+                                        <input type="text" maxlength="10" class="form-control form-control-sm"
+                                        formControlName="customerPhoneNumber">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">GST No :
+                                    </label>
+                                    <div class="col-md-12">
+                                        <input type="text" maxlength="15" class="form-control form-control-sm"
+                                        formControlName="gstNumber">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">POC Name :</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="pocName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Shipment Address :</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="shipmentAddress">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Website :
+                                    </label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="organizationWebsite">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Logo : 
+                                        <span (click)="openModal(modalData)" *ngIf="this.CustomersData.organizationLogo != null" style="cursor: pointer;color: #0074f1;text-decoration: underline;">
+                                            (View Uploaded Logo)
+                                        </span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        <input type="file" class="form-control-file form-control-xs"
+                                        (change)="selectLogo($event)"
+                                            style="border: 1px solid rgba(104, 102, 102, 0.363);" accept='image/jpeg,image/png'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Email :
+                                    </label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="accountPocEmail">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Phone :
+                                    </label>
+                                    <div class="col-md-12">
+                                        <input type="text" maxlength="10" class="form-control form-control-sm"
+                                        formControlName="accountsPocPhoneNumber">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Accounts POC :
+                                    </label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="accountsPoc">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Billing Address :</label>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control form-control-sm"
+                                        formControlName="billingAddress">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div >
+                                    <label><b>Show validation form to candidate:</b>
+                                     <div class="showvalid" formControlName="showValidation">
+                                        <div class="checkbox">                                
+                                            <span><label class="firstcheckbox" >Yes</label></span>
+                                            <span><input type="checkbox" class="inputcheckbox"(click)="selectshowValidation($event)" name="showValidation" value="true" >></span>
+                                            <span><label class="firstcheckbox">NO</label></span>
+                                            <span><input type="checkbox" class="inputcheckbox"(click)="selectshowValidation($event)" name="showValidation" value="false"  ></span>
+                                        </div>
+                                    </div>
+                                      <!-- <div class="checkbox">
+                                        <label class="switch">
+                                        <input type="checkbox" class="form-control form-control-sm"(click)="selectshowValidation($event)" name="showValidation" value="true" >  
+                                        </label>                      
+                                        <b>Yes</b> 
+                                      </div>  -->
+                                      <!-- <div class="">  
+                                        <label class="switch">                                                                
+                                        <input type="checkbox" class="form-control form-control-sm"
+                                        (click)="selectshowValidation($event)" name="showValidation" value="false">                                          
+                                        </label>    
+                                        <b >No</b>
+                                    </div> -->
+                                    </label>
+                                </div>
+                                
+                            </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center mt-3 pb-3">
+                                <a routerLink="../../custlist" class="btn btn-warning btn-sm">Back</a>
+                                <button type="submit"  (click)="onSubmit(updateCustomers)" class="btn btn-primary btn-sm">Update Customer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">View Logo</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="{{viewLogo}}" class="img-fluid"> 
+            </div>
+        </div>
+    </div>
+  </ng-template>
+
+
+
