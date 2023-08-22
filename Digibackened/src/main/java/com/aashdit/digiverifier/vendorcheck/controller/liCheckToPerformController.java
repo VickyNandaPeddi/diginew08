@@ -407,15 +407,15 @@ public class liCheckToPerformController {
 //        response.setOutcome(true);
 //        return response;
 //    }
-    @ApiOperation("Save and  Update ConventionalAttributesMaster")
-    @PostMapping("/saveConventionalAttributesMaster")
-    public ResponseEntity<ServiceOutcome<ConventionalAttributesMaster>> saveConventionalAttributesMaster(@RequestBody ConventionalAttributesMaster conventionalAttributesMaster, @RequestHeader("Authorization") String authorization) {
-
-        System.out.println("ConventionalAttributesMaster**************" + conventionalAttributesMaster);
-        ServiceOutcome<ConventionalAttributesMaster> svcSearchResult = liCheckToPerformService.saveConventionalAttributesMaster(conventionalAttributesMaster);
-        return new ResponseEntity<ServiceOutcome<ConventionalAttributesMaster>>(svcSearchResult, HttpStatus.OK);
-
-    }
+//    @ApiOperation("Save and  Update ConventionalAttributesMaster")
+//    @PostMapping("/saveConventionalAttributesMaster")
+//    public ResponseEntity<ServiceOutcome<ConventionalAttributesMaster>> saveConventionalAttributesMaster(@RequestBody ConventionalAttributesMaster conventionalAttributesMaster, @RequestHeader("Authorization") String authorization) {
+//
+//        System.out.println("ConventionalAttributesMaster**************" + conventionalAttributesMaster);
+//        ServiceOutcome<ConventionalAttributesMaster> svcSearchResult = liCheckToPerformService.saveConventionalAttributesMaster(conventionalAttributesMaster);
+//        return new ResponseEntity<ServiceOutcome<ConventionalAttributesMaster>>(svcSearchResult, HttpStatus.OK);
+//
+//    }
 
 
     @ApiOperation("Get By Id ConventionalAttributesMaster")

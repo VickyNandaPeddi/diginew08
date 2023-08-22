@@ -179,9 +179,9 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             updateSubmittedCandidatesResponseDtos.add(conventionalVendorCandidatesSubmitted);
             //hitting the update request to third party api
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -275,9 +275,9 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             updateSubmittedCandidatesResponseDtos.add(conventionalVendorCandidatesSubmitted);
             //hitting the update request to third party api
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -313,9 +313,9 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                 User user = SecurityHelper.getCurrentUser();
                 //To generate token first
                 MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-                map.add("grant_type", "password");
-                map.add("username", "Test@HelloVerify.com");
-                map.add("password", "LTI$test123#");
+                map.add("grant_type", environmentVal.getMtGrantType());
+                map.add("username", environmentVal.getMtUsername());
+                map.add("password",environmentVal.getMtPassword());
                 HttpHeaders tokenHeader = new HttpHeaders();
                 tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
                 ResponseEntity<String> responseEntity = null;
@@ -747,9 +747,10 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
         try {
             log.info("acknoledgeAfterSavedCandidate() starts");
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
+
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -791,9 +792,10 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
+
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -973,9 +975,10 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
+
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -2252,9 +2255,10 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
 //            listServiceOutcome.setData(conventionalVendorCandidatesSubmitted);
             //hitting the update request to third party api
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
+
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;

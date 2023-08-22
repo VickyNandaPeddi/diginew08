@@ -48,12 +48,12 @@ public class RoleController {
 		return new ResponseEntity<ServiceOutcome<List<Role>>>(svcSearchResult, HttpStatus.OK);
 	}
 	
-	@ApiOperation("Save and Update Role Master")
-	@PostMapping(path = "/saveNUpdateRole")
-	public ResponseEntity<ServiceOutcome<Role>> saveNUpdateRole(@RequestBody Role role,@RequestHeader("Authorization") String authorization) {
-		ServiceOutcome<Role> svcSearchResult = roleService.saveNUpdateRole(role);
-		return new ResponseEntity<ServiceOutcome<Role>>(svcSearchResult, HttpStatus.OK);
-	}
+//	@ApiOperation("Save and Update Role Master")
+//	@PostMapping(path = "/saveNUpdateRole")
+//	public ResponseEntity<ServiceOutcome<Role>> saveNUpdateRole(@RequestBody Role role,@RequestHeader("Authorization") String authorization) {
+//		ServiceOutcome<Role> svcSearchResult = roleService.saveNUpdateRole(role);
+//		return new ResponseEntity<ServiceOutcome<Role>>(svcSearchResult, HttpStatus.OK);
+//	}
 
 	@ApiOperation("Get All Details for Role Permission")
 	@GetMapping("/getAllRolePermission")

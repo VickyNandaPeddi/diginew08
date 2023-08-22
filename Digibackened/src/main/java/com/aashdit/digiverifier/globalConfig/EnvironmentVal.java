@@ -72,6 +72,12 @@ public class EnvironmentVal {
 
     @Value("${com.dgv.client.access.token.url}")
     private String dgvClientAccessTokenUrl;
+    @Value("${com.dgv.client.acess.conventional.vendor.username}")
+    private String mtUsername;
+    @Value("${com.dgv.client.acess.conventional.vendor.password}")
+    private String mtPassword;
+    @Value("${com.dgv.client.acess.conventional.vendor.granttype}")
+    private String mtGrantType;
 
     @Value("${com.dgv.client.access.code.uri}")
     private String dgvClientAccessCodeUri;

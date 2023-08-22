@@ -379,9 +379,10 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
+
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -628,7 +629,6 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
                     }
                     if (liCandidateInformation.isNull("GapAnalysisDocuments") == false) {
                         String documentUrl = liCandidateInformation.getString("GapAnalysisDocuments");
-                        System.out.println(documentUrl);
                         Long candidateID = obj1.getLong("CandidateID");
                         Long requestID = obj1.getLong("RequestID");
                         HttpEntity<String> entity = new HttpEntity<>(headers);
@@ -749,9 +749,9 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -857,9 +857,9 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -998,9 +998,9 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -1133,9 +1133,9 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -1225,9 +1225,9 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
             User user = SecurityHelper.getCurrentUser();
             //To generate token first
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("grant_type", "password");
-            map.add("username", "Test@HelloVerify.com");
-            map.add("password", "LTI$test123#");
+            map.add("grant_type", environmentVal.getMtGrantType());
+            map.add("username", environmentVal.getMtUsername());
+            map.add("password",environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -4152,7 +4152,6 @@ public class CandidateServiceImpl<T> implements CandidateService, MessageSourceA
                     agentIds = agentList.stream().map(x -> x.getUserId()).collect(Collectors.toList());
                 }
                 agentIds.add(user.getUserId());
-//                candidateStatusList = candidateStatusRepository.findAllByCandidateCreatedByUserIdInAndLastUpdatedOnBetween(agentIds, startDate, endDate);
                 candidatesSubmittedList = conventionalVendorCandidatesSubmittedRepository.findAllByUserIdAndDateRange(userId, startDate, endDate);
             }
             if (candidatesSubmittedList.isEmpty() == true) {
