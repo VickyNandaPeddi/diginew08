@@ -106,18 +106,18 @@ public class CandidateController {
     }
 
     @ApiOperation("Get all Candidate Information")
-    @RequestMapping(value = "/candidateList", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/candidateList", method = { RequestMethod.POST})
     public ResponseEntity<ServiceOutcome<DashboardDto>> getCandidateList(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
         ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getAllCandidateList(dashboardDto);
         return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
     }
 
-    @ApiOperation("Get CandidateList Status And Count")
-    @RequestMapping(value = "/getCandidateStatusAndCount", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseEntity<ServiceOutcome<DashboardDto>> getCandidateStatusAndCount(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
-        ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getCandidateStatusAndCount(dashboardDto);
-        return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
-    }
+//    @ApiOperation("Get CandidateList Status And Count")
+//    @RequestMapping(value = "/getCandidateStatusAndCount", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ResponseEntity<ServiceOutcome<DashboardDto>> getCandidateStatusAndCount(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
+//        ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getCandidateStatusAndCount(dashboardDto);
+//        return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
+//    }
 
     @ApiOperation("Send Email For Candidate")
     @PostMapping("/invitationSent")
@@ -147,12 +147,12 @@ public class CandidateController {
         return new ResponseEntity<ServiceOutcome<Boolean>>(svcSearchResult, HttpStatus.OK);
     }
 
-    @ApiOperation("Get Report Delivery Details Status And Count")
-    @RequestMapping(value = "/getReportDeliveryDetailsStatusAndCount", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseEntity<ServiceOutcome<DashboardDto>> getReportDeliveryDetailsStatusAndCount(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
-        ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getReportDeliveryDetailsStatusAndCount(dashboardDto);
-        return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
-    }
+//    @ApiOperation("Get Report Delivery Details Status And Count")
+//    @RequestMapping(value = "/getReportDeliveryDetailsStatusAndCount", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ResponseEntity<ServiceOutcome<DashboardDto>> getReportDeliveryDetailsStatusAndCount(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
+//        ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getReportDeliveryDetailsStatusAndCount(dashboardDto);
+//        return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
+//    }
 
     @ApiOperation("Get all Candidate Application form details")
     @GetMapping("/candidateApplicationFormDetails/{candidateCode}")
@@ -230,12 +230,12 @@ public class CandidateController {
         }
     }
 
-    @ApiOperation("View Pending Details Status And Count For Dashboard")
-    @RequestMapping(value = "/getPendingDetailsStatusAndCount", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseEntity<ServiceOutcome<DashboardDto>> getPendingDetailsStatusAndCount(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
-        ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getPendingDetailsStatusAndCount(dashboardDto);
-        return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
-    }
+//    @ApiOperation("View Pending Details Status And Count For Dashboard")
+//    @RequestMapping(value = "/getPendingDetailsStatusAndCount", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ResponseEntity<ServiceOutcome<DashboardDto>> getPendingDetailsStatusAndCount(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
+//        ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getPendingDetailsStatusAndCount(dashboardDto);
+//        return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
+//    }
 
     @ApiOperation(" Get All Status List")
     @GetMapping("/getAllStatus")
@@ -310,14 +310,14 @@ public class CandidateController {
     // added for conventional upload details
 
     @ApiOperation("Get Upload Details Status And Count")
-    @RequestMapping(value = "/getUploadDetailsStatusAndCountConventional", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/getUploadDetailsStatusAndCountConventional", method = { RequestMethod.POST})
     public ResponseEntity<ServiceOutcome<DashboardDto>> getUploadDetailsStatusAndCountConventional(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
         ServiceOutcome<DashboardDto> svcSearchResult = candidateService.getUploadDetailsStatusAndCountConventional(dashboardDto);
         return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);
     }
 
     @ApiOperation("Get Upload Details Status And Count")
-    @RequestMapping(value = "/getConvCandInterimAndFinal", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/getConvCandInterimAndFinal", method = { RequestMethod.POST})
     public ResponseEntity<ServiceOutcome<DashboardDto>> findConvCandidateForInterimAndFinal(@RequestHeader("Authorization") String authorization, @RequestBody DashboardDto dashboardDto) {
         ServiceOutcome<DashboardDto> svcSearchResult = candidateService.findConvCandidateForInterimAndFinal(dashboardDto);
         return new ResponseEntity<ServiceOutcome<DashboardDto>>(svcSearchResult, HttpStatus.OK);

@@ -32,98 +32,95 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
-	@Autowired
-	private JwtUtil jwtUtil;
+    @Autowired
+    private JwtUtil jwtUtil;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-			FilterChain filterChain) throws ServletException, IOException {
+    @Override
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                    FilterChain filterChain) throws ServletException, IOException {
 
-		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,OPTIONS");
+        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers",
+                "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, No-Auth");
+        Boolean skipThis = false;
+        if (httpServletRequest.getRequestURI().contains("/api/login/authenticate")
+                || httpServletRequest.getRequestURI().contains("/configuration/ui")
+                || httpServletRequest.getRequestURI().contains("/swagger")
+                || httpServletRequest.getRequestURI().contains("/webjars")
+                || httpServletRequest.getRequestURI().contains("/v2")
+                || httpServletRequest.getRequestURI().contains("/api/allowAll")) {
+            skipThis = true;
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+        } else {
+            if (httpServletRequest.getRequestURI().contains("/api") && skipThis == false) {
+                String authorizationHeader = httpServletRequest.getHeader("Authorization");
+                String token = null;
+                String userName = null;
 
-		httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,OPTIONS");
-		httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
+                if (!httpServletRequest.getMethod().equals("OPTIONS")) {
+                    if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                        token = authorizationHeader.substring(7);
+                        if (StringUtils.isNotEmpty(token)) {
+                            userName = jwtUtil.extractUsername(token);
+                        }
 
-		httpServletResponse.setHeader("Access-Control-Allow-Headers",
-				"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, No-Auth");
+                        if (userName != null) {
+                            User user = userService.findByUsername(userName).getData();
+                            if (user != null) {
 
-		Boolean skipThis = false;
-		if (httpServletRequest.getRequestURI().contains("/api/login/authenticate")
-				|| httpServletRequest.getRequestURI().contains("/configuration/ui")
-				|| httpServletRequest.getRequestURI().contains("/swagger")
-				|| httpServletRequest.getRequestURI().contains("/webjars")
-				|| httpServletRequest.getRequestURI().contains("/v2")
-				|| httpServletRequest.getRequestURI().contains("/api/allowAll")) {
-			skipThis = true;
-			filterChain.doFilter(httpServletRequest, httpServletResponse);
-		} else {
-			if (httpServletRequest.getRequestURI().contains("/api") && skipThis == false) {
-				String authorizationHeader = httpServletRequest.getHeader("Authorization");
-				String token = null;
-				String userName = null;
+                                try {
+                                    if (jwtUtil.validateToken(token, user)) {
 
-				if (!httpServletRequest.getMethod().equals("OPTIONS")) {
-					if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-						token = authorizationHeader.substring(7);
-						if(StringUtils.isNotEmpty(token)){
-							userName = jwtUtil.extractUsername(token);
-						}
-						
-						if (userName != null) {
-							User user = userService.findByUsername(userName).getData();
-							if (user != null) {
-								
-								try {
-									if (jwtUtil.validateToken(token, user)) {
+                                        final Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+                                        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRoleCode()));
 
-										final Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-										grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRoleCode()));
+                                        final LoggedInUser userDetails = new LoggedInUser(user.getUserName(),
+                                                user.getPassword(), true, true, true, true, grantedAuthorities,
+                                                user.getRole(), user);
 
-										final LoggedInUser userDetails = new LoggedInUser(user.getUserName(),
-												user.getPassword(), true, true, true, true, grantedAuthorities,
-												user.getRole(), user);
+                                        final Authentication auth = new UsernamePasswordAuthenticationToken(userDetails,
+                                                null, grantedAuthorities);
+                                        final SecurityContext sc = SecurityContextHolder.getContext();
+                                        sc.setAuthentication(auth);
+                                        final HttpSession session = httpServletRequest.getSession(true);
+                                        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
 
-										final Authentication auth = new UsernamePasswordAuthenticationToken(userDetails,
-												null, grantedAuthorities);
-										final SecurityContext sc = SecurityContextHolder.getContext();
-										sc.setAuthentication(auth);
-										final HttpSession session = httpServletRequest.getSession(true);
-										session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
+                                        filterChain.doFilter(httpServletRequest, httpServletResponse);
 
-										filterChain.doFilter(httpServletRequest, httpServletResponse);
+                                    } else {
+                                        user.setIsLoggedIn(false);
+                                        userService.saveUserLoginData(user);
+                                        httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+                                    }
+                                } catch (Exception e) {
+                                    log.error("Exception occured in jWT filter-->", e);
+                                    user.setIsLoggedIn(false);
+                                    userService.saveUserLoginData(user);
+                                    httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+                                }
+                            } else {
+                                httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+                            }
 
-									} else {
-										user.setIsLoggedIn(false);
-										userService.saveUserLoginData(user);
-										httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-									}
-								} catch (Exception e) {
-									log.error("Exception occured in jWT filter-->",e);
-									user.setIsLoggedIn(false);
-									userService.saveUserLoginData(user);
-									httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-								}
-							} else {
-								httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-							}
+                        } else {
+                            httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+                        }
 
-						} else {
-							httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-						}
+                    } else {
+                        httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+                    }
+                }
 
-					} else {
-						httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
-					}
-				}
+            } else {
+                filterChain.doFilter(httpServletRequest, httpServletResponse);
+            }
+        }
 
-			} else {
-				filterChain.doFilter(httpServletRequest, httpServletResponse);
-			}
-		}
-
-	}
+    }
 
 }

@@ -341,18 +341,18 @@ public class liCheckToPerformController {
 //    }
 
 
-    @ApiOperation(value = "finds All submittedCandidates by date range and returns the data")
-    @RequestMapping(value = "/generateReportForConventionalCandidate/{canididateId}/{reportType}", method = {RequestMethod.GET, RequestMethod.POST})
-    public ServiceOutcome<List<liReportDetails>> generateDocumentReportConventional
-            (@PathVariable(name = "canididateId") String candidateId, @PathVariable("reportType") String reportType) throws
-            Exception {
-        ServiceOutcome<List<liReportDetails>> response = liCheckToPerformService.generateDocumentConventional(candidateId, reportType);
-        response.setData(response.getData());
-        response.setStatus("200");
-        response.setOutcome(true);
-        response.setMessage("candidates Fetched Sucessfully");
-        return response;
-    }
+//    @ApiOperation(value = "finds All submittedCandidates by date range and returns the data")
+//    @RequestMapping(value = "/generateReportForConventionalCandidate/{canididateId}/{reportType}", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ServiceOutcome<List<liReportDetails>> generateDocumentReportConventional
+//            (@PathVariable(name = "canididateId") String candidateId, @PathVariable("reportType") String reportType) throws
+//            Exception {
+//        ServiceOutcome<List<liReportDetails>> response = liCheckToPerformService.generateDocumentConventional(candidateId, reportType);
+//        response.setData(response.getData());
+//        response.setStatus("200");
+//        response.setOutcome(true);
+//        response.setMessage("candidates Fetched Sucessfully");
+//        return response;
+//    }
 
     @ApiOperation(value = "generate response for Report response")
     @RequestMapping(value = "/generateJsonByCandidateId/{canididateId}/{reportType}/{updated}", method = {RequestMethod.GET}, produces = "application/json")

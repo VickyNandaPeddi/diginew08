@@ -54,14 +54,26 @@ public class AesUtil {
 		}
 	}
 
+	private final SecureRandom random = new SecureRandom();
 	private byte[] doFinal(int encryptMode, SecretKey key, String iv, byte[] bytes) {
+
 		try {
-			cipher.init(encryptMode, key, new IvParameterSpec(hex(iv)));
+			byte[] bytesIV = new byte[16];
+
+			random.nextBytes(bytesIV);
+
+			cipher.init(encryptMode, key, new IvParameterSpec(bytesIV));
+
 			return cipher.doFinal(bytes);
+
 		} catch (InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException
-				| BadPaddingException e) {
+
+					| BadPaddingException e) {
+
 			return null;
+
 		}
+
 	}
 
 	private SecretKey generateKey(String salt, String passphrase) {

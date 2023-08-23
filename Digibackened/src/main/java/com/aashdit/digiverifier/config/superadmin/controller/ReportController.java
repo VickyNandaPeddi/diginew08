@@ -19,12 +19,12 @@ public class ReportController {
 	@Autowired
 	private ReportService reportService;
 	
-	@ApiOperation("Customer Utilization Report")
-	@RequestMapping(value = "/getCustomerUtilizationReport", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<ServiceOutcome<ReportSearchDto>> getCustomerUtilizationReport(@RequestHeader("Authorization") String authorization,@RequestBody(required=false) ReportSearchDto reportSearchDto) {
-		ServiceOutcome<ReportSearchDto> svcSearchResult=  reportService.getCustomerUtilizationReportData(reportSearchDto);
-		return new ResponseEntity<ServiceOutcome<ReportSearchDto>>(svcSearchResult, HttpStatus.OK);
-	}
+//	@ApiOperation("Customer Utilization Report")
+//	@RequestMapping(value = "/getCustomerUtilizationReport", method = { RequestMethod.GET, RequestMethod.POST })
+//	public ResponseEntity<ServiceOutcome<ReportSearchDto>> getCustomerUtilizationReport(@RequestHeader("Authorization") String authorization,@RequestBody(required=false) ReportSearchDto reportSearchDto) {
+//		ServiceOutcome<ReportSearchDto> svcSearchResult=  reportService.getCustomerUtilizationReportData(reportSearchDto);
+//		return new ResponseEntity<ServiceOutcome<ReportSearchDto>>(svcSearchResult, HttpStatus.OK);
+//	}
 	
 	@ApiOperation("Customer Utilization Report")
 	@PostMapping("/getCustomerUtilizationReportByAgent")
@@ -40,12 +40,12 @@ public class ReportController {
 		return new ResponseEntity<ServiceOutcome<ReportSearchDto>>(svcSearchResult, HttpStatus.OK);
 	}
 
-	@ApiOperation("E-KYC Report")
-	@RequestMapping(value = "/eKycReport", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<ServiceOutcome<ReportSearchDto>> eKycReport(@RequestHeader("Authorization") String authorization,@RequestBody(required=false) ReportSearchDto reportSearchDto) {
-		ServiceOutcome<ReportSearchDto> svcSearchResult=  reportService.eKycReportData(reportSearchDto);
-		return new ResponseEntity<ServiceOutcome<ReportSearchDto>>(svcSearchResult, HttpStatus.OK);
-	}
+//	@ApiOperation("E-KYC Report")
+//	@RequestMapping(value = "/eKycReport", method = { RequestMethod.GET, RequestMethod.POST })
+//	public ResponseEntity<ServiceOutcome<ReportSearchDto>> eKycReport(@RequestHeader("Authorization") String authorization,@RequestBody(required=false) ReportSearchDto reportSearchDto) {
+//		ServiceOutcome<ReportSearchDto> svcSearchResult=  reportService.eKycReportData(reportSearchDto);
+//		return new ResponseEntity<ServiceOutcome<ReportSearchDto>>(svcSearchResult, HttpStatus.OK);
+//	}
 	
 	@GetMapping(value = "")
 	public ResponseEntity getReport(@RequestParam("Authorization") String authorization,@RequestParam String candidateCode,@RequestParam

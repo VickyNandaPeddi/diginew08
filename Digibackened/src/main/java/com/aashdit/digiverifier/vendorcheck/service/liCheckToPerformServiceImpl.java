@@ -181,7 +181,7 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", environmentVal.getMtGrantType());
             map.add("username", environmentVal.getMtUsername());
-            map.add("password",environmentVal.getMtPassword());
+            map.add("password", environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -277,7 +277,7 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", environmentVal.getMtGrantType());
             map.add("username", environmentVal.getMtUsername());
-            map.add("password",environmentVal.getMtPassword());
+            map.add("password", environmentVal.getMtPassword());
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             ResponseEntity<String> responseEntity = null;
@@ -315,7 +315,7 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                 MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
                 map.add("grant_type", environmentVal.getMtGrantType());
                 map.add("username", environmentVal.getMtUsername());
-                map.add("password",environmentVal.getMtPassword());
+                map.add("password", environmentVal.getMtPassword());
                 HttpHeaders tokenHeader = new HttpHeaders();
                 tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
                 ResponseEntity<String> responseEntity = null;
@@ -372,8 +372,6 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
 //                            }
                             LicheckRequiredResponseDto licheckRequiredResponseDto = new LicheckRequiredResponseDto(saved.getId(), saved.getCheckCode(), saved.getCheckName(), saved.getCheckStatus().getCheckStatusCode(), saved.getCheckRemarks(), saved.getModeOfVerificationRequired(), saved.getModeOfVerificationPerformed(), saved.getCompletedDate());
                             log.info("addUpdateLiCheckToPerformData() adding licheck with insufficiency data validating with check unique id");
-                        } else {
-                            log.info("insufficiecy resubmitted true .insuff already saved");
                         }
                     }
                     log.info("reverting the candidate status to  original status");
@@ -749,7 +747,7 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", environmentVal.getMtGrantType());
             map.add("username", environmentVal.getMtUsername());
-            map.add("password",environmentVal.getMtPassword());
+            map.add("password", environmentVal.getMtPassword());
 
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -794,7 +792,7 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", environmentVal.getMtGrantType());
             map.add("username", environmentVal.getMtUsername());
-            map.add("password",environmentVal.getMtPassword());
+            map.add("password", environmentVal.getMtPassword());
 
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -843,15 +841,10 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
 //                    if (conventionalCandidate == null) {
 //                        if (candidateInCandidateBasic == true) {
 //                            log.info("Candidate Exists in Conventional Candidate basic");
-//                        } else {
-//                            log.info("Candidate Not Exists in Conventional Candidate basic");
-//                            ServiceOutcome<List> listServiceOutcome = candidateService.saveConventionalCandidateInformation(fetchVendorConventionalCandidateDto);
 //                        }
 //                    }
 //                    if (conventionalDocexists == true) {
 //                        log.info("Conventional Candidate Documents already Exists ,Docs Not Saving");
-//                    } else {
-//                        saveConventionalCandidateDocumentInfo(fetchVendorConventionalCandidateDto);
 //                    }
 //
 //
@@ -977,7 +970,7 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", environmentVal.getMtGrantType());
             map.add("username", environmentVal.getMtUsername());
-            map.add("password",environmentVal.getMtPassword());
+            map.add("password", environmentVal.getMtPassword());
 
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -2257,7 +2250,7 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type", environmentVal.getMtGrantType());
             map.add("username", environmentVal.getMtUsername());
-            map.add("password",environmentVal.getMtPassword());
+            map.add("password", environmentVal.getMtPassword());
 
             HttpHeaders tokenHeader = new HttpHeaders();
             tokenHeader.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -2611,8 +2604,6 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                     vendorReferenceDataDto.setVendorReferenceData(candidateReferenceDtos);
                     vendorReferenceDataDtos.add(vendorReferenceDataDto);
 
-                } else {
-                    log.info("conventional candidate for Reference check not exists");
                 }
 
             } else if (sourceName.contains("EMPLOYMENT")) {
@@ -2651,8 +2642,6 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                     vendorReferenceDataDto.setCheckName(vc.getSource().getSourceName());
                     vendorReferenceDataDto.setVendorReferenceData(candidateCafExperienceDtos);
                     vendorReferenceDataDtos.add(vendorReferenceDataDto);
-                } else {
-                    log.info("conventional candidate for Reference check not exists");
                 }
 
             } else if (sourceName.contains("EDUCATION")) {
@@ -2679,8 +2668,6 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                     vendorReferenceDataDto.setCheckName(vc.getSource().getSourceName());
                     vendorReferenceDataDto.setVendorReferenceData(candidateCafEducationDtos);
                     vendorReferenceDataDtos.add(vendorReferenceDataDto);
-                } else {
-                    log.info("conventional candidate for Reference check not exists");
                 }
 
 
@@ -2711,8 +2698,6 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                     vendorReferenceDataDto.setCheckName(vc.getSource().getSourceName());
                     vendorReferenceDataDto.setVendorReferenceData(conventionalAddressDtos);
                     vendorReferenceDataDtos.add(vendorReferenceDataDto);
-                } else {
-                    log.info("conventional candidate for Reference check not exists");
                 }
             } else {
                 log.info("NO Reference Data Found For  this Candidate");
