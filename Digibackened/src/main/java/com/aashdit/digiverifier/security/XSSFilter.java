@@ -30,8 +30,10 @@ public class XSSFilter implements Filter {
         ServletRequest request, 
         ServletResponse response, 
         FilterChain chain) throws IOException, ServletException {
+      // Wrap the request to ensure XSS filtering
+      XSSRequestWrapper wrappedRequest = new XSSRequestWrapper((HttpServletRequest) request);
 
-      chain.doFilter(new XSSRequestWrapper((HttpServletRequest) request), response);
+      chain.doFilter(wrappedRequest, response);
    }
 
 } 

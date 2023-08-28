@@ -20,6 +20,9 @@ public class VendorUploadChecksDto<t> {
     private Long colorId;
     private String checkUniqueId;
 
+    private ArrayList<VendorAttributeDto> vendorAttirbuteValue;
+
+
     public VendorUploadChecksDto(String userFirstName, Long vendorChecks, byte[] document, String documentname, String agentColor, String colorHexCode, Long colorId) {
         this.userFirstName = userFirstName;
         VendorChecks = vendorChecks;
@@ -28,6 +31,17 @@ public class VendorUploadChecksDto<t> {
         AgentColor = agentColor;
         this.colorHexCode = colorHexCode;
         this.colorId = colorId;
+    }
+
+    public VendorUploadChecksDto(String userFirstName, Long vendorChecks, byte[] document, String documentname, String agentColor, String colorHexCode, Long colorId, ArrayList<VendorAttributeDto> vendorAttirbuteValue) {
+        this.userFirstName = userFirstName;
+        VendorChecks = vendorChecks;
+        this.document = document;
+        this.documentname = documentname;
+        AgentColor = agentColor;
+        this.colorHexCode = colorHexCode;
+        this.colorId = colorId;
+        this.vendorAttirbuteValue = vendorAttirbuteValue;
     }
 
     public VendorUploadChecksDto(String userFirstName, Long vendorChecks, byte[] document, String documentname, String agentColor, String colorHexCode, Long colorId, String checkUniqueId) {
@@ -40,8 +54,5 @@ public class VendorUploadChecksDto<t> {
         this.colorId = colorId;
         this.checkUniqueId = checkUniqueId;
     }
-
-    private ArrayList<VendorAttributeDto> vendorAttirbuteValue;
-
 
 }

@@ -2022,31 +2022,39 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
 //            });
                 // System.out.println("before pdf*******************************"+candidateReportDTO);
 
+//                List<VendorChecks> vendorList = vendorChecksRepository.findAllByCandidateCandidateId(candidate.getCandidateId());
+//                for (VendorChecks vendorChecks : vendorList) {
+//
+//                    User user = userRepository.findByUserId(vendorChecks.getVendorId());
+//                    VendorUploadChecks vendorChecksss = vendorUploadChecksRepository.findByVendorChecksVendorcheckId(vendorChecks.getVendorcheckId());
+//                    if (vendorChecksss != null) {
+//                        vendorUploadChecksDto = new VendorUploadChecksDto(user.getUserFirstName(), vendorChecksss.getVendorChecks().getVendorcheckId(), vendorChecksss.getVendorUploadedDocument(), vendorChecksss.getDocumentname(), vendorChecksss.getAgentColor().getColorName(), vendorChecksss.getAgentColor().getColorHexCode(), null);
+//                        vendordocDtoList.add(vendorUploadChecksDto);
+//                    }
+//                }
+//                candidateReportDTO.setVendorProofDetails(vendordocDtoList);
 
+                VendorUploadChecksDto vendorUploadChecksDto=null;
                 List<VendorChecks> vendorList = vendorChecksRepository.findAllByCandidateCandidateId(candidate.getCandidateId());
                 for (VendorChecks vendorChecks : vendorList) {
                     User user = userRepository.findByUserId(vendorChecks.getVendorId());
                     VendorUploadChecks vendorChecksss = vendorUploadChecksRepository.findByVendorChecksVendorcheckId(vendorChecks.getVendorcheckId());
                     if (vendorChecksss != null) {
-                        VendorUploadChecksDto vendorUploadChecksDto = new VendorUploadChecksDto();
-                        vendorUploadChecksDto.setAgentColor(vendorChecksss.getAgentColor().getColorName());
-                        vendorUploadChecksDto.setVendorChecks(vendorChecksss.getVendorChecks().getVendorcheckId());
-                        vendorUploadChecksDto.setUserFirstName(user.getUserFirstName());
-                        vendorUploadChecksDto.setDocumentname(vendorChecksss.getDocumentname());
-                        vendorUploadChecksDto.setDocument(vendorChecksss.getVendorUploadedDocument());
-                        vendorUploadChecksDto.setColorHexCode(vendorChecksss.getAgentColor().getColorHexCode());
+//                       vendorUploadChecksDto = new VendorUploadChecksDto();
+//                        vendorUploadChecksDto.setAgentColor(vendorChecksss.getAgentColor().getColorName());
+//                        vendorUploadChecksDto.setVendorChecks(vendorChecksss.getVendorChecks().getVendorcheckId());
+//                        vendorUploadChecksDto.setUserFirstName(user.getUserFirstName());
+//                        vendorUploadChecksDto.setDocumentname(vendorChecksss.getDocumentname());
+//                        vendorUploadChecksDto.setDocument(vendorChecksss.getVendorUploadedDocument());
+//                        vendorUploadChecksDto.setColorHexCode(vendorChecksss.getAgentColor().getColorHexCode());
                         //vendor attributes
                         ArrayList<VendorAttributeDto> vendorAttributeDtos = new ArrayList<>();
                         VendorAttributeDto vendorAttributeDto = new VendorAttributeDto();
                         vendorAttributeDto.setSourceName(vendorChecksss.getVendorChecks().getSource().getSourceName());
                         vendorAttributeDto.setVendorAttirbuteValue(vendorChecksss.getVendorAttirbuteValue());
-                        log.info("vendor attributes data" + vendorAttributeDto);
                         vendorAttributeDtos.add(vendorAttributeDto);
-                        vendorUploadChecksDto.setVendorAttirbuteValue(vendorAttributeDtos);
+                        vendorUploadChecksDto = new VendorUploadChecksDto(user.getUserFirstName(), vendorChecksss.getVendorChecks().getVendorcheckId(), vendorChecksss.getVendorUploadedDocument(), vendorChecksss.getDocumentname(), vendorChecksss.getAgentColor().getColorName(), vendorChecksss.getAgentColor().getColorHexCode(), null,vendorAttributeDtos);
                         vendordocDtoList.add(vendorUploadChecksDto);
-                        log.info("venord data" + vendorUploadChecksDto);
-
-                        log.warn("vendor attrubyte dtp=" + vendorAttributeDto);
                     }
                 }
 
