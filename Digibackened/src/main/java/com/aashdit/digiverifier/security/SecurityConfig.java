@@ -19,8 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+
 
 
 @Configuration
@@ -61,23 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("*")
-                        .allowedOrigins("http://localhost:4200/")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowCredentials(true); // Allow sending cookies and authentication headers
-            }
-        };
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-
        http.headers()
          .contentTypeOptions()
          .and()
@@ -93,11 +79,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          .and()
          .referrerPolicy(ReferrerPolicy.ORIGIN_WHEN_CROSS_ORIGIN)
          ;
-
-
-       http .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) // Configure CSRF protection
-               .and()
-               .cors().and() .authorizeRequests()
+       http.csrf()
+               .ignoringAntMatchers("/api/**").and().authorizeRequests()
          .antMatchers(HttpMethod.TRACE, "/**").denyAll()
          .antMatchers(HttpMethod.PATCH, "/**").denyAll()
          .antMatchers(HttpMethod.DELETE, "/**").denyAll().antMatchers(HttpMethod.HEAD, "/**").denyAll()
@@ -108,9 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers("/v2/api-docs").permitAll()
          .antMatchers("/api/**").permitAll()
          .anyRequest().authenticated();
-
-//        http.csrf().disable();
-      http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
    }
 

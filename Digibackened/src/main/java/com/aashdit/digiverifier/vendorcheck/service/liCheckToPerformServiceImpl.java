@@ -556,8 +556,10 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                 licheckRequiredResponseDto.setCreatedBy(licheck.getCreatedBy().getUserName());
                 licheckRequiredResponseDto.setCreatedOn(licheck.getCreatedOn());
                 licheckRequiredResponseDto.setCheckUniqueId(licheck.getCheckUniqueId());
-                licheckRequiredResponseDto.setModeOfVerificationPerformed(licheck.getModeOfVerificationPerformed());
-                licheckRequiredResponseDto.setModeOfVerificationRequired(licheck.getModeOfVerificationRequired());
+                ModeOfVerificationStatusMaster modeOfVerificationStatusMasterPerformed = modeOfVerificationStatusMasterRepository.findById(Long.valueOf(licheck.getModeOfVerificationPerformed())).get();
+                licheckRequiredResponseDto.setModeOfVerificationPerformed(modeOfVerificationStatusMasterPerformed.getModeOfVerification());
+                ModeOfVerificationStatusMaster modeOfVerificationStatusMasterRequired = modeOfVerificationStatusMasterRepository.findById(Long.valueOf(licheck.getModeOfVerificationRequired())).get();
+                licheckRequiredResponseDto.setModeOfVerificationRequired(modeOfVerificationStatusMasterRequired.getModeOfVerification());
                 if (licheck.getVendorChecks() != null) {
                     licheckRequiredResponseDto.setDocumentName(licheck.getVendorChecks().getDocumentname());
                     licheckRequiredResponseDto.setVendorId(licheck.getVendorChecks().getVendorcheckId());
@@ -609,8 +611,10 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                 licheckRequiredResponseDto.setCreatedBy(licheck.getCreatedBy().getUserName());
                 licheckRequiredResponseDto.setCreatedOn(licheck.getCreatedOn());
                 licheckRequiredResponseDto.setCheckUniqueId(licheck.getCheckUniqueId());
-                licheckRequiredResponseDto.setModeOfVerificationPerformed(licheck.getModeOfVerificationPerformed());
-                licheckRequiredResponseDto.setModeOfVerificationRequired(licheck.getModeOfVerificationRequired());
+                ModeOfVerificationStatusMaster modeOfVerificationStatusMasterPerformed = modeOfVerificationStatusMasterRepository.findById(Long.valueOf(licheck.getModeOfVerificationPerformed())).get();
+                licheckRequiredResponseDto.setModeOfVerificationPerformed(modeOfVerificationStatusMasterPerformed.getModeOfVerification());
+                ModeOfVerificationStatusMaster modeOfVerificationStatusMasterRequired = modeOfVerificationStatusMasterRepository.findById(Long.valueOf(licheck.getModeOfVerificationRequired())).get();
+                licheckRequiredResponseDto.setModeOfVerificationRequired(modeOfVerificationStatusMasterRequired.getModeOfVerification());
                 if (licheck.getRequestId().isEmpty() == false) {
                     licheckRequiredResponseDto.setRequestID(licheck.getRequestId());
                 }
@@ -2032,7 +2036,6 @@ public class liCheckToPerformServiceImpl implements liCheckToPerformService {
                         vendorUploadChecksDto.setDocument(vendorChecksss.getVendorUploadedDocument());
                         vendorUploadChecksDto.setColorHexCode(vendorChecksss.getAgentColor().getColorHexCode());
                         //vendor attributes
-
                         ArrayList<VendorAttributeDto> vendorAttributeDtos = new ArrayList<>();
                         VendorAttributeDto vendorAttributeDto = new VendorAttributeDto();
                         vendorAttributeDto.setSourceName(vendorChecksss.getVendorChecks().getSource().getSourceName());
